@@ -1,2 +1,9 @@
 - fix toggle dropdown user navbar
-- add fiture authentication and authorization (working)
+- add fiture crud brands 
+- add fiture crud products
+- add fiture crud slider
+- add fiture crud coupons
+- show categories in home page
+- show brands in home page
+- show product in shop and home page
+- add show and detail orders

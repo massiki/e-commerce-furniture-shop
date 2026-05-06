@@ -39,6 +39,7 @@
                 </a>
               </div>
             </div>
+            <x-alert-success />
           </div>
           <div class="white_card_body">
             <div class="table-responsive m-b-30">
@@ -53,34 +54,40 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>
-                      <div class="customer d-flex align-items-center">
-                        <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50"
-                            src="{{ asset('img/customers/pro_1.png') }}" alt=""></div>
-                        <span class="f_s_12 f_w_600 color_text_5">Category 1</span>
-                      </div>
-                    </td>
-                    <td>category-1</td>
-                    <td>2</td>
-                    <td>
-                      <div class="list-icon-function">
-                        <a href="{{ route('admin.categories.edit', 1) }}" wire:navigate>
-                          <div class="item edit">
-                            <i class="fa fa-edit"></i>
-                          </div>
-                        </a>
-                        <form action="#" method="POST">
-                          <div class="item text-danger delete">
-                            <i class="fa fa-trash"></i>
-                          </div>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @forelse ($categories as $category)
+                    <tr>
+                      <th scope="row">{{ $loop->iteration }}</th>
+                      <td>
+                        <div class="customer d-flex align-items-center">
+                          <div class="thumb_34 mr_15 mt-0"><img class="img-fluid"
+                              src="{{ asset('storage/' . $category->image) }}" alt=""></div>
+                          <span class="f_s_12 f_w_600 color_text_5">{{ $category->name }}</span>
+                        </div>
+                      </td>
+                      <td>{{ $category->slug }}</td>
+                      <td>-</td>
+                      <td>
+                        <div class="list-icon-function">
+                          <a href="{{ route('admin.categories.edit', $category->id) }}" wire:navigate>
+                            <div class="item edit">
+                              <i class="fa fa-edit"></i>
+                            </div>
+                          </a>
+                          <form action="#" method="POST" wire:submit="delete({{ $category->id }})">
+                            <button class="btn item text-danger delete">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <x-admin-empty-data totalColspan='5' title="No categories found"
+                      subtitle="You haven not added any categories yet." />
+                  @endforelse
                 </tbody>
               </table>
+              {{ $categories->links(data: ['scrollTo' => false]) }}
             </div>
           </div>
         </div>

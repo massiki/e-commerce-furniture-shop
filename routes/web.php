@@ -69,7 +69,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
   Route::get('/categories', CategoriesIndex::class)->name('admin.categories.index');
   Route::get('/categories/create', CategoriesCreate::class)->name('admin.categories.create');
-  Route::get('/categories/id/edit', CategoriesEdit::class)->name('admin.categories.edit');
+  Route::get('/categories/{category}/edit', CategoriesEdit::class)->name('admin.categories.edit');
 
   Route::get('/products', ProductsIndex::class)->name('admin.products.index');
   Route::get('/products/create', ProductsCreate::class)->name('admin.products.create');

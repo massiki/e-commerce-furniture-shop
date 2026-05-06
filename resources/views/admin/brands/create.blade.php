@@ -1,4 +1,4 @@
-<div class="main_content_iner overly_inner ">
+s<div class="main_content_iner overly_inner ">
   <div class="container-fluid p-0 ">
     <!-- page title  -->
     <div class="row">
@@ -36,23 +36,14 @@
           </div>
           <div class="white_card_body">
             <div class="card-body">
-              <form data-parsley-validate>
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label" for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="" required
-                      data-parsley-trigger="change">
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="slug">Slug</label>
-                    <input type="text" class="form-control" id="slug" placeholder="" required
-                      data-parsley-trigger="change">
-                  </div>
+              <form wire:submit="store">
+                <div class="mb-3">
+                  <label class="form-label" for="name">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="" wire:model="name">
                 </div>
                 <div class="mb-3">
                   <label class="form-label" for="image">Image</label>
-                  <input type="file" class="form-control" id="image" accept="image/*"
-                    onchange="previewImage(event)" required data-parsley-trigger="change">
+                  <input type="file" class="form-control" id="image" accept="image/*">
                 </div>
                 <div class="mb-3">
                   <img id="image-preview" src="#" alt="Image Preview"
