@@ -65,7 +65,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
   Route::get('/brands', BrandsIndex::class)->name('admin.brands.index');
   Route::get('/brands/create', BrandsCreate::class)->name('admin.brands.create');
-  Route::get('/brands/id/edit', BrandsEdit::class)->name('admin.brands.edit');
+  Route::get('/brands/{brand}/edit', BrandsEdit::class)->name('admin.brands.edit');
 
   Route::get('/categories', CategoriesIndex::class)->name('admin.categories.index');
   Route::get('/categories/create', CategoriesCreate::class)->name('admin.categories.create');

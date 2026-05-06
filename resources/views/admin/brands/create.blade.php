@@ -1,4 +1,4 @@
-s<div class="main_content_iner overly_inner ">
+<div class="main_content_iner overly_inner ">
   <div class="container-fluid p-0 ">
     <!-- page title  -->
     <div class="row">
@@ -37,24 +37,19 @@ s<div class="main_content_iner overly_inner ">
           <div class="white_card_body">
             <div class="card-body">
               <form wire:submit="store">
-                <div class="mb-3">
-                  <label class="form-label" for="name">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="" wire:model="name">
-                </div>
+                <x-admin-input-text field="name" />
+
                 <div class="mb-3">
                   <label class="form-label" for="image">Image</label>
-                  <input type="file" class="form-control" id="image" accept="image/*">
+                  <input type="file" class="form-control" id="image" accept="image/*" wire:model="image">
+                  <x-alert-error field="image" />
                 </div>
                 <div class="mb-3">
-                  <img id="image-preview" src="#" alt="Image Preview"
-                    style="display: none; max-width: 120px; height: auto;">
+                  <img id="image-preview" src="{{ $image ? $image->temporaryUrl() : '' }}" alt="Image Preview"
+                    style="{{ !$image ? 'display:none;' : '' }} max-width: 150px; height: auto;">
                 </div>
-                <div class="mb-3">
-                  <button type="button" class="btn btn-danger btn-sm" id="remove-image" style="display: none;"
-                    onclick="removeImage()">Remove Image</button>
-                  <p id="message" style="color: green;"></p>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <x-admin-button-submit />
               </form>
             </div>
           </div>
