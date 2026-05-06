@@ -11,21 +11,28 @@
           <!-- Login & Register Start -->
           <div class="login-register-wrapper">
             <h4 class="title">Login to Your Account</h4>
-            <form action="{{ route('login') }}" method="POST">
-              @csrf
+            <form wire:submit="authenticate">
               <div class="single-form">
-                <input type="text" name="email" placeholder="Username or email *" required />
+                <input type="text" placeholder="Username or email *" wire:model="email" />
+                <x-alert-error field="email" />
+                @if (session()->has('error'))
+                  <div class="alert alert-danger">
+                    {{ session('error') }}
+                  </div>
+                @endif
               </div>
               <div class="single-form">
-                <input type="password" name="password" placeholder="Password" required />
+                <input type="password" placeholder="Password" wire:model="password" />
+                <x-alert-error field="password" />
               </div>
               <div class="single-form">
                 <input type="checkbox" id="remember" name="remember" />
                 <label for="remember"><span></span> Remember me</label>
               </div>
               <div class="single-form">
-                <button class="btn btn-primary btn-hover-dark" type="submit">
-                  Login
+                <button type="submit" class="btn btn-primary btn-hover-dark" wire:loading.attr="disabled">
+                  <span wire:loading.remove>Login</span>
+                  <span wire:loading>Loging...</span>
                 </button>
               </div>
             </form>

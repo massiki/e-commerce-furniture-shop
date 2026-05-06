@@ -16,8 +16,8 @@
             <ul class="nav-menu">
               <li><a href="{{ route('home') }}" wire:navigate>Home</a></li>
               <li><a href="{{ route('shop') }}" wire:navigate>Shop</a></li>
-              <li><a href="{{ route('cart') }}" wire:navigate>Cart</a></li>
-              <li><a href="{{ route('wishlist') }}" wire:navigate>Wishlist</a></li>
+              <li><a href="{{ route('user.cart') }}" wire:navigate>Cart</a></li>
+              <li><a href="{{ route('user.wishlist') }}" wire:navigate>Wishlist</a></li>
               <li><a href="{{ route('contact') }}" wire:navigate>Contact</a></li>
             </ul>
           </div>
@@ -52,13 +52,17 @@
               <ul class="dropdown-menu dropdown-profile">
                 <li><a href="{{ route('user.dashboard') }}" wire:navigate>My Account</a></li>
                 <li><a href="{{ route('user.checkout') }}" wire:navigate>Checkout</a></li>
-                <li><a href="{{ route('login') }}" wire:navigate>Sign In</a></li>
+                @auth
+                  <li><a href="{{ route('user.dashboard') }}" wire:navigate>{{ auth()->user()->name }}</a></li>
+                @else
+                  <li><a href="{{ route('login') }}" wire:navigate>Sign In</a></li>
+                @endauth
               </ul>
             </div>
-            <a class="action" href="{{ route('wishlist') }}" wire:navigate><i class="pe-7s-like"></i></a>
+            <a class="action" href="{{ route('user.wishlist') }}" wire:navigate><i class="pe-7s-like"></i></a>
 
             <div class="dropdown">
-              <a class="action" href="{{ route('cart') }}" wire:navigate>
+              <a class="action" href="{{ route('user.cart') }}" wire:navigate>
                 <i class="pe-7s-shopbag"></i>
                 <span class="number">3</span>
               </a>
@@ -107,10 +111,14 @@
                     <a href="{{ route('user.dashboard') }}" wire:navigate>My Account</a>
                   </li>
                   <li><a href="{{ route('user.checkout') }}" wire:navigate>Checkout</a></li>
-                  <li><a href="{{ route('login') }}" wire:navigate>Sign In</a></li>
+                  @auth
+                    <li><a href="{{ route('user.dashboard') }}" wire:navigate>{{ auth()->user()->name }}</a></li>
+                  @else
+                    <li><a href="{{ route('login') }}" wire:navigate>Sign In</a></li>
+                  @endauth
                 </ul>
               </div>
-              <a class="action" href="{{ route('cart') }}" wire:navigate>
+              <a class="action" href="{{ route('user.cart') }}" wire:navigate>
                 <i class="pe-7s-shopbag"></i>
                 <span class="number">3</span>
               </a>
@@ -146,7 +154,7 @@
       <div class="canvas-action">
         <a class="action" href="#" wire:navigate><i class="icon-sliders"></i> Compare
           <span class="action-num">(3)</span></a>
-        <a class="action" href="{{ route('wishlist') }}" wire:navigate><i class="icon-heart"></i> Wishlist
+        <a class="action" href="{{ route('user.wishlist') }}" wire:navigate><i class="icon-heart"></i> Wishlist
           <span class="action-num">(3)</span></a>
       </div>
       <!-- Canvas Action end -->
@@ -168,8 +176,8 @@
           <ul class="nav-menu">
             <li><a href="{{ route('home') }}" wire:navigate>Home</a></li>
             <li><a href="{{ route('shop') }}" wire:navigate>Shop</a></li>
-            <li><a href="{{ route('cart') }}" wire:navigate>Cart</a></li>
-            <li><a href="{{ route('wishlist') }}" wire:navigate>Wishlist</a></li>
+            <li><a href="{{ route('user.cart') }}" wire:navigate>Cart</a></li>
+            <li><a href="{{ route('user.wishlist') }}" wire:navigate>Wishlist</a></li>
             <li><a href="{{ route('contact') }}" wire:navigate>Contact</a></li>
           </ul>
         </nav>
