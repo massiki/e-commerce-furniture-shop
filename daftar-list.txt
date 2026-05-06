@@ -1,1 +1,2 @@
 - fix toggle dropdown user navbar
+- add fiture authentication and authorization (working)

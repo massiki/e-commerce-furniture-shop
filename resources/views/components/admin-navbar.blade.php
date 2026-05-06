@@ -74,7 +74,7 @@
               </div>
               <div class="profile_info_details">
                 <a href="{{ asset('profile.html') }}">My Profile </a>
-                <a href="#">Log Out </a>
+                <a href="#" wire:click="logout">Log Out </a>
               </div>
             </div>
           </div>

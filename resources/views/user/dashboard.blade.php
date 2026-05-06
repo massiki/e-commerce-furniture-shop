@@ -36,8 +36,10 @@
                   Details</a>
               </li>
               <li>
-                <a href="login-2.html"><i class="fa fa-sign-out"></i>
-                  Logout</a>
+                <a href="#" wire:click="logout"><i class="fa fa-sign-out"></i>
+                  <span wire:loading.remove>Logout</span>
+                  <span wire:loading>Logout...</span>
+                </a>
               </li>
             </ul>
           </div>
@@ -52,7 +54,7 @@
                 <div class="welcome-dashboard">
                   <p>
                     Hello,
-                    <strong>Alex Tuntuni</strong> (If
+                    <strong>{{ auth()->user()->name }}</strong> (If
                     Not <strong>Tuntuni !</strong>
                     <a href="login-2.html">Logout</a> )
                   </p>
