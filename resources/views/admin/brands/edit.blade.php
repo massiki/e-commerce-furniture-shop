@@ -37,34 +37,20 @@
           <div class="white_card_body">
             <div class="card-body">
               <!-- Update the form to support Livewire navigation if needed -->
-              <form data-parsley-validate>
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label" for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="" required
-                      data-parsley-trigger="change">
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="slug">Slug</label>
-                    <input type="text" class="form-control" id="slug" placeholder="" required
-                      data-parsley-trigger="change">
-                  </div>
-                </div>
+              <form wire:submit="update">
+                <x-admin-input-text field="name" />
+
                 <div class="mb-3">
                   <label class="form-label" for="image">Image</label>
-                  <input type="file" class="form-control" id="image" accept="image/*"
-                    onchange="previewImage(event)" required data-parsley-trigger="change">
+                  <input type="file" class="form-control" id="image" accept="image/*" wire:model="image">
+                  <x-alert-error field="image" />
                 </div>
                 <div class="mb-3">
-                  <img id="image-preview" src="#" alt="Image Preview"
-                    style="display: none; max-width: 120px; height: auto;">
+                  <img id="image-preview" src="{{ $image ? $image->temporaryUrl() : asset('storage/' . $oldImage) }}"
+                    alt="Image Preview" style="max-width: 150px; height: auto;">
                 </div>
-                <div class="mb-3">
-                  <button type="button" class="btn btn-danger btn-sm" id="remove-image" style="display: none;"
-                    onclick="removeImage()">Remove Image</button>
-                  <p id="message" style="color: green;"></p>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <x-admin-button-submit />
               </form>
             </div>
           </div>

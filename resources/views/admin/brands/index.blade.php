@@ -39,6 +39,7 @@
                 </a>
               </div>
             </div>
+            <x-alert-success />
           </div>
           <div class="white_card_body">
             <div class="table-responsive m-b-30">
@@ -53,34 +54,40 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>
-                      <div class="customer d-flex align-items-center">
-                        <div class="thumb_34 mr_15 mt-0"><img class="img-fluid radius_50"
-                            src="{{ asset('img/customers/pro_1.png') }}" alt=""></div>
-                        <span class="f_s_12 f_w_600 color_text_5">Brand 1</span>
-                      </div>
-                    </td>
-                    <td>brand-1</td>
-                    <td>2</td>
-                    <td>
-                      <div class="list-icon-function" bis_skin_checked="1">
-                        <a href="{{ route('admin.brands.edit') }}" wire:navigate>
-                          <div class="item edit" bis_skin_checked="1">
-                            <i class="fa fa-edit"></i>
-                          </div>
-                        </a>
-                        <form action="#" method="POST">
-                          <div class="item text-danger delete" bis_skin_checked="1">
-                            <i class="fa fa-trash"></i>
-                          </div>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @forelse ($brands as $brand)
+                    <tr>
+                      <th scope="row">{{ $loop->iteration }}</th>
+                      <td>
+                        <div class="customer d-flex align-items-center">
+                          <div class="thumb_34 mr_15 mt-0"><img class="img-fluid"
+                              src="{{ asset('storage/' . $brand->image) }}" alt="{{ $brand->name }}"></div>
+                          <span class="f_s_12 f_w_600 color_text_5">{{ $brand->name }}</span>
+                        </div>
+                      </td>
+                      <td>{{ $brand->slug }}</td>
+                      <td>-</td>
+                      <td>
+                        <div class="list-icon-function" bis_skin_checked="1">
+                          <a href="{{ route('admin.brands.edit', $brand->id) }}" wire:navigate>
+                            <div class="item edit" bis_skin_checked="1">
+                              <i class="fa fa-edit"></i>
+                            </div>
+                          </a>
+                          <form action="#" method="POST" wire:submit="delete({{ $brand->id }})">
+                            <button type="submit" class="btn item text-danger delete" bis_skin_checked="1">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <x-admin-empty-data totalColspan="5" title="No brands found"
+                      subtitle="You haven not added any brands yet." />
+                  @endforelse
                 </tbody>
               </table>
+              {{ $brands->links() }}
             </div>
           </div>
         </div>

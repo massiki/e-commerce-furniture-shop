@@ -1,5 +1,4 @@
-- fix toggle dropdown user navbar
-- add fiture crud brands 
+- fix bug toggle dropdown user navbar
 - add fiture crud products
 - add fiture crud slider
 - add fiture crud coupons
