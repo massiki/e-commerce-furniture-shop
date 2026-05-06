@@ -34,18 +34,13 @@
           <div class="white_card_body">
             <div class="card-body">
               <form wire:submit="store">
-                <div class="mb-3">
-                  <label class="form-label" for="name">Name</label>
-                  <input type="text" class="form-control" id="name" wire:model="name">
-                </div>
-                <x-alert-error field="name" />
+                <x-admin-input-text field="name" />
 
                 <div class="mb-3">
                   <label class="form-label" for="image">Image</label>
                   <input type="file" class="form-control" id="image" accept="image/*" wire:model="image">
+                  <x-alert-error field="image" />
                 </div>
-                <x-alert-error field="image" />
-
                 <div class="mb-3">
                   <img id="image-preview" src="{{ $image ? $image->temporaryUrl() : '' }}" alt="Image Preview"
                     style="{{ !$image ? 'display:none;' : '' }} max-width: 150px; height: auto;">
