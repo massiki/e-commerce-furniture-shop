@@ -42,6 +42,7 @@
                 </a>
               </div>
             </div>
+            <x-alert-success />
           </div>
           <div class="white_card_body">
             <div class="table-responsive m-b-30">
@@ -50,36 +51,42 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Tagline</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Tagline</th>
                     <th scope="col">Link</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>
-                      <img src="{{ asset('img/products/img-5.png') }}" alt="" height="52">
-                    </td>
-                    <td>Tagline</td>
-                    <td>Abc</td>
-                    <td>https://google.com/</td>
-                    <td>
-                      <div class="list-icon-function">
-                        <a href="{{ route('admin.sliders.edit', 1) }}" wire:navigate>
-                          <div class="item edit">
-                            <i class="fa fa-edit"></i>
-                          </div>
-                        </a>
-                        <form action="#" method="POST">
-                          <div class="item text-danger delete">
-                            <i class="fa fa-trash"></i>
-                          </div>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @forelse ($sliders as $slider)
+                    <tr>
+                      <th scope="row">{{ $loop->iteration }}</th>
+                      <td>
+                        <img src="{{ asset('storage/' . $slider->image) }}" alt="{{ $slider->title }}" height="52">
+                      </td>
+                      <td>{{ $slider->title }}</td>
+                      <td>{{ $slider->tagline }}</td>
+                      <td>{{ $slider->link }}</td>
+                      <td>
+                        <div class="list-icon-function">
+                          <a href="{{ route('admin.sliders.edit', $slider->id) }}" wire:navigate>
+                            <div class="item edit">
+                              <i class="fa fa-edit"></i>
+                            </div>
+                          </a>
+                          <form action="#" wire:submit="delete({{ $slider->id }})" style="display:inline;">
+                            <button type="submit" class="item text-danger delete"
+                              style="background:none;border:none;padding:0;">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <x-admin-empty-data totalColspan="6" title="No sliders found"
+                      subtitle="You haven not added any sliders yet." />
+                  @endforelse
                 </tbody>
               </table>
             </div>
