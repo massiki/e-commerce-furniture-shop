@@ -40,6 +40,7 @@
                 </a>
               </div>
             </div>
+            <x-alert-success />
           </div>
           <div class="white_card_body">
             <div class="table-responsive m-b-30">
