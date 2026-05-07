@@ -84,7 +84,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
   Route::get('/coupons', CouponsIndex::class)->name('admin.coupons.index');
   Route::get('/coupons/create', CouponsCreate::class)->name('admin.coupons.create');
-  Route::get('/coupons/id/edit', CouponsEdit::class)->name('admin.coupons.edit');
+  Route::get('/coupons/{coupon}/edit', CouponsEdit::class)->name('admin.coupons.edit');
 
   Route::get('/users', UsersIndex::class)->name('admin.users.index');
 

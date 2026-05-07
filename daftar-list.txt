@@ -1,6 +1,6 @@
 - fix bug toggle dropdown user navbar
 - add fiture crud slider
-- add fiture crud coupons
+- add fiture crud coupons (working)
 - show categories in home page
 - show brands in home page
 - show product in shop and home page

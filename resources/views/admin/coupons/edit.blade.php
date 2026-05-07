@@ -36,43 +36,32 @@
           </div>
           <div class="white_card_body">
             <div class="card-body">
-              <form data-parsley-validate>
+              <form wire:submit="update">
                 <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label" for="coupon-code">Coupon Code</label>
-                    <input type="text" class="form-control" id="coupon-code" placeholder="" required>
-                  </div>
+                  <x-admin-input-text field="code" :isCol="true" />
                   <div class="col-md-6">
                     <label class="form-label" for="coupon-type">Coupon Type</label>
-                    <select class="form-select" id="coupon-type" required>
+                    <select class="form-select" id="coupon-type" wire:model="type">
                       <option value="">Select Coupon Type</option>
-                      <option value="percentage">Percentage</option>
+                      <option value="percent">Percentage</option>
                       <option value="fixed">Fixed Amount</option>
                     </select>
+                    <x-alert-error field="type" />
                   </div>
                 </div>
-                <div class="mb-3">
-                  <label class="form-label" for="value">Value</label>
-                  <input type="text" class="form-control" id="value" placeholder="" required>
+
+                <div class="row mb-3">
+                  <x-admin-input-text field="value" :isCol="true" />
+                  <x-admin-input-text field="cart_value" :isCol="true" />
                 </div>
-                <div class="mb-3">
-                  <label class="form-label" for="cart-value">Cart Value</label>
-                  <input type="text" class="form-control" id="cart-value" placeholder="" required>
-                </div>
+
                 <div class="mb-3">
                   <label class="form-label" for="expiry-date">Expiry Date</label>
-                  <input type="date" class="form-control" id="expiry-date" required>
+                  <input type="date" class="form-control" id="expiry-date" wire:model="expired_date">
+                  <x-alert-error field="expired_date" />
                 </div>
-                <div class="mb-3">
-                  <label class="form-label" for="image">Image</label>
-                  <input type="file" class="form-control" id="image" accept="image/*"
-                    onchange="previewImage(event)" required>
-                  <img id="image-preview" src="#" alt="Image Preview"
-                    style="display:none; margin-top:10px; width:160px; max-width:100%;" />
-                  <button type="button" id="remove-image" class="btn btn-sm btn-danger"
-                    style="display:none; margin-top:5px;" onclick="removeImage()">Remove</button>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <x-admin-button-submit />
               </form>
             </div>
           </div>
