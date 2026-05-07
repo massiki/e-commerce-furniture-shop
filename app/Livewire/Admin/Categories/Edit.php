@@ -42,7 +42,7 @@ class Edit extends Component
         $baseSlug = Str::slug($this->name);
         $slug = $baseSlug;
         $count = 1;
-        while (Category::where('slug', '=', $slug, 'and')->exists()) {
+        while (Category::where('slug', '=', $slug, 'and')->where('id', '!=', $this->category->id)->exists()) {
             $slug = $baseSlug . '-' . $count++;
         }
         $this->slug = $slug;
