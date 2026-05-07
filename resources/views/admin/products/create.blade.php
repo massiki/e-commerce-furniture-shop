@@ -36,101 +36,91 @@
           </div>
           <div class="white_card_body">
             <div class="card-body">
-              <form data-parsley-validate>
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label" for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="slug">Slug</label>
-                    <input type="text" class="form-control" id="slug" placeholder="" required>
-                  </div>
-                </div>
+              <form wire:submit="store">
+                <x-admin-input-text field="name" :isCol="false" />
+
                 <div class="row mb-3">
                   <div class="col-md-6">
                     <label class="form-label" for="category">Category</label>
-                    <select class="form-select" id="category" required>
+                    <select class="form-select" id="category" wire:model="category_id">
                       <option value="">Select Category</option>
-                      <option value="category1">Category 1</option>
-                      <option value="category2">Category 2</option>
-                      <option value="category3">Category 3</option>
+                      @foreach ($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                      @endforeach
                     </select>
+                    <x-alert-error field="category_id" />
                   </div>
                   <div class="col-md-6">
                     <label class="form-label" for="brand">Brand</label>
-                    <select class="form-select" id="brand" required>
+                    <select class="form-select" id="brand" wire:model="brand_id">
                       <option value="">Select Brand</option>
-                      <option value="brand1">Brand 1</option>
-                      <option value="brand2">Brand 2</option>
-                      <option value="brand3">Brand 3</option>
+                      @foreach ($brands as $brand)
+                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                      @endforeach
                     </select>
+                    <x-alert-error field="brand_id" />
                   </div>
                 </div>
+
+                <x-admin-input-textarea field="short_description" />
+
+                <x-admin-input-textarea field="information" />
+
+                <x-admin-input-textarea field="description" />
+
                 <div class="mb-3">
-                  <label class="form-label" for="short-description">Short Description</label>
-                  <textarea class="form-control" id="short-description" required></textarea>
+                  <label class="form-label" for="image">Image</label>
+                  <input type="file" class="form-control" id="image" accept="image/*" wire:model="image">
+                  <x-alert-error field="image" />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label" for="information">Information</label>
-                  <textarea class="form-control" id="information" rows="3" required></textarea>
+                  <img id="image-preview" src="{{ $image ? $image->temporaryUrl() : '' }}" alt="Image Preview"
+                    style="{{ !$image ? 'display:none;' : '' }} max-width: 150px; height: auto;">
                 </div>
+
                 <div class="mb-3">
-                  <label class="form-label" for="description">Description</label>
-                  <textarea class="form-control" id="description" rows="3" required></textarea>
+                  <label class="form-label" for="gallery-images">Upload Gallery Images</label>
+                  <input type="file" class="form-control" id="gallery-images" accept="image/*" wire:model="images"
+                    multiple>
+                  <x-alert-error field="images" />
                 </div>
-                <div class="mb-3">
-                  <label class="form-label" for="image">Upload Image</label>
-                  <input type="file" class="form-control" id="image" accept="image/*"
-                    onchange="previewImage(event)" required>
-                  <img id="image-preview" src="#" alt="Image Preview"
-                    style="display:none; width:130px; margin-top:10px; max-width:100%;" />
-                  <button type="button" id="remove-image" class="btn btn-sm btn-danger"
-                    style="display:none; margin-top:5px;" onclick="removeImage()">Remove</button>
+                @if ($images && count($images) > 0)
+                  <div class="mb-3 d-flex flex-wrap gap-2">
+                    @foreach ($images as $img)
+                      <img src="{{ $img->temporaryUrl() }}" alt="Gallery Image Preview"
+                        style="max-width: 150px; height: auto;">
+                    @endforeach
+                  </div>
+                @endif
+
+
+                <div class="row mb-3">
+                  <x-admin-input-text field="regular_price" :isCol="true" />
+                  <x-admin-input-text field="sale_price" :isCol="true" />
                 </div>
-                <div class="mb-3">
-                  <label class="form-label" for="gallery-image">Upload Gallery Images</label>
-                  <input type="file" class="form-control" id="gallery-image" accept="image/*" multiple
-                    onchange="previewGalleryImages(event)">
-                  <div id="gallery-preview" style="margin-top:10px;"></div>
-                </div>
+
                 <div class="row mb-3">
                   <div class="col-md-6">
-                    <label class="form-label" for="regular-price">Regular Price</label>
-                    <input type="text" class="form-control" id="regular-price" placeholder="" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="sale-price">Sale Price</label>
-                    <input type="text" class="form-control" id="sale-price" placeholder="">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label" for="sku">SKU</label>
-                    <input type="text" class="form-control" id="sku" placeholder="" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="quantity">Quantity</label>
-                    <input type="number" class="form-control" id="quantity" placeholder="" required>
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label" for="stock">Stock</label>
-                    <select class="form-select" id="stock" required>
-                      <option value="in-stock">In Stock</option>
-                      <option value="out-of-stock">Out of Stock</option>
+                    <label class="form-label" for="stock_status">Stock</label>
+                    <select class="form-select" id="stock_status" wire:model="stock_status">
+                      <option value="instock">In Stock</option>
+                      <option value="outofstock">Out of Stock</option>
                     </select>
+                    <x-alert-error field="stock_status" />
                   </div>
                   <div class="col-md-6">
                     <label class="form-label" for="featured">Featured</label>
-                    <select class="form-select" id="featured" required>
-                      <option value="yes">Yes</option>
-                      <option value="no">No</option>
+                    <select class="form-select" id="featured" wire:model="featured">
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
                     </select>
+                    <x-alert-error field="featured" />
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="row mb-3">
+                  <x-admin-input-text field="quantity" :isCol="true" />
+                </div>
+                <x-admin-button-submit />
               </form>
             </div>
           </div>

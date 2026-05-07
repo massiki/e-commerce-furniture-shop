@@ -37,7 +37,7 @@
           <div class="white_card_body">
             <div class="card-body">
               <form wire:submit="update">
-                <x-admin-input-text field="name" />
+                <x-admin-input-text field="name" :isCol="false" />
 
                 <div class="mb-3">
                   <label class="form-label" for="image">Image</label>

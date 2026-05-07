@@ -6,12 +6,8 @@ use Livewire\Component;
 
 class AdminInputText extends Component
 {
-    public string $field = '';
-
-    public function mount(string $field)
-    {
-        $this->field = $field;
-    }
+    public string $field;
+    public bool $isCol = false;
 
     public function render()
     {
