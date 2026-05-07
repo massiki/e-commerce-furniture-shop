@@ -50,7 +50,6 @@
                     <th>Name</th>
                     <th>Price</th>
                     <th>SalePrice</th>
-                    <th>SKU</th>
                     <th>Category</th>
                     <th>Brand</th>
                     <th>Featured</th>
@@ -60,46 +59,51 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>6</td>
-                    <td>
-                      <img src="{{ asset('img/products/img-5.png') }}" alt="" height="52">
-                      <p class="d-inline-block align-middle mb-0">
-                        <a href="#" class="d-inline-block align-middle mb-0 f_s_16 f_w_600 color_theme2">
-                          Reebok Beg
-                        </a>
-                        <br>
-                        <span class="text-muted font_s_13">size-08 (Model 2025)</span>
-                      </p>
-                    </td>
-                    <td>$128.00</td>
-                    <td>$110.00</td>
-                    <td>SKU7868</td>
-                    <td>Category3</td>
-                    <td>Brand2</td>
-                    <td>Yes</td>
-                    <td>instock</td>
-                    <td>11</td>
-                    <td>
-                      <div class="list-icon-function" bis_skin_checked="1">
-                        <a href="#" target="_blank">
-                          <div class="item eye" bis_skin_checked="1">
-                            <i class="fa fa-eye"></i>
-                          </div>
-                        </a>
-                        <a href="{{ route('admin.products.edit', 6) }}" wire:navigate>
-                          <div class="item edit" bis_skin_checked="1">
-                            <i class="fa fa-edit"></i>
-                          </div>
-                        </a>
-                        <form action="#" method="POST">
-                          <div class="item text-danger delete" bis_skin_checked="1">
-                            <i class="fa fa-trash"></i>
-                          </div>
-                        </form>
-                      </div>
-                    </td>
-                  </tr>
+                  @forelse ($products as $product)
+                    <tr>
+                      <td>{{ $loop->iteration }}</td>
+                      <td>
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->image }}" height="52">
+                        <p class="d-inline-block align-middle mb-0">
+                          <a href="#" class="d-inline-block align-middle mb-0 f_s_16 f_w_600 color_theme2">
+                            {{ $product->name }}
+                          </a>
+                          <br>
+                          {{-- <span class="text-muted font_s_13">size-08 (Model 2025)</span> --}}
+                        </p>
+                      </td>
+                      <td>Rp {{ number_format($product->regular_price, 0, ',', '.') }}</td>
+                      <td>{{ $product->sale_price ? 'Rp ' . number_format($product->sale_price, 0, ',', '.') : '-' }}
+                      </td>
+                      <td>{{ $product->category ? $product->category->name : '-' }}</td>
+                      <td>{{ $product->brand ? $product->brand->name : '-' }}</td>
+                      <td>{{ $product->featured ? 'Yes' : 'No' }}</td>
+                      <td>{{ $product->stock_status }}</td>
+                      <td>{{ $product->quantity }}</td>
+                      <td>
+                        <div class="list-icon-function">
+                          <a href="#" target="_blank">
+                            <div class="item eye">
+                              <i class="fa fa-eye"></i>
+                            </div>
+                          </a>
+                          <a href="{{ route('admin.products.edit', $product->id) }}" wire:navigate>
+                            <div class="item edit">
+                              <i class="fa fa-edit"></i>
+                            </div>
+                          </a>
+                          <form action="#" wire:submit="delete({{ $product->id }})">
+                            <button class="btn item text-danger delete p-0">
+                              <i class="fa fa-trash"></i>
+                            </button>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <x-admin-empty-data totalColspan="10" title="No products found"
+                      subtitle="You haven not added any products yet." />
+                  @endforelse
                 </tbody>
               </table>
             </div>

@@ -1,5 +1,5 @@
-<div class="{{ $isCol ? 'col-md-6' : 'mb-3' }}">
+<div class="mb-3">
   <label class="form-label" for="{{ $field }}">{{ ucfirst(str_replace('_', ' ', $field)) }}</label>
-  <input type="text" class="form-control" id="{{ $field }}" wire:model="{{ $field }}">
+  <textarea class="form-control" id="{{ $field }}" rows="3" wire:model="{{ $field }}"></textarea>
   <x-alert-error field="{{ $field }}" />
 </div>

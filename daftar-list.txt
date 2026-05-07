@@ -1,8 +1,9 @@
 - fix bug toggle dropdown user navbar
-- add fiture crud products
+- add fiture crud products (working)
 - add fiture crud slider
 - add fiture crud coupons
 - show categories in home page
 - show brands in home page
 - show product in shop and home page
 - add show and detail orders
+- fix bug selected featured edit product
