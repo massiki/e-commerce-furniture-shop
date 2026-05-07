@@ -42,7 +42,7 @@ class Edit extends Component
         $baseSlug = Str::slug($this->name);
         $slug = $baseSlug;
         $count = 1;
-        while (Brand::where('slug', '=', $slug, 'and')->exists()) {
+        while (Brand::where('slug', '=', $slug, 'and')->where('id', '!=', $this->brand->id)->exists()) {
             $slug = $baseSlug . '-' . $count++;
         }
         $this->slug = $slug;
