@@ -31,16 +31,6 @@ use App\Livewire\User\Dashboard as UserDashboard;
 use App\Livewire\Wishlist;
 use Illuminate\Support\Facades\Route;
 
-// Route::view('/', 'welcome');
-
-// Route::view('dashboard', 'dashboard')
-//     ->middleware(['auth', 'verified'])
-//     ->name('dashboard');
-
-// Route::view('profile', 'profile')
-//     ->middleware(['auth'])
-//     ->name('profile');
-
 Route::get('/', Home::class)->name('home');
 Route::get('/shops', Shop::class)->name('shop');
 Route::get('/contact', Contact::class)->name('contact');
@@ -80,7 +70,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 
   Route::get('/sliders', SlidersIndex::class)->name('admin.sliders.index');
   Route::get('/sliders/create', SlidersCreate::class)->name('admin.sliders.create');
-  Route::get('/sliders/id/edit', SlidersEdit::class)->name('admin.sliders.edit');
+  Route::get('/sliders/{slider}/edit', SlidersEdit::class)->name('admin.sliders.edit');
 
   Route::get('/coupons', CouponsIndex::class)->name('admin.coupons.index');
   Route::get('/coupons/create', CouponsCreate::class)->name('admin.coupons.create');

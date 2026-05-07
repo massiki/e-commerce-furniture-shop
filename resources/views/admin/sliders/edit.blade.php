@@ -36,31 +36,25 @@
           </div>
           <div class="white_card_body">
             <div class="card-body">
-              <form data-parsley-validate>
+              <form wire:submit="update">
                 <div class="row mb-3">
-                  <div class="col-md-6">
-                    <label class="form-label" for="title">Title</label>
-                    <input type="text" class="form-control" id="title" placeholder="" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label class="form-label" for="line1">Line 1</label>
-                    <input type="text" class="form-control" id="line1" placeholder="" required>
-                  </div>
+                  <x-admin-input-text field="title" :isCol="true" />
+                  <x-admin-input-text field="tagline" :isCol="true" />
+                </div>
+
+                <x-admin-input-text field="link" :isCol="false" />
+
+                <div class="mb-3">
+                  <label class="form-label" for="image">Image</label>
+                  <input type="file" class="form-control" id="image" accept="image/*" wire:model="image">
+                  <x-alert-error field="image" />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label" for="line2">Line 2</label>
-                  <input type="text" class="form-control" id="line2" placeholder="" required>
+                  <img id="image-preview" src="{{ $image ? $image->temporaryUrl() : asset('storage/' . $oldImage) }}"
+                    alt="Image Preview" style="max-width: 150px; height: auto;">
                 </div>
-                <div class="mb-3">
-                  <label class="form-label" for="image">Upload Image</label>
-                  <input type="file" class="form-control" id="image" accept="image/*"
-                    onchange="previewImage(event)" required>
-                  <img id="image-preview" src="#" alt="Image Preview"
-                    style="display:none; margin-top:10px; width: 160px; max-width:100%;" />
-                  <button type="button" id="remove-image" class="btn btn-sm btn-danger"
-                    style="display:none; margin-top:5px;" onclick="removeImage()">Remove</button>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+
+                <x-admin-button-submit />
               </form>
             </div>
           </div>
