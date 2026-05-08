@@ -1,7 +1,6 @@
 - fix bug toggle dropdown user navbar
 - add show and detail orders
 - fix bug selected featured edit product
-- add show slider in home page
 - create fiture product add to cart
 - create fiture product add to wishlist
 - add manage contact in admin

@@ -8,81 +8,31 @@
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <!-- Single Slider Start  -->
-            <div class="single-slider swiper-slide animation-style-01">
-              <!-- Slider Content Start -->
-              <div class="slider-content">
-                <h2 class="title">
-                  New Stylish <br />
-                  Decore Furniture
-                </h2>
-                <p>
-                  Unique Furniture Style Design for Your
-                  Family
-                </p>
-                <a href="{{ asset('product-details-2.html') }}"
-                  class="btn btn-primary btn-hover-dark btn-margin">purchase now</a>
-              </div>
-              <!-- Slider Content End -->
+            @foreach ($sliders as $slider)
+              <div class="single-slider swiper-slide animation-style-01">
+                <!-- Slider Content Start -->
+                <div class="slider-content">
+                  <h1 class="title">
+                    {{ $slider->title }}
+                  </h1>
+                  <p>
+                    {{ $slider->tagline }}
+                  </p>
+                  <a href="{{ $slider->link }}" class="btn btn-primary btn-hover-dark btn-margin">
+                    purchase now
+                  </a>
 
-              <!-- Slider images Start -->
-              <div class="slider-images">
-                <img src="{{ asset('assets/images/slider/slider-item-1.png') }}" width="707" height="477"
-                  alt="Slider" />
-              </div>
-              <!-- Slider images End -->
-            </div>
-            <!-- Single Slider End  -->
+                </div>
+                <!-- Slider Content End -->
 
-            <!-- Single Slider Start  -->
-            <div class="single-slider swiper-slide animation-style-01">
-              <!-- Slider Content Start -->
-              <div class="slider-content">
-                <h2 class="title">
-                  New Stylish <br />
-                  Decore Furniture
-                </h2>
-                <p>
-                  Unique Furniture Style Design for Your
-                  Family
-                </p>
-                <a href="{{ asset('product-details-2.html') }}"
-                  class="btn btn-primary btn-hover-dark btn-margin">purchase now</a>
+                <!-- Slider images Start -->
+                <div class="slider-images">
+                  <img src="{{ asset('storage/' . $slider->image) }}" width="707" height="477"
+                    alt="{{ $slider->name }}" />
+                </div>
+                <!-- Slider images End -->
               </div>
-              <!-- Slider Content End -->
-
-              <!-- Slider images Start -->
-              <div class="slider-images">
-                <img src="{{ asset('assets/images/slider/slider-item-2.png') }}" width="707" height="477"
-                  alt="Slider" />
-              </div>
-              <!-- Slider images End -->
-            </div>
-            <!-- Single Slider End  -->
-
-            <!-- Single Slider Start  -->
-            <div class="single-slider swiper-slide animation-style-01">
-              <!-- Slider Content Start -->
-              <div class="slider-content">
-                <h2 class="title">
-                  New Stylish <br />
-                  Decore Furniture
-                </h2>
-                <p>
-                  Unique Furniture Style Design for Your
-                  Family
-                </p>
-                <a href="{{ asset('product-details-2.html') }}"
-                  class="btn btn-primary btn-hover-dark btn-margin">purchase now</a>
-              </div>
-              <!-- Slider Content End -->
-
-              <!-- Slider images Start -->
-              <div class="slider-images">
-                <img src="{{ asset('assets/images/slider/slider-item-3.png') }}" width="707" height="477"
-                  alt="Slider" />
-              </div>
-              <!-- Slider images End -->
-            </div>
+            @endforeach
             <!-- Single Slider End  -->
           </div>
 
