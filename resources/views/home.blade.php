@@ -104,63 +104,15 @@
       <div class="brand-logo-wrapper brand-active">
         <div class="swiper-container">
           <div class="swiper-wrapper">
-
             <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/categories/1.png') }}" width="118" height="87"
-                  alt="Category 1" /></a>
-              <h4 class="title mt-3"><a href="#">Category 1</a></h4>
-            </div>
+            @foreach ($categories as $category)
+              <div class="swiper-slide single-brand-02">
+                <a href="#" wire:navigate><img src="{{ asset('storage/' . $category->image) }}" width="118"
+                    height="87" alt="{{ $category->name }}" /></a>
+                <h4 class="title mt-3"><a href="#">{{ $category->name }}</a></h4>
+              </div>
+            @endforeach
             <!-- Brand Logo Wrapper End -->
-
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/categories/2.png') }}" width="118" height="87"
-                  alt="Category 2" /></a>
-              <h4 class="title mt-3"><a href="#">Category 2</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/categories/3.png') }}" width="118" height="87"
-                  alt="Category 3" /></a>
-              <h4 class="title mt-3"><a href="#">Category 3</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/categories/4.png') }}" width="118" height="87"
-                  alt="Category 4" /></a>
-              <h4 class="title mt-3"><a href="#">Category 4</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/categories/5.png') }}" width="118" height="87"
-                  alt="Category 5" /></a>
-              <h4 class="title mt-3"><a href="#">Category 5</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/categories/6.png') }}" width="118" height="87"
-                  alt="Category 6" /></a>
-              <h4 class="title mt-3"><a href="#">Category 6</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/categories/7.png') }}" width="118" height="87"
-                  alt="Category 7" /></a>
-              <h4 class="title mt-3"><a href="#">Category 7</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-
           </div>
         </div>
       </div>
@@ -178,8 +130,7 @@
           <div class="col-lg-4 col-md-6">
             <!-- Single Benefit Start -->
             <div class="single-benefit">
-              <img src="{{ asset('assets/images/icon/icon-1.png') }}" width="70" height="92"
-                alt="Icon" />
+              <img src="{{ asset('assets/images/icon/icon-1.png') }}" width="70" height="92" alt="Icon" />
               <h3 class="title">Free Shipping</h3>
               <p>
                 Get 10% cash back, free shipping, free
@@ -191,8 +142,7 @@
           <div class="col-lg-4 col-md-6">
             <!-- Single Benefit Start -->
             <div class="single-benefit">
-              <img src="{{ asset('assets/images/icon/icon-2.png') }}" width="70" height="92"
-                alt="Icon" />
+              <img src="{{ asset('assets/images/icon/icon-2.png') }}" width="70" height="92" alt="Icon" />
               <h3 class="title">Safe Payment</h3>
               <p>
                 Get 10% cash back, free shipping, free
@@ -204,8 +154,7 @@
           <div class="col-lg-4 col-md-6">
             <!-- Single Benefit Start -->
             <div class="single-benefit">
-              <img src="{{ asset('assets/images/icon/icon-3.png') }}" width="70" height="92"
-                alt="Icon" />
+              <img src="{{ asset('assets/images/icon/icon-3.png') }}" width="70" height="92" alt="Icon" />
               <h3 class="title">Online Support</h3>
               <p>
                 Get 10% cash back, free shipping, free

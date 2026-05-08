@@ -2,12 +2,14 @@
 
 namespace App\Livewire;
 
+use App\Models\Category;
 use Livewire\Component;
 
 class Home extends Component
 {
     public function render()
     {
-        return view('home');
+        $categories = Category::latest('id')->get();
+        return view('home', compact('categories'));
     }
 }
