@@ -109,7 +109,7 @@
               <div class="swiper-slide single-brand-02">
                 <a href="#" wire:navigate><img src="{{ asset('storage/' . $category->image) }}" width="118"
                     height="87" alt="{{ $category->name }}" /></a>
-                <h4 class="title mt-3"><a href="#">{{ $category->name }}</a></h4>
+                <h4 class="title mt-3"><a href="#" wire:navigate>{{ $category->name }}</a></h4>
               </div>
             @endforeach
             <!-- Brand Logo Wrapper End -->
@@ -170,7 +170,7 @@
   </div>
   <!-- Benefit Section End -->
 
-  <!-- Popular Category Section Start -->
+  <!-- Popular Brands Section Start -->
   <div class="section brand-logo mt-5">
     <div class="container">
       <div class="section-title pb-3">
@@ -181,62 +181,21 @@
         <div class="swiper-container">
           <div class="swiper-wrapper">
             <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/brands/1.png') }}" width="118" height="87"
-                  alt="Brand 1" /></a>
-              <h4 class="title mt-3"><a href="#">Brand 1</a></h4>
-            </div>
+            @foreach ($brands as $brand)
+              <div class="swiper-slide single-brand-02">
+                <a href="#" wire:navigate><img src="{{ asset('storage/' . $brand->image) }}" width="118"
+                    height="87" alt="{{ $brand->name }}" /></a>
+                <h4 class="title mt-3"><a href="#" wire:navigate>{{ $brand->name }}</a></h4>
+              </div>
+            @endforeach
             <!-- Brand Logo Wrapper End -->
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/brands/2.png') }}" width="118" height="87"
-                  alt="Brand 2" /></a>
-              <h4 class="title mt-3"><a href="#">Brand 2</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/brands/3.png') }}" width="118" height="87"
-                  alt="Brand 3" /></a>
-              <h4 class="title mt-3"><a href="#">Brand 3</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/brands/4.png') }}" width="118" height="87"
-                  alt="Brand 4" /></a>
-              <h4 class="title mt-3"><a href="#">Brand 4</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/brands/5.png') }}" width="118" height="87"
-                  alt="Brand 5" /></a>
-              <h4 class="title mt-3"><a href="#">Brand 5</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/brands/6.png') }}" width="118" height="87"
-                  alt="Brand 6" /></a>
-              <h4 class="title mt-3"><a href="#">Brand 6</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-            <!-- Brand Logo Wrapper Start -->
-            <div class="swiper-slide single-brand-02">
-              <a href="#"><img src="{{ asset('uploads/brands/7.png') }}" width="118" height="87"
-                  alt="Brand 7" /></a>
-              <h4 class="title mt-3"><a href="#">Brand 7</a></h4>
-            </div>
-            <!-- Brand Logo Wrapper End -->
-
           </div>
         </div>
       </div>
       <!-- Brand Logo Wrapper End -->
     </div>
   </div>
-  <!-- Popular Category Section End -->
+  <!-- Popular Brands Section End -->
 
   <!-- New Product Section Start -->
   <div class="section section-padding-02">
