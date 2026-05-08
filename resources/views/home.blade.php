@@ -519,15 +519,21 @@
                               </a>
                             </h4>
                             <div class="price">
-                              <span class="sale-price">$40.00</span>
-                              <span class="old-price">$40.00</span>
+                              @if ($product->sale_price)
+                                <span class="sale-price">Rp
+                                  {{ number_format($product->sale_price, 0, ',', '.') }}</span>
+                                <span class="old-price">Rp
+                                  {{ number_format($product->regular_price, 0, ',', '.') }}</span>
+                              @else
+                                <span class="sale-price">Rp
+                                  {{ number_format($product->regular_price, 0, ',', '.') }}</span>
+                              @endif
                             </div>
                           </div>
                         </div>
                       </div>
                     @endforeach
                     <!-- Single Product End -->
-
                   </div>
                 </div>
               </div>
