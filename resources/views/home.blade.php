@@ -213,279 +213,54 @@
           <div class="tab-content">
             <div class="tab-pane fade show active" id="tab1">
               <div class="row">
-                <div class="col-lg-3 col-sm-6">
-                  <!-- Single Product Start -->
-                  <div class="single-product-02">
-                    <div class="product-images">
-                      <a href="{{ asset('details.html') }}"><img
-                          src="{{ asset('assets/images/product/product-01.jpg') }}" width="270" height="303"
-                          alt="product" /></a>
-
-                      <ul class="product-meta">
-                        <li>
-                          <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                              class="pe-7s-search"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-like"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="product-content">
-                      <h4 class="title">
-                        <a href="{{ asset('details.html') }}">Elona bedside grey
-                          table</a>
-                      </h4>
-                      <div class="price">
-                        <span class="sale-price">$40.00</span>
+                <!-- Single Product Start -->
+                @foreach ($newProducts as $product)
+                  <div class="col-lg-3 col-sm-6">
+                    <div class="single-product-02">
+                      <div class="product-images">
+                        <a href="#" wire:navigate>
+                          <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
+                            alt="{{ $product->name }}">
+                        </a>
+                        <ul class="product-meta">
+                          <li>
+                            <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"
+                              wire:navigate>
+                              <i class="pe-7s-search"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a class="action" href="#" wire:navigate><i class="pe-7s-shopbag"></i></a>
+                          </li>
+                          <li>
+                            <a class="action" href="#" wire:navigate><i class="pe-7s-like"></i></a>
+                          </li>
+                        </ul>
+                        @if ($product->sale_price)
+                          <span
+                            class="discount">-{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%
+                          </span>
+                        @endif
+                      </div>
+                      <div class="product-content">
+                        <h4 class="title">
+                          <a href="http://localhost:8000/details.html">{{ $product->name }}</a>
+                        </h4>
+                        <div class="price">
+                          @if ($product->sale_price)
+                            <span class="sale-price">Rp {{ number_format($product->sale_price, 0, ',', '.') }}</span>
+                            <span class="old-price">Rp
+                              {{ number_format($product->regular_price, 0, ',', '.') }}</span>
+                          @else
+                            <span class="sale-price">Rp
+                              {{ number_format($product->regular_price, 0, ',', '.') }}</span>
+                          @endif
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <!-- Single Product End -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                  <!-- Single Product Start -->
-                  <div class="single-product-02">
-                    <div class="product-images">
-                      <a href="{{ asset('details.html') }}"><img
-                          src="{{ asset('assets/images/product/product-02.jpg') }}" width="270" height="303"
-                          alt="product" /></a>
-
-                      <ul class="product-meta">
-                        <li>
-                          <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                              class="pe-7s-search"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-like"></i></a>
-                        </li>
-                      </ul>
-
-                      <span class="discount">-50%</span>
-                    </div>
-                    <div class="product-content">
-                      <h4 class="title">
-                        <a href="{{ asset('details.html') }}">Simple minimal Chair</a>
-                      </h4>
-                      <div class="price">
-                        <span class="sale-price">$20.00</span>
-                        <span class="old-price">$40.00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Single Product End -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                  <!-- Single Product Start -->
-                  <div class="single-product-02">
-                    <div class="product-images">
-                      <a href="{{ asset('details.html') }}"><img
-                          src="{{ asset('assets/images/product/product-03.jpg') }}" width="270" height="303"
-                          alt="product" /></a>
-
-                      <ul class="product-meta">
-                        <li>
-                          <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                              class="pe-7s-search"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-like"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="product-content">
-                      <h4 class="title">
-                        <a href="{{ asset('details.html') }}">Pendant Chandelier
-                          Light</a>
-                      </h4>
-                      <div class="price">
-                        <span class="sale-price">$40.00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Single Product End -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                  <!-- Single Product Start -->
-                  <div class="single-product-02">
-                    <div class="product-images">
-                      <a href="{{ asset('details.html') }}"><img
-                          src="{{ asset('assets/images/product/product-04.jpg') }}" width="270" height="303"
-                          alt="product" /></a>
-
-                      <ul class="product-meta">
-                        <li>
-                          <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                              class="pe-7s-search"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-like"></i></a>
-                        </li>
-                      </ul>
-
-                      <span class="discount">-50%</span>
-                    </div>
-                    <div class="product-content">
-                      <h4 class="title">
-                        <a href="{{ asset('details.html') }}">High quality vase
-                          bottle</a>
-                      </h4>
-                      <div class="price">
-                        <span class="sale-price">$20.00</span>
-                        <span class="old-price">$40.00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Single Product End -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                  <!-- Single Product Start -->
-                  <div class="single-product-02">
-                    <div class="product-images">
-                      <a href="{{ asset('details.html') }}"><img
-                          src="{{ asset('assets/images/product/product-05.jpg') }}" width="270" height="303"
-                          alt="product" /></a>
-
-                      <ul class="product-meta">
-                        <li>
-                          <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                              class="pe-7s-search"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-like"></i></a>
-                        </li>
-                      </ul>
-
-                      <span class="discount">-50%</span>
-                    </div>
-                    <div class="product-content">
-                      <h4 class="title">
-                        <a href="{{ asset('details.html') }}">Living & Bedroom
-                          Chair</a>
-                      </h4>
-                      <div class="price">
-                        <span class="sale-price">$20.00</span>
-                        <span class="old-price">$40.00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Single Product End -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                  <!-- Single Product Start -->
-                  <div class="single-product-02">
-                    <div class="product-images">
-                      <a href="{{ asset('details.html') }}"><img
-                          src="{{ asset('assets/images/product/product-06.jpg') }}" width="270" height="303"
-                          alt="product" /></a>
-
-                      <ul class="product-meta">
-                        <li>
-                          <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                              class="pe-7s-search"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-like"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="product-content">
-                      <h4 class="title">
-                        <a href="{{ asset('details.html') }}">Herman Arm Grey
-                          Chair</a>
-                      </h4>
-                      <div class="price">
-                        <span class="sale-price">$40.00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Single Product End -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                  <!-- Single Product Start -->
-                  <div class="single-product-02">
-                    <div class="product-images">
-                      <a href="{{ asset('details.html') }}"><img
-                          src="{{ asset('assets/images/product/product-11.jpg') }}" width="270" height="303"
-                          alt="product" /></a>
-
-                      <ul class="product-meta">
-                        <li>
-                          <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                              class="pe-7s-search"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-like"></i></a>
-                        </li>
-                      </ul>
-
-                      <span class="discount">-50%</span>
-                    </div>
-                    <div class="product-content">
-                      <h4 class="title">
-                        <a href="{{ asset('details.html') }}">Lace Bar Stool</a>
-                      </h4>
-                      <div class="price">
-                        <span class="sale-price">$20.00</span>
-                        <span class="old-price">$40.00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Single Product End -->
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                  <!-- Single Product Start -->
-                  <div class="single-product-02">
-                    <div class="product-images">
-                      <a href="{{ asset('details.html') }}"><img
-                          src="{{ asset('assets/images/product/product-08.jpg') }}" width="270" height="303"
-                          alt="product" /></a>
-
-                      <ul class="product-meta">
-                        <li>
-                          <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
-                              class="pe-7s-search"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-shopbag"></i></a>
-                        </li>
-                        <li>
-                          <a class="action" href="#"><i class="pe-7s-like"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="product-content">
-                      <h4 class="title">
-                        <a href="{{ asset('details.html') }}">Herman Seater Sofa</a>
-                      </h4>
-                      <div class="price">
-                        <span class="sale-price">$40.00</span>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- Single Product End -->
-                </div>
+                @endforeach
+                <!-- Single Product End -->
               </div>
             </div>
           </div>
@@ -563,7 +338,7 @@
               </p>
 
               <div class="countdown-wrapper">
-                <div class="countdown" data-countdown="2024/11/20" data-format="short">
+                <div class="countdown" data-countdown="2026/11/20" data-format="short">
                   <div class="single-countdown">
                     <span class="count countdown__time daysLeft"></span>
                     <span class="value countdown__time daysText"></span>
@@ -608,7 +383,7 @@
   </div>
   <!-- Countdown Section End -->
 
-  <!-- Sale Product Section Start -->
+  <!-- Featured Product Section Start -->
   <div class="section section-padding-02 mb-5">
     <div class="container">
       <div class="">
@@ -642,86 +417,41 @@
               <div class="tab-pane fade show active" id="tab7">
                 <div class="swiper-container">
                   <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <!-- Single Product Start -->
-                      <div class="single-product-02">
-                        <div class="product-images">
-                          <a href="{{ asset('details.html') }}"><img
-                              src="{{ asset('assets/images/product/product-12.jpg') }}" width="270"
-                              height="303" alt="product" /></a>
-                        </div>
-                        <div class="product-content">
-                          <h4 class="title">
-                            <a href="{{ asset('details.html') }}">Modern Accent
-                              Chair</a>
-                          </h4>
-                          <div class="price">
-                            <span class="sale-price">$40.00</span>
+                    <!-- Single Product Start -->
+                    @foreach ($featuredProducts as $product)
+                      <div class="swiper-slide">
+                        <div class="single-product-02">
+                          <div class="product-images">
+                            <a href="#" wire:navigate>
+                              <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
+                                alt="{{ $product->name }}" />
+                            </a>
+                          </div>
+                          <div class="product-content">
+                            <h4 class="title">
+                              <a href="#">
+                                {{ $product->name }}
+                              </a>
+                            </h4>
+                            <div class="price">
+                              @if ($product->sale_price)
+                                <span class="sale-price">
+                                  Rp {{ number_format($product->sale_price, 0, ',', '.') }}
+                                </span>
+                                <span class="old-price">
+                                  Rp {{ number_format($product->regular_price, 0, ',', '.') }}
+                                </span>
+                              @else
+                                <span class="sale-price">
+                                  Rp {{ number_format($product->regular_price, 0, ',', '.') }}
+                                </span>
+                              @endif
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <!-- Single Product End -->
-                    </div>
-                    <div class="swiper-slide">
-                      <!-- Single Product Start -->
-                      <div class="single-product-02">
-                        <div class="product-images">
-                          <a href="{{ asset('details.html') }}"><img
-                              src="{{ asset('assets/images/product/product-08.jpg') }}" width="270"
-                              height="303" alt="product" /></a>
-                        </div>
-                        <div class="product-content">
-                          <h4 class="title">
-                            <a href="{{ asset('details.html') }}">Herman Seater
-                              Sofa</a>
-                          </h4>
-                          <div class="price">
-                            <span class="sale-price">$40.00</span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Single Product End -->
-                    </div>
-                    <div class="swiper-slide">
-                      <!-- Single Product Start -->
-                      <div class="single-product-02">
-                        <div class="product-images">
-                          <a href="{{ asset('details.html') }}"><img
-                              src="{{ asset('assets/images/product/product-09.jpg') }}" width="270"
-                              height="303" alt="product" /></a>
-                        </div>
-                        <div class="product-content">
-                          <h4 class="title">
-                            <a href="{{ asset('details.html') }}">Reece Seater
-                              Sofa</a>
-                          </h4>
-                          <div class="price">
-                            <span class="sale-price">$40.00</span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Single Product End -->
-                    </div>
-                    <div class="swiper-slide">
-                      <!-- Single Product Start -->
-                      <div class="single-product-02">
-                        <div class="product-images">
-                          <a href="{{ asset('details.html') }}"><img
-                              src="{{ asset('assets/images/product/product-10.jpg') }}" width="270"
-                              height="303" alt="product" /></a>
-                        </div>
-                        <div class="product-content">
-                          <h4 class="title">
-                            <a href="{{ asset('details.html') }}">Round Swivel
-                              Chair</a>
-                          </h4>
-                          <div class="price">
-                            <span class="sale-price">$40.00</span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Single Product End -->
-                    </div>
+                    @endforeach
+                    <!-- Single Product End -->
                   </div>
                 </div>
               </div>
@@ -733,7 +463,7 @@
       </div>
     </div>
   </div>
-  <!-- Sale Product Section End -->
+  <!-- Featured Product Section End -->
 
   <!-- Sale Product Section Start -->
   <div class="section section-padding-02 mb-5">
