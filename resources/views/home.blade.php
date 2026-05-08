@@ -499,86 +499,35 @@
               <div class="tab-pane fade show active" id="tab8">
                 <div class="swiper-container">
                   <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <!-- Single Product Start -->
-                      <div class="single-product-02">
-                        <div class="product-images">
-                          <a href="{{ asset('details.html') }}"><img
-                              src="{{ asset('assets/images/product/product-12.jpg') }}" width="270"
-                              height="303" alt="product" /></a>
-                        </div>
-                        <div class="product-content">
-                          <h4 class="title">
-                            <a href="{{ asset('details.html') }}">Modern Accent
-                              Chair</a>
-                          </h4>
-                          <div class="price">
-                            <span class="sale-price">$40.00</span>
+                    <!-- Single Product Start -->
+                    @foreach ($saleProducts as $product)
+                      <div class="swiper-slide">
+                        <div class="single-product-02">
+                          <div class="product-images">
+                            <a href="#" wire:navigate>
+                              <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
+                                alt="{{ $product->name }}" />
+                            </a>
+                            <span
+                              class="discount">-{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%
+                            </span>
+                          </div>
+                          <div class="product-content">
+                            <h4 class="title">
+                              <a href="#" wire:navigate>
+                                {{ $product->name }}
+                              </a>
+                            </h4>
+                            <div class="price">
+                              <span class="sale-price">$40.00</span>
+                              <span class="old-price">$40.00</span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <!-- Single Product End -->
-                    </div>
-                    <div class="swiper-slide">
-                      <!-- Single Product Start -->
-                      <div class="single-product-02">
-                        <div class="product-images">
-                          <a href="{{ asset('details.html') }}"><img
-                              src="{{ asset('assets/images/product/product-08.jpg') }}" width="270"
-                              height="303" alt="product" /></a>
-                        </div>
-                        <div class="product-content">
-                          <h4 class="title">
-                            <a href="{{ asset('details.html') }}">Herman Seater
-                              Sofa</a>
-                          </h4>
-                          <div class="price">
-                            <span class="sale-price">$40.00</span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Single Product End -->
-                    </div>
-                    <div class="swiper-slide">
-                      <!-- Single Product Start -->
-                      <div class="single-product-02">
-                        <div class="product-images">
-                          <a href="{{ asset('details.html') }}"><img
-                              src="{{ asset('assets/images/product/product-09.jpg') }}" width="270"
-                              height="303" alt="product" /></a>
-                        </div>
-                        <div class="product-content">
-                          <h4 class="title">
-                            <a href="{{ asset('details.html') }}">Reece Seater
-                              Sofa</a>
-                          </h4>
-                          <div class="price">
-                            <span class="sale-price">$40.00</span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Single Product End -->
-                    </div>
-                    <div class="swiper-slide">
-                      <!-- Single Product Start -->
-                      <div class="single-product-02">
-                        <div class="product-images">
-                          <a href="{{ asset('details.html') }}"><img
-                              src="{{ asset('assets/images/product/product-10.jpg') }}" width="270"
-                              height="303" alt="product" /></a>
-                        </div>
-                        <div class="product-content">
-                          <h4 class="title">
-                            <a href="{{ asset('details.html') }}">Round Swivel
-                              Chair</a>
-                          </h4>
-                          <div class="price">
-                            <span class="sale-price">$40.00</span>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Single Product End -->
-                    </div>
+                    @endforeach
+                    <!-- Single Product End -->
+
                   </div>
                 </div>
               </div>
