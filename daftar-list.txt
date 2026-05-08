@@ -1,4 +1,4 @@
 - fix bug toggle dropdown user navbar
-- show product in shop and home page
+- show sale product in shop and home page
 - add show and detail orders
 - fix bug selected featured edit product
