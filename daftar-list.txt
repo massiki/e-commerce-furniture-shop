@@ -1,6 +1,4 @@
 - fix bug toggle dropdown user navbar
-- show categories in home page (working)
-- show brands in home page
 - show product in shop and home page
 - add show and detail orders
 - fix bug selected featured edit product
