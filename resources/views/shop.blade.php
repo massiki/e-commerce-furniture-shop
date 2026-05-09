@@ -32,7 +32,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="shop-sort">
+              <div class="shop-sort" wire:ignore>
                 <span class="title">Sort By :</span>
                 <select class="select2-2">
                   <option value="featured">
@@ -44,6 +44,7 @@
               </div>
             </div>
             <!-- Shop top Bar End -->
+            {{-- <x-alert-success /> --}}
 
             <div class="tab-content">
               <div class="tab-pane fade show active" id="grid">
@@ -76,7 +77,18 @@
                           </div>
                           <ul class="product-meta">
                             <li>
-                              <a class="action" href="#" wire:navigate><i class="pe-7s-like"></i></a>
+                              <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
+                                  class="pe-7s-search"></i></a>
+                            </li>
+                            <li>
+                              <a class="action" href="#"><i class="pe-7s-like"></i></a>
+                            </li>
+                            <li>
+                              <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
+                                style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }}" @endauth wire:click.prevent="toggleCart({{ $product->id }})"
+                                href="javascript:void(0)">
+                                <i class="pe-7s-shopbag"></i>
+                              </a>
                             </li>
                           </ul>
                         </div>
@@ -105,7 +117,11 @@
                                 class="pe-7s-search"></i></a>
                           </li>
                           <li>
-                            <a class="action" href="#" wire:navigate><i class="pe-7s-shopbag"></i></a>
+                            <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0' : '' }}" @endauth 
+                              style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }}" @endauth
+                              wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
+                              <i class="pe-7s-shopbag"></i>
+                            </a>
                           </li>
                           <li>
                             <a class="action" href="#" wire:navigate><i class="pe-7s-like"></i></a>
@@ -225,14 +241,14 @@
               </div>
               <!-- Sidebar Widget End -->
               <!-- Sidebar Widget Start -->
-              <div class="sidebar-widget">
+              {{-- <div class="sidebar-widget">
 
                 <h4 class="widget-title">Filter By Price</h4>
 
                 <div class="widget-price">
-                  <input id="price-range" type="text">
+                  <input id="price-range" type="text" wire:ignore>
                 </div>
-              </div>
+              </div> --}}
               <!-- Sidebar Widget End -->
               <!-- Sidebar Widget Start -->
               <div class="sidebar-widget">

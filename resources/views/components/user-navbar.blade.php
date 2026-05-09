@@ -60,11 +60,12 @@
               </ul>
             </div>
             <a class="action" href="{{ route('user.wishlist') }}" wire:navigate><i class="pe-7s-like"></i></a>
-
             <div class="dropdown">
               <a class="action" href="{{ route('user.cart') }}" wire:navigate>
                 <i class="pe-7s-shopbag"></i>
-                <span class="number">3</span>
+                @if ($countCartItems > 0)
+                  <span class="number">{{ $countCartItems }}</span>
+                @endif
               </a>
             </div>
           </div>

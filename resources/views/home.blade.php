@@ -174,16 +174,18 @@
                         </a>
                         <ul class="product-meta">
                           <li>
-                            <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"
-                              wire:navigate>
-                              <i class="pe-7s-search"></i>
+                            <a class="action" data-bs-toggle="modal" data-bs-target="#quickView" href="#"><i
+                                class="pe-7s-search"></i></a>
+                          </li>
+                          <li>
+                            <a class="action" href="#"><i class="pe-7s-like"></i></a>
+                          </li>
+                          <li>
+                            <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
+                              style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }}" @endauth wire:click.prevent="toggleCart({{ $product->id }})"
+                              href="javascript:void(0)">
+                              <i class="pe-7s-shopbag"></i>
                             </a>
-                          </li>
-                          <li>
-                            <a class="action" href="#" wire:navigate><i class="pe-7s-shopbag"></i></a>
-                          </li>
-                          <li>
-                            <a class="action" href="#" wire:navigate><i class="pe-7s-like"></i></a>
                           </li>
                         </ul>
                         @if ($product->sale_price)
@@ -365,7 +367,7 @@
           <div class="product-tabs-content">
             <div class="tab-content">
               <div class="tab-pane fade show active" id="tab7">
-                <div class="swiper-container">
+                <div class="swiper-container" wire:ignore>
                   <div class="swiper-wrapper">
                     <!-- Single Product Start -->
                     @foreach ($featuredProducts as $product)
@@ -447,7 +449,7 @@
           <div class="product-tabs-content">
             <div class="tab-content">
               <div class="tab-pane fade show active" id="tab8">
-                <div class="swiper-container">
+                <div class="swiper-container" wire:ignore>
                   <div class="swiper-wrapper">
                     <!-- Single Product Start -->
                     @foreach ($saleProducts as $product)
