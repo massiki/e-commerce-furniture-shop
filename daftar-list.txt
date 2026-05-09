@@ -1,8 +1,9 @@
 - fix bug toggle dropdown user navbar
 - add show and detail orders
 - fix bug selected featured edit product
-- create fiture product add to cart
+- create fiture product add to cart (working)
 - create fiture product add to wishlist
 - add manage contact in admin
 - add user send contact
 - add aply coupon
+- fix eager loading in admin product
