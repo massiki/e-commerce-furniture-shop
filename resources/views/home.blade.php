@@ -5,7 +5,7 @@
 
     <div class="container">
       <div class="slider-active">
-        <div class="swiper-container">
+        <div class="swiper-container" wire:ignore>
           <div class="swiper-wrapper">
             <!-- Single Slider Start  -->
             @foreach ($sliders as $slider)
@@ -52,7 +52,7 @@
       </div>
       <!-- Brand Logo Wrapper Start -->
       <div class="brand-logo-wrapper brand-active">
-        <div class="swiper-container">
+        <div class="swiper-container" wire:ignore>
           <div class="swiper-wrapper">
             <!-- Brand Logo Wrapper Start -->
             @foreach ($categories as $category)
@@ -128,7 +128,7 @@
       </div>
       <!-- Brand Logo Wrapper Start -->
       <div class="brand-logo-wrapper brand-active">
-        <div class="swiper-container">
+        <div class="swiper-container" wire:ignore>
           <div class="swiper-wrapper">
             <!-- Brand Logo Wrapper Start -->
             @foreach ($brands as $brand)
@@ -241,10 +241,10 @@
             <div class="banner-content">
               <h6 class="sub-title">High-Quality</h6>
               <h3 class="title">
-                <a href="{{ asset('shop-grid-left-sidebar.html') }}">New Kitchen <br />
+                <a href="#">New Kitchen <br />
                   Furniture</a>
               </h3>
-              <a class="btn btn-primary btn-hover-dark" href="{{ asset('shop-grid-left-sidebar.html') }}">Shop
+              <a class="btn btn-primary btn-hover-dark" href="#">Shop
                 Now</a>
             </div>
           </div>
@@ -259,10 +259,10 @@
             <div class="banner-content">
               <h6 class="sub-title">Best-Quality</h6>
               <h3 class="title">
-                <a href="{{ asset('shop-grid-left-sidebar.html') }}">Bed Room <br />
+                <a href="#">Bed Room <br />
                   Furniture</a>
               </h3>
-              <a class="btn btn-primary btn-hover-dark" href="{{ asset('shop-grid-left-sidebar.html') }}">Shop
+              <a class="btn btn-primary btn-hover-dark" href="#">Shop
                 Now</a>
             </div>
           </div>

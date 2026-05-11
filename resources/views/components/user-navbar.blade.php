@@ -128,7 +128,9 @@
               </div>
               <a class="action" href="{{ route('user.cart') }}" wire:navigate>
                 <i class="pe-7s-shopbag"></i>
-                <span class="number">3</span>
+                @if ($countCartItems > 0)
+                  <span class="number">{{ $countCartItems }}</span>
+                @endif
               </a>
             </div>
             <!-- Header Action End -->
@@ -160,10 +162,16 @@
     <div class="offcanvas-header">
       <!-- Canvas Action Start -->
       <div class="canvas-action">
-        <a class="action" href="#" wire:navigate><i class="icon-sliders"></i> Compare
-          <span class="action-num">(3)</span></a>
         <a class="action" href="{{ route('user.wishlist') }}" wire:navigate><i class="icon-heart"></i> Wishlist
-          <span class="action-num">(3)</span></a>
+          @if ($countWishlists > 0)
+            <span class="action-num">({{ $countWishlists }})</span>
+          @endif
+        </a>
+        <a class="action" href="{{ route('user.cart') }}" wire:navigate><i class="icon-sliders"></i> Cart
+          @if ($countCartItems > 0)
+            <span class="action-num">({{ $countCartItems }})</span>
+          @endif
+        </a>
       </div>
       <!-- Canvas Action end -->
 
