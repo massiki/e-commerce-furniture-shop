@@ -25,6 +25,7 @@ use App\Livewire\Auth\Register;
 use App\Livewire\Cart;
 use App\Livewire\Contact;
 use App\Livewire\Home;
+use App\Livewire\ProductDetail;
 use App\Livewire\Shop;
 use App\Livewire\User\Checkout;
 use App\Livewire\User\Dashboard as UserDashboard;
@@ -33,6 +34,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
 Route::get('/shops', Shop::class)->name('shop');
+Route::get('/product-detail/{product:slug}', ProductDetail::class)->name('product.detail');
 Route::get('/contact', Contact::class)->name('contact');
 
 // auth 

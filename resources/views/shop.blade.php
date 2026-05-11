@@ -55,13 +55,14 @@
                     @foreach ($products as $product)
                       <div class="col-lg-4 col-sm-6">
                         <div class="single-product">
-                          <a href="#" wire:navigate>
+                          <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
                             <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
                               alt="product" />
                           </a>
                           <div class="product-content">
                             <h4 class="title">
-                              <a href="#" wire:navigate>{{ $product->name }}</a>
+                              <a href="{{ route('product.detail', $product->slug) }}"
+                                wire:navigate>{{ $product->name }}</a>
                             </h4>
                             <div class="price">
                               @if ($product->sale_price)
@@ -105,6 +106,7 @@
                 <!-- Shop Product Wrapper End -->
 
               </div>
+
               <div class="tab-pane fade" id="list">
                 <!-- Shop Product Wrapper Start -->
                 <div class="shop-product-wrapper">
@@ -112,7 +114,7 @@
                   @foreach ($products as $product)
                     <div class="single-product-02 product-list">
                       <div class="product-images">
-                        <a href="#" wire:navigate>
+                        <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
                           <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
                             alt="{{ $product->name }}" />
                         </a>
@@ -139,7 +141,8 @@
                       </div>
                       <div class="product-content">
                         <h4 class="title">
-                          <a href="#" wire:navigate>{{ $product->name }}</a>
+                          <a href="{{ route('product.detail', $product->slug) }}"
+                            wire:navigate>{{ $product->name }}</a>
                         </h4>
                         <div class="price">
                           @if ($product->sale_price)
