@@ -21,20 +21,41 @@ class Shop extends Component
         $this->dispatch('cart-updated');
     }
 
+    public function toggleWishlist(Product $product)
+    {
+        $user = Auth::user();
+        if (!$user) return;
+
+        $wishlist = $user->wishlists()->where('product_id', $product->id)->first();
+        if ($wishlist) {
+            $wishlist->delete();
+        } else {
+            $user->wishlists()->create([
+                'product_id' => $product->id,
+            ]);
+        }
+        $this->dispatch('wishlist-updated');
+    }
+
     public function render()
     {
         $products = Product::query();
         if (Auth::check()) {
-            $products->with(['cartItems' => function ($query) {
-                $query->whereHas('cart', function ($q) {
-                    $q->where('user_id', Auth::user()->id);
-                });
-            }]);
+            $products->with([
+                'cartItems' => function ($query) {
+                    $query->whereHas('cart', function ($q) {
+                        $q->where('user_id', Auth::user()->id);
+                    });
+                },
+                'wishlists' => function ($query) {
+                    $query->where(
+                        'user_id',
+                        Auth::id()
+                    );
+                }
+            ]);
         }
-        $products = $products
-            ->latest('id')
-            ->paginate(12);
-
+        $products = $products->latest('id')->paginate(12);
         $allProducts = Product::all();
         return view('shop', compact('products', 'allProducts'));
     }
