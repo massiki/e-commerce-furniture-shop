@@ -6,5 +6,4 @@
 - add aply coupon
 - add reset password
 - add popup icon cart, wishlist and seach on featured product and sale product in home page
-- fix restart render nav user mement clear cart from product
-- add show count wishlist and product in small size navbar (working)
+- fix restart render nav user mement clear cart from product (working)

@@ -34,6 +34,7 @@ class Cart extends Component
         if ($cart) {
             $cart->items()->delete();
         }
+        $this->dispatch('cart-updated');
     }
 
     public function render()
