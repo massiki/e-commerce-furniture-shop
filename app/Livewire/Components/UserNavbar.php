@@ -8,15 +8,21 @@ use Livewire\Component;
 
 class UserNavbar extends Component
 {
-    protected $listeners = ['cart-updated' => '$refresh'];
+    protected $listeners = [
+        'cart-updated' => '$refresh',
+        'wishlist-updated' => '$refresh'
+    ];
 
     public function render()
     {
         if (Auth::check()) {
-            $countCartItems = Cart::where('user_id', Auth::id())->first()->items()->count();
+            $cart = Cart::where('user_id', Auth::id())->first();
+            $countCartItems = $cart ? $cart->items()->count() : 0;
+            $countWishlists = Auth::user()->wishlists()->count();
         } else {
             $countCartItems = 0;
+            $countWishlists = 0;
         }
-        return view('components.user-navbar', compact('countCartItems'));
+        return view('components.user-navbar', compact('countCartItems', 'countWishlists'));
     }
 }

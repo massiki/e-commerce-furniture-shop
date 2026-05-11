@@ -59,7 +59,14 @@
                 @endauth
               </ul>
             </div>
-            <a class="action" href="{{ route('user.wishlist') }}" wire:navigate><i class="pe-7s-like"></i></a>
+            <div class="dropdown">
+              <a class="action" href="{{ route('user.wishlist') }}" wire:navigate>
+                <i class="pe-7s-like"></i>
+                @if ($countWishlists > 0)
+                  <span class="number">{{ $countWishlists }}</span>
+                @endif
+              </a>
+            </div>
             <div class="dropdown">
               <a class="action" href="{{ route('user.cart') }}" wire:navigate>
                 <i class="pe-7s-shopbag"></i>

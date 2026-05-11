@@ -24,6 +24,22 @@ class Home extends Component
         $this->dispatch('cart-updated');
     }
 
+    public function toggleWishlist(Product $product)
+    {
+        $user = Auth::user();
+        if (!$user) return;
+
+        $wishlist = $user->wishlists()->where('product_id', $product->id)->first();
+        if ($wishlist) {
+            $wishlist->delete();
+        } else {
+            $user->wishlists()->create([
+                'product_id' => $product->id,
+            ]);
+        }
+        $this->dispatch('wishlist-updated');
+    }
+
     public function render()
     {
         $product = Product::query();
@@ -32,6 +48,8 @@ class Home extends Component
                 $query->whereHas('cart', function ($q) {
                     $q->where('user_id', Auth::user()->id);
                 });
+            }, 'wishlists' => function ($query) {
+                $query->where('user_id', Auth::id());
             }]);
         }
         $newProducts = $product->latest('id')->take(8)->get();
