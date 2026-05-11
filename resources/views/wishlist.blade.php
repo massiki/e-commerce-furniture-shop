@@ -53,7 +53,7 @@
                     </td>
                     <td class="product-info">
                       <h6 class="name">
-                        <a href="#" wire:navigate>
+                        <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
                           {{ $product->name }}
                         </a>
                       </h6>

@@ -48,7 +48,8 @@
                     </td>
                     <td class="product-info">
                       <h6 class="name">
-                        <a href="#" wire:navigate>{{ $items->product->name }}</a>
+                        <a href="{{ route('product.detail', $items->product->slug) }}"
+                          wire:navigate>{{ $items->product->name }}</a>
                       </h6>
                       <div class="product-prices">
                         @if ($items->product->sale_price)
