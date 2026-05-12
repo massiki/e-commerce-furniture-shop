@@ -17,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    protected $with = ['wishlists'];
+    protected $with = ['wishlists', 'orders', 'transactions'];
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
@@ -42,5 +42,20 @@ class User extends Authenticatable
     public function wishlists(): HasMany
     {
         return $this->hasMany(Wishlist::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function address(): HasOne
+    {
+        return $this->hasOne(Address::class);
     }
 }

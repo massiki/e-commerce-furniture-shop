@@ -51,6 +51,7 @@
             <div class="tab-pane fade show active" id="pills-dashboard">
               <div class="my-account-dashboard account-wrapper">
                 <h4 class="account-title">Dashboard</h4>
+                <x-alert-success />
                 <div class="welcome-dashboard">
                   <p>
                     Hello,
