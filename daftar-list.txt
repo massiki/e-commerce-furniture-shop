@@ -1,8 +1,9 @@
 - fix bug toggle dropdown user navbar
-- add show and detail orders
+- add show and detail orders in admin
 - fix bug selected featured edit product
 - add manage contact in admin
 - add user send contact
-- add aply coupon
 - add reset password
 - add popup icon cart, wishlist and seach on featured product and sale product in home page
+- bug logic coupon update, error terjadi saat data expired_data yang ditampilkan  kosong dan di update dengan mengirim data expired_date kosong error
+- fix bug loop iterasion in admin coupon

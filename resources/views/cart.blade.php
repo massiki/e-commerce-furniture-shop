@@ -117,7 +117,7 @@
                 <h4 class="title">Calculate Shipping</h4>
                 <p>Estimate your shipping fee *</p>
               </div>
-              <div class="cart-form">
+              <div class="cart-form" wire:ignore>
                 <p>Calculate shipping</p>
                 <form action="#">
                   <div class="single-select2">
@@ -370,13 +370,19 @@
                 <p>Enter your coupon code if you have one.</p>
               </div>
               <div class="cart-form">
-                <form action="#">
+                <form wire:submit="{{ session('coupon') ? 'removeCoupon' : 'applyCoupon' }}">
                   <div class="single-form">
-                    <input class="form-control" type="text" placeholder="Enter your coupon code.." />
+                    <input class="form-control" type="text" placeholder="Enter your coupon code.."
+                      wire:model="code">
+                    @if (session('success'))
+                      <span class="text-success">{{ session('success') }}</span>
+                    @elseif (session('error'))
+                      <span class="text-danger">{{ session('error') }}</span>
+                    @endif
                   </div>
                   <div class="single-form">
-                    <button class="btn btn-dark btn-hover-primary">
-                      Apply Coupon
+                    <button type="submit" class="btn btn-dark btn-hover-primary">
+                      {{ session('coupon') ? 'Remove Coupon' : 'Apply Coupon' }}
                     </button>
                   </div>
                 </form>
@@ -398,39 +404,27 @@
                         <p class="value">Subtotal</p>
                       </td>
                       <td>
-                        <p class="price">£600.00</p>
+                        <p class="price text-end">Rp {{ number_format($subtotal, 0, ',', '.') }}</p>
                       </td>
                     </tr>
-                    <tr>
-                      <td>
-                        <p class="value">Shipping</p>
-                      </td>
-                      <td>
-                        <ul class="shipping-list">
-                          <li class="radio">
-                            <input type="radio" name="shipping" id="radio1" checked="" />
-                            <label for="radio1"><span></span> Flat
-                              Rate</label>
-                          </li>
-                          <li class="radio">
-                            <input type="radio" name="shipping" id="radio2" />
-                            <label for="radio2"><span></span> Free
-                              Shipping</label>
-                          </li>
-                          <li class="radio">
-                            <input type="radio" name="shipping" id="radio3" />
-                            <label for="radio3"><span></span> Local
-                              Pickup</label>
-                          </li>
-                        </ul>
-                      </td>
-                    </tr>
+                    @if (session('coupon'))
+                      <tr>
+                        <td>
+                          <p class="value">Vocher | {{ session('coupon.type') }}</p>
+                        </td>
+                        <td>
+                          <p class="price text-end">
+                            - Rp {{ number_format($discount, 0, ',', '.') }}
+                          </p>
+                        </td>
+                      </tr>
+                    @endif
                     <tr>
                       <td>
                         <p class="value">Total</p>
                       </td>
                       <td>
-                        <p class="price">£600.00</p>
+                        <p class="price text-end">Rp {{ number_format($total, 0, ',', '.') }}</p>
                       </td>
                     </tr>
                   </tbody>

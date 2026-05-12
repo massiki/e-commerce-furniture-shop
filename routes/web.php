@@ -30,6 +30,7 @@ use App\Livewire\Shop;
 use App\Livewire\User\Checkout;
 use App\Livewire\User\Dashboard as UserDashboard;
 use App\Livewire\Wishlist;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', Home::class)->name('home');
@@ -83,5 +84,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
   Route::get('/settings', SettingsIndex::class)->name('admin.settings.index');
 });
 
+Route::get('/session', function (Request $request) {
+  dd($request->session());
+});
 
 require __DIR__ . '/auth.php';
