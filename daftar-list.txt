@@ -7,3 +7,5 @@
 - add popup icon cart, wishlist and seach on featured product and sale product in home page
 - bug logic coupon update, error terjadi saat data expired_data yang ditampilkan  kosong dan di update dengan mengirim data expired_date kosong error
 - fix bug loop iterasion in admin coupon
+- add show order in admin
+- add show order in user
