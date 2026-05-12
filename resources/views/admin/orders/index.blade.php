@@ -43,11 +43,10 @@
               <table class="table table-striped table-bordered">
                 <thead>
                   <tr>
-                    <th class="col">OrderNo</th>
+                    <th class="col">No</th>
                     <th class="col">Name</th>
                     <th class="col">Phone</th>
                     <th class="col">Subtotal</th>
-                    <th class="col">Tax</th>
                     <th class="col">Total</th>
                     <th class="col">Status</th>
                     <th class="col">Order Date</th>
@@ -57,128 +56,71 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="text-center">5</td>
-                    <td class="text-center">Sudhir Kumar</td>
-                    <td class="text-center">1234567890</td>
-                    <td class="text-center">$788</td>
-                    <td class="text-center">$165.48</td>
-                    <td class="text-center">$953.48</td>
-                    <td class="text-center">
-                      <span class="badge bg-warning">Ordered</span>
-                    </td>
-                    <td class="text-center">2025-07-06 16:58:13</td>
-                    <td class="text-center">4</td>
-                    <td class="text-center"></td>
-                    <td class="text-center">
-                      <a href="{{ route('admin.orders.detail', ['order' => 5]) }}" wire:navigate>
-                        <div class="list-icon-function view-icon">
-                          <div class="item eye">
-                            <i class="fa fa-eye"></i>
-                          </div>
-                        </div>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center">4</td>
-                    <td class="text-center">Sudhir Kumar</td>
-                    <td class="text-center">1234567890</td>
-                    <td class="text-center">$788</td>
-                    <td class="text-center">$165.48</td>
-                    <td class="text-center">$953.48</td>
-                    <td class="text-center">
-                      <span class="badge bg-warning">Ordered</span>
-                    </td>
-                    <td class="text-center">2025-07-06 16:50:00</td>
-                    <td class="text-center">4</td>
-                    <td class="text-center"></td>
-                    <td class="text-center">
-                      <a href="{{ route('admin.orders.detail', ['order' => 4]) }}" wire:navigate>
-                        <div class="list-icon-function view-icon">
-                          <div class="item eye">
-                            <i class="fa fa-eye"></i>
-                          </div>
-                        </div>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center">3</td>
-                    <td class="text-center">Sudhir Kumar</td>
-                    <td class="text-center">1234567890</td>
-                    <td class="text-center">$368</td>
-                    <td class="text-center">$77.28</td>
-                    <td class="text-center">$445.28</td>
-                    <td class="text-center">
-                      <span class="badge bg-warning">Ordered</span>
-                    </td>
-                    <td class="text-center">2025-07-06 16:44:53</td>
-                    <td class="text-center">2</td>
-                    <td class="text-center"></td>
-                    <td class="text-center">
-                      <a href="{{ route('admin.orders.detail', ['order' => 3]) }}" wire:navigate>
-                        <div class="list-icon-function view-icon">
-                          <div class="item eye">
-                            <i class="fa fa-eye"></i>
-                          </div>
-                        </div>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center">2</td>
-                    <td class="text-center">Sudhir Kumar</td>
-                    <td class="text-center">1234567890</td>
-                    <td class="text-center">$330</td>
-                    <td class="text-center">$69.3</td>
-                    <td class="text-center">$399.3</td>
-                    <td class="text-center">
-                      <span class="badge bg-warning">Ordered</span>
-                    </td>
-                    <td class="text-center">2025-07-06 16:41:18</td>
-                    <td class="text-center">2</td>
-                    <td class="text-center"></td>
-                    <td class="text-center">
-                      <a href="{{ route('admin.orders.detail', ['order' => 2]) }}" wire:navigate>
-                        <div class="list-icon-function view-icon">
-                          <div class="item eye">
-                            <i class="fa fa-eye"></i>
-                          </div>
-                        </div>
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">Sudhir Kumar</td>
-                    <td class="text-center">1234567890</td>
-                    <td class="text-center">$120</td>
-                    <td class="text-center">$25.2</td>
-                    <td class="text-center">$145.2</td>
-                    <td class="text-center">
-                      <span class="badge bg-success">Delivered</span>
-                    </td>
-                    <td class="text-center">2025-05-12 11:16:16</td>
-                    <td class="text-center">1</td>
-                    <td class="text-center">2025-05-12 11:31:33</td>
-                    <td class="text-center">
-                      <a href="{{ route('admin.orders.detail', ['order' => 1]) }}" wire:navigate>
-                        <div class="list-icon-function view-icon">
-                          <div class="item eye">
-                            <i class="fa fa-eye"></i>
-                          </div>
-                        </div>
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                  @forelse($orders as $order)
+                    <tr>
+                      <td class="text-center">{{ $loop->iteration }}</td>
+                      <td class="text-center">{{ $order->name }}</td>
+                      <td class="text-center">{{ $order->phone }}</td>
+                      <td class="text-center">
+                        Rp {{ number_format($order->subtotal, 0, ',', '.') }}
+                      </td>
+                      <td class="text-center">
+                        Rp {{ number_format($order->total, 0, ',', '.') }}
+                      </td>
+                      <td class="text-center">
+                        @switch($order->order_status)
+                          @case('pending')
+                            <span class="badge bg-secondary">Pending</span>
+                          @break
 
+                          @case('processed')
+                            <span class="badge bg-info text-white">Processed</span>
+                          @break
+
+                          @case('shipped')
+                            <span class="badge bg-primary">Shipped</span>
+                          @break
+
+                          @case('delivered')
+                            <span class="badge bg-success">Delivered</span>
+                          @break
+
+                          @case('cancelled')
+                            <span class="badge bg-danger">Cancelled</span>
+                          @break
+
+                          @default
+                            <span class="badge bg-warning text-dark">{{ ucfirst($order->order_status) }}</span>
+                        @endswitch
+                      </td>
+                      <td class="text-center">{{ $order->created_at->translatedFormat('d M Y') }}</td>
+                      <td class="text-center">{{ $order->orderItems->count() }}</td>
+                      <td class="text-center">
+                        {{ $order->order_status === 'delivered' && $order->delivered_at ? $order->delivered_at : '' }}
+                      </td>
+                      <td class="text-center">
+                        <a href="{{ route('admin.orders.detail', $order->id) }}" wire:navigate>
+                          <div class="list-icon-function view-icon">
+                            <div class="item eye">
+                              <i class="fa fa-eye"></i>
+                            </div>
+                          </div>
+                        </a>
+                      </td>
+                    </tr>
+                    @empty
+                      <tr>
+                        <td colspan="11" class="text-center">No orders found.</td>
+                      </tr>
+                    @endforelse
+                  </tbody>
+                </table>
+
+
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>

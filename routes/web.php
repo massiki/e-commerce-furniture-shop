@@ -69,7 +69,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
   Route::get('/products/{product}/edit', ProductsEdit::class)->name('admin.products.edit');
 
   Route::get('/orders', OrdersIndex::class)->name('admin.orders.index');
-  Route::get('/orders/id', OrdersDetail::class)->name('admin.orders.detail');
+  Route::get('/orders/{order}', OrdersDetail::class)->name('admin.orders.detail');
 
   Route::get('/sliders', SlidersIndex::class)->name('admin.sliders.index');
   Route::get('/sliders/create', SlidersCreate::class)->name('admin.sliders.create');
