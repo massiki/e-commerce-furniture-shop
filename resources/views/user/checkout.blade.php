@@ -18,49 +18,49 @@
               <div class="row mt-5">
                 <div class="col-md-6">
                   <div class="form-floating my-3">
-                    <input type="text" class="form-control" name="name" required="" value="">
+                    <input type="text" class="form-control">
                     <label for="name">Full Name *</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating my-3">
-                    <input type="text" class="form-control" name="phone" required="" value="">
+                    <input type="text" class="form-control">
                     <label for="phone">Phone Number *</label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating my-3">
-                    <input type="text" class="form-control" name="zip" required="" value="">
+                    <input type="text" class="form-control">
                     <label for="zip">Pincode *</label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating mt-3 mb-3">
-                    <input type="text" class="form-control" name="state" required="" value="">
+                    <input type="text" class="form-control">
                     <label for="state">State *</label>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-floating my-3">
-                    <input type="text" class="form-control" name="city" required="" value="">
+                    <input type="text" class="form-control">
                     <label for="city">Town / City *</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating my-3">
-                    <input type="text" class="form-control" name="address" required="" value="">
+                    <input type="text" class="form-control">
                     <label for="address">House no, Building Name *</label>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating my-3">
-                    <input type="text" class="form-control" name="locality" required="" value="">
+                    <input type="text" class="form-control">
                     <label for="locality">Road Name, Area, Colony *</label>
                   </div>
                 </div>
                 <div class="col-md-12">
                   <div class="form-floating my-3">
-                    <input type="text" class="form-control" name="landmark" required="" value="">
+                    <input type="text" class="form-control">
                     <label for="landmark">Landmark *</label>
                   </div>
                 </div>
@@ -83,28 +83,19 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="Product-name">
-                        <p class="order-products">
-                          <img src="{{ asset('uploads/products/thumbnails/1747188775.jpg') }}" class="order-img">
-                          &nbsp; Fourth Product × 1
-                        </p>
-                      </td>
-                      <td class="Product-price">
-                        <p>$210.00</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="Product-name">
-                        <p class="order-products">
-                          <img src="{{ asset('uploads/products/thumbnails/1747188478.jpg') }}" class="order-img">
-                          &nbsp; Second Product × 1
-                        </p>
-                      </td>
-                      <td class="Product-price">
-                        <p>$300.00</p>
-                      </td>
-                    </tr>
+                    @foreach ($orderItems as $item)
+                      <tr>
+                        <td class="Product-name">
+                          <p class="order-products">
+                            <img src="{{ asset('storage/' . $item['image']) }}" class="order-img" width="75">
+                            &nbsp; {{ $item['nameProduct'] }} × {{ $item['quantity'] }}
+                          </p>
+                        </td>
+                        <td class="Product-price">
+                          <p>Rp {{ number_format($item['totalPrice'], 0, ',', '.') }}</p>
+                        </td>
+                      </tr>
+                    @endforeach
                   </tbody>
                   <tfoot>
                     <tr>
@@ -112,31 +103,27 @@
                         <p>Subtotal</p>
                       </td>
                       <td class="Product-price">
-                        <p>$510.00</p>
+                        <p>Rp {{ number_format($subTotal, 0, ',', '.') }}</p>
                       </td>
                     </tr>
-                    <tr>
-                      <td class="Product-name">
-                        <p>Shipping</p>
-                      </td>
-                      <td class="Product-price">
-                        <p>Free</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="Product-name">
-                        <p>VAT</p>
-                      </td>
-                      <td class="total-price">
-                        <p>$107.10</p>
-                      </td>
-                    </tr>
+                    @if (session('coupon'))
+                      <tr>
+                        <td class="Product-name">
+                          <p class="value">Vocher | {{ session('coupon.type') }}</p>
+                        </td>
+                        <td class="Product-price">
+                          <p class="price text-end">
+                            - Rp {{ number_format($discount, 0, ',', '.') }}
+                          </p>
+                        </td>
+                      </tr>
+                    @endif
                     <tr>
                       <td class="Product-name">
                         <p>Total</p>
                       </td>
                       <td class="total-price">
-                        <p>$617.10</p>
+                        <p>Rp {{ number_format($total, 0, ',', '.') }}</p>
                       </td>
                     </tr>
                   </tfoot>
