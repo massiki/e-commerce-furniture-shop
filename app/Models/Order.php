@@ -10,6 +10,17 @@ class Order extends Model
 {
     protected $with = ['orderItems', 'transaction'];
 
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'delivered_date' => 'date',
+            'cancelled_date' => 'date',
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

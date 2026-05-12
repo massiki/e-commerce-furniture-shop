@@ -18,6 +18,7 @@ class Dashboard extends Component
 
     public function render()
     {
-        return view('user.dashboard');
+        $orders = Auth::user()->orders()->latest()->get();
+        return view('user.dashboard', compact('orders'));
     }
 }
