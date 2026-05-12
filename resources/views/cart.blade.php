@@ -431,7 +431,8 @@
                 </table>
               </div>
               <div class="cart-total-btn">
-                <a href="#" class="btn btn-dark btn-hover-primary btn-block">Proceed To Checkout</a>
+                <a href="{{ route('user.checkout') }}" wire:navigate
+                  class="btn btn-dark btn-hover-primary btn-block">Proceed To Checkout</a>
               </div>
             </div>
             <!-- Cart Totals End -->
