@@ -25,7 +25,7 @@
                   </div>
                   <div class="info-content">
                     <p>
-                      <a href="tel:0000000000">000 000 0000</a>
+                      <a href="tel:085294532451">085294532451</a>
                     </p>
                   </div>
                 </div>
@@ -36,7 +36,7 @@
                   </div>
                   <div class="info-content">
                     <p>
-                      <a href="mailto:info@surfsidemedia.in">info@surfsidemedia.in</a>
+                      <a href="mailto:fikri.amrulloh15@gmail.com">fikri.amrulloh15@gmail.com</a>
                     </p>
                   </div>
                 </div>
@@ -46,7 +46,7 @@
                     <i class="pe-7s-map-marker"></i>
                   </div>
                   <div class="info-content">
-                    <p>Your Address Goese Here</p>
+                    <p>Kp. Cigadog Rt.01 Rw.10 Desa Lingkungpasir Kec. Cibiuk Kab. Garut</p>
                   </div>
                 </div>
               </div>
@@ -55,18 +55,18 @@
               <!-- Contact Social Start -->
               <ul class="social">
                 <li>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
+                  <a href="https://github.com/massiki" target="_blank"><i class="fa fa-github"></i></a>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-tumblr"></i></a>
+                  <a href="https://www.linkedin.com/in/fikri-amrullah-5583b52b6/" target="_blank"><i
+                      class="fa fa-linkedin"></i></a>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-facebook-f"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-instagram"></i></a>
+                  <a href="https://www.instagram.com/fikri.amrulloh.15/" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
                 </li>
               </ul>
+
               <!-- Contact Social End -->
 
               <img src="assets/images/contact-info.png" alt="Contact-info" />
@@ -75,43 +75,51 @@
           <div class="col-lg-8">
             <!-- Contact Form Start  -->
             <div class="contact-form">
-              <form id="contact-form" action="#" method="post">
+              <form id="contact-form" wire:submit.prevent="send">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="single-form">
-                      <input type="text" name="name" placeholder="Name*" />
+                      <input type="text" name="name" placeholder="Name*" wire:model.defer="name" />
+                      <x-alert-error field="name" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="single-form">
-                      <input type="email" name="email" placeholder="Email*" />
+                      <input type="email" name="email" placeholder="Email*" wire:model.defer="email" />
+                      <x-alert-error field="email" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="single-form">
-                      <input type="text" name="subject" placeholder="Subject" />
+                      <input type="text" name="subject" placeholder="Subject*" wire:model.defer="subject" />
+                      <x-alert-error field="subject" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="single-form">
-                      <input type="text" name="phone" placeholder="Phone No" />
+                      <input type="text" name="phone" placeholder="Phone No*" wire:model.defer="phone" />
+                      <x-alert-error field="phone" />
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="single-form">
-                      <textarea name="message" placeholder="Write your comments here"></textarea>
+                      <textarea name="message" placeholder="Write your comments here" wire:model.defer="message"></textarea>
+                      <x-alert-error field="message" />
                     </div>
                   </div>
-                  <p class="form-message"></p>
+                  <div class="col-md-12">
+                    <x-alert-success />
+                  </div>
                   <div class="col-md-12">
                     <div class="single-form">
                       <button type="submit" class="btn btn-dark btn-hover-primary">
-                        Submit Review
+                        Submit
                       </button>
                     </div>
                   </div>
                 </div>
               </form>
+
             </div>
             <!-- Contact Form End  -->
           </div>
