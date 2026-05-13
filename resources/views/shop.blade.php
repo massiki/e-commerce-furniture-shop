@@ -89,8 +89,7 @@
                             <li>
                               <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
                                 style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
-                                wire:click.prevent="toggleCart({{ $product->id }})"
-                                href="javascript:void(0)">
+                                wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
                                 <i class="pe-7s-shopbag"></i>
                               </a>
                             </li>
@@ -165,7 +164,7 @@
 
             <!-- Page pagination Start -->
             <div class="page-pagination">
-              {{ $products->links() }}
+              {{ $products->links('components.custom-paginate-user') }}
             </div>
             <!-- Page pagination End -->
           </div>
