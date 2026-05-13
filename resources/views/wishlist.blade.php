@@ -87,8 +87,12 @@
                       </span>
                     </td>
                     <td class="product-add-to-cart">
-                      <a href="javascript:void(0)" class="btn btn-dark btn-hover-primary"
-                        wire:click.prevent="addToCart({{ $product->id }})">Add to Cart</a>
+                      @if ($product->stock_status === 'instock' && $product->quantity > 0)
+                        <a href="javascript:void(0)" class="btn btn-dark btn-hover-primary"
+                          wire:click.prevent="addToCart({{ $product->id }})">Add to Cart</a>
+                      @else
+                        <a href="javascript:void(0)" class="btn btn-secondary">Out Of Stock</a>
+                      @endif
                     </td>
                     <td class="product-action">
                       <button class="remove" wire:click.prevent="remove({{ $wishlist->id }})">

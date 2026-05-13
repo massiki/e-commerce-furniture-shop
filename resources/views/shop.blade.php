@@ -52,11 +52,33 @@
                     <!-- Single Product Start -->
                     @foreach ($products as $product)
                       <div class="col-lg-4 col-sm-6">
-                        <div class="single-product">
-                          <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
-                            <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
-                              alt="product" />
-                          </a>
+                        <div class="single-product position-relative">
+                          <div class="position-relative">
+                            <!-- BADGE: NEW (top left) -->
+                            @if ($product->created_at >= now()->subDays(30))
+                              <span class="position-absolute top-0 start-0 badge text-white z-1 rounded px-2 py-1"
+                                style="background-color: #f2a100; font-size: 13px;">
+                                NEW
+                              </span>
+                            @endif
+                            <!-- BADGE: DISCOUNT (top right) -->
+                            @if ($product->sale_price)
+                              <span class="discount position-absolute top-0 end-0 z-2 fw-bold" style="color: #f2a100;">
+                                -<strong>{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%</strong>
+                              </span>
+                            @endif
+                            <!-- BADGE: OUT OF STOCK (center overlay) -->
+                            @if ($product->stock_status === 'outofstock' || $product->quantity < 1)
+                              <span
+                                class="position-absolute top-50 start-50 translate-middle badge bg-secondary text-white z-2 opacity-75 fs-6 rounded px-3 py-2">
+                                OUT OF STOCK
+                              </span>
+                            @endif
+                            <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
+                              <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
+                                alt="product" />
+                            </a>
+                          </div>
                           <div class="product-content">
                             <h4 class="title">
                               <a href="{{ route('product.detail', $product->slug) }}"
@@ -87,11 +109,17 @@
                               </a>
                             </li>
                             <li>
-                              <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
-                                style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
-                                wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
-                                <i class="pe-7s-shopbag"></i>
-                              </a>
+                              @if ($product->stock_status === 'instock' && $product->quantity > 0)
+                                <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
+                                  style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
+                                  wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
+                                  <i class="pe-7s-shopbag"></i>
+                                </a>
+                              @else
+                                <a class="action p-0 bg-secondary border-0 text-white" href="javascript:void(0)">
+                                  <i class="pe-7s-shopbag"></i>
+                                </a>
+                              @endif
                             </li>
                           </ul>
                         </div>
@@ -109,8 +137,28 @@
                 <div class="shop-product-wrapper">
                   <!-- Single Product Start -->
                   @foreach ($products as $product)
-                    <div class="single-product-02 product-list">
-                      <div class="product-images">
+                    <div class="single-product-02 product-list position-relative">
+                      <div class="product-images position-relative">
+                        <!-- BADGE: NEW (top left) -->
+                        @if ($product->created_at >= now()->subDays(30))
+                          <span class="position-absolute top-0 start-0 badge text-white z-1 rounded px-2 py-1"
+                            style="background-color: #f2a100; font-size: 13px;">
+                            NEW
+                          </span>
+                        @endif
+                        <!-- BADGE: DISCOUNT (top right) -->
+                        @if ($product->sale_price)
+                          <span class="discount position-absolute top-0 end-0 z-2 fw-bold">
+                            -<strong>{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%</strong>
+                          </span>
+                        @endif
+                        <!-- BADGE: OUT OF STOCK (center overlay) -->
+                        @if ($product->stock_status === 'outofstock' || $product->quantity < 1)
+                          <span
+                            class="position-absolute top-50 start-50 translate-middle badge bg-secondary text-white z-2 opacity-75 fs-6 rounded px-3 py-2">
+                            OUT OF STOCK
+                          </span>
+                        @endif
                         <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
                           <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
                             alt="{{ $product->name }}" />

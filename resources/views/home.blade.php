@@ -166,8 +166,29 @@
                 <!-- Single Product Start -->
                 @foreach ($newProducts as $product)
                   <div class="col-lg-3 col-sm-6">
-                    <div class="single-product-02">
-                      <div class="product-images">
+                    <div class="single-product-02 position-relative">
+                      <div class="product-images position-relative">
+                        <!-- BADGE: NEW (top left) -->
+                        @if ($product->created_at >= now()->subDays(30))
+                          <span class="position-absolute top-0 start-0 badge text-white z-1 rounded px-2 py-1"
+                            style="background-color: #f2a100; font-size: 13px;">
+                            NEW
+                          </span>
+                        @endif
+                        <!-- BADGE: DISCOUNT (top right) -->
+                        @if ($product->sale_price)
+                          <span class="discount position-absolute top-0 end-0 z-2 fw-bold">
+                            -<strong>{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%</strong>
+                          </span>
+                        @endif
+                        <!-- BADGE: OUT OF STOCK (center overlay) -->
+                        @if ($product->stock_status === 'outofstock' || $product->quantity < 1)
+                          <span
+                            class="position-absolute top-50 start-50 translate-middle badge bg-secondary text-white z-2 opacity-75 fs-6 rounded px-3 py-2">
+                            OUT OF STOCK
+                          </span>
+                        @endif
+                        <!-- Existing Product Image -->
                         <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
                           <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
                             alt="{{ $product->name }}">
@@ -185,18 +206,19 @@
                             </a>
                           </li>
                           <li>
-                            <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
-                              style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }}" @endauth wire:click.prevent="toggleCart({{ $product->id }})"
-                              href="javascript:void(0)">
-                              <i class="pe-7s-shopbag"></i>
-                            </a>
+                            @if ($product->stock_status === 'instock' && $product->quantity > 0)
+                              <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
+                                style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
+                                wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
+                                <i class="pe-7s-shopbag"></i>
+                              </a>
+                            @else
+                              <a class="action p-0 bg-secondary border-0 text-white" href="javascript:void(0)">
+                                <i class="pe-7s-shopbag"></i>
+                              </a>
+                            @endif
                           </li>
                         </ul>
-                        @if ($product->sale_price)
-                          <span
-                            class="discount">-{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%
-                          </span>
-                        @endif
                       </div>
                       <div class="product-content">
                         <h4 class="title">
@@ -205,7 +227,8 @@
                         </h4>
                         <div class="price">
                           @if ($product->sale_price)
-                            <span class="sale-price">Rp {{ number_format($product->sale_price, 0, ',', '.') }}</span>
+                            <span class="sale-price">Rp {{ number_format($product->sale_price, 0, ',', '.') }}
+                            </span>
                             <span class="old-price">Rp
                               {{ number_format($product->regular_price, 0, ',', '.') }}</span>
                           @else
@@ -377,18 +400,33 @@
                     <!-- Single Product Start -->
                     @foreach ($featuredProducts as $product)
                       <div class="swiper-slide">
-                        <div class="single-product-02">
-                          <div class="product-images">
+                        <div class="single-product-02 position-relative">
+                          <div class="product-images position-relative">
+                            <!-- BADGE: NEW (top left) -->
+                            @if ($product->created_at >= now()->subDays(30))
+                              <span class="position-absolute top-0 start-0 badge text-white z-1 rounded px-2 py-1"
+                                style="background-color: #f2a100; font-size: 13px;">
+                                NEW
+                              </span>
+                            @endif
+                            <!-- BADGE: DISCOUNT (top right) -->
+                            @if ($product->sale_price)
+                              <span class="discount position-absolute top-0 end-0 z-2 fw-bold">
+                                -<strong>{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%</strong>
+                              </span>
+                            @endif
+                            <!-- BADGE: OUT OF STOCK (center overlay) -->
+                            @if ($product->stock_status === 'outofstock' || $product->quantity < 1)
+                              <span
+                                class="position-absolute top-50 start-50 translate-middle badge bg-secondary text-white z-2 opacity-75 fs-6 rounded px-3 py-2">
+                                OUT OF STOCK
+                              </span>
+                            @endif
                             <a href="{{ route('product.detail', $product->slug) }}" class="swiper-no-swiping"
                               wire:navigate>
                               <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
                                 alt="{{ $product->name }}" />
                             </a>
-                            @if ($product->sale_price)
-                              <span
-                                class="discount">-{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%
-                              </span>
-                            @endif
                           </div>
                           <div class="product-content">
                             <h4 class="title">
@@ -415,6 +453,7 @@
                         </div>
                       </div>
                     @endforeach
+
                     <!-- Single Product End -->
                   </div>
                 </div>
@@ -466,16 +505,33 @@
                     <!-- Single Product Start -->
                     @foreach ($saleProducts as $product)
                       <div class="swiper-slide">
-                        <div class="single-product-02">
-                          <div class="product-images">
+                        <div class="single-product-02 position-relative">
+                          <div class="product-images position-relative">
+                            <!-- BADGE: NEW (top left) -->
+                            @if ($product->created_at >= now()->subDays(30))
+                              <span class="position-absolute top-0 start-0 badge text-white z-1 rounded px-2 py-1"
+                                style="background-color: #f2a100; font-size: 13px;">
+                                NEW
+                              </span>
+                            @endif
+                            <!-- BADGE: DISCOUNT (top right) -->
+                            @if ($product->sale_price)
+                              <span class="discount position-absolute top-0 end-0 z-2 fw-bold">
+                                -<strong>{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%</strong>
+                              </span>
+                            @endif
+                            <!-- BADGE: OUT OF STOCK (center overlay) -->
+                            @if ($product->stock_status === 'outofstock' || $product->quantity < 1)
+                              <span
+                                class="position-absolute top-50 start-50 translate-middle badge bg-secondary text-white z-2 opacity-75 fs-6 rounded px-3 py-2">
+                                OUT OF STOCK
+                              </span>
+                            @endif
                             <a href="{{ route('product.detail', $product->slug) }}" class="swiper-no-swiping"
                               wire:navigate>
                               <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
                                 alt="{{ $product->name }}" />
                             </a>
-                            <span
-                              class="discount">-{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%
-                            </span>
                           </div>
                           <div class="product-content">
                             <h4 class="title">
