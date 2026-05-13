@@ -13,6 +13,8 @@ class Shop extends Component
 {
     use WithPagination;
 
+    public string $search = '';
+
     public string $sortBy = 'featured';
 
     /** @var list<int|string> */
@@ -23,6 +25,11 @@ class Shop extends Component
     public bool $filterNew = false;
 
     public bool $filterInStock = false;
+
+    public function updatedSearch(): void
+    {
+        $this->resetPage();
+    }
 
     public function updatedSortBy(): void
     {
@@ -100,6 +107,7 @@ class Shop extends Component
             ]);
         }
 
+        if ($this->search) $products = $products->where('name', 'like', '%' . $this->search . '%');
         $categoryIds = array_values(array_filter($this->selectedCategories));
         if ($categoryIds !== []) $products->whereIn('category_id', $categoryIds);
         if ($this->filterOnSale) $products->whereNotNull('sale_price')->where('sale_price', '>', 0);

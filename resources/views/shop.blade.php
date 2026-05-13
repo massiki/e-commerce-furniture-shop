@@ -175,10 +175,8 @@
               <!-- Sidebar Widget Start -->
               <div class="sidebar-widget">
                 <div class="widget-search">
-                  <form action="#">
-                    <input type="text" placeholder="Search">
-                    <button><i class="fa fa-search"></i></button>
-                  </form>
+                  <input type="text" placeholder="Search" wire:model.live.debounce.300ms="search">
+                  <button><i class="fa fa-search"></i></button>
                 </div>
               </div>
               <!-- Sidebar Widget End -->
