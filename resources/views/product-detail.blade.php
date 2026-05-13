@@ -97,10 +97,14 @@
               <p>{{ $product->short_description }}</p>
               <div class="product-meta">
                 <div class="meta-action">
-                  <button wire:click="toggleCart" class="btn btn-dark btn-hover-primary"
-                    style="@auth {{ $product->cartItems->isNotEmpty() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth">
-                    {{ $product->cartItems->isNotEmpty() ? 'Added To Cart' : 'Add To Cart' }}
-                  </button>
+                  @if ($product->stock_status === 'instock' && $product->quantity > 0)
+                    <button wire:click="toggleCart" class="btn btn-dark btn-hover-primary"
+                      style="@auth {{ $product->cartItems->isNotEmpty() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth">
+                      {{ $product->cartItems->isNotEmpty() ? 'Added To Cart' : 'Add To Cart' }}
+                    </button>
+                  @else
+                    <button class="btn btn-dark">Out Of Stock</button>
+                  @endif
                 </div>
                 <div class="meta-action">
                   <button class="action border-0" wire:click="toggleWishlist"
@@ -405,11 +409,32 @@
                               <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
                                 alt="{{ $product->name }}" />
                             </a>
+                            <!-- BADGE: NEW (top left) -->
+                            @if ($product->created_at >= now()->subDays(30))
+                              <span class="position-absolute top-0 start-0 badge text-white z-1 rounded px-2 py-1"
+                                style="background-color: #f2a100; font-size: 13px;">
+                                NEW
+                              </span>
+                            @endif
+                            <!-- BADGE: DISCOUNT (top right) -->
                             @if ($product->sale_price)
+                              <span class="discount position-absolute top-0 end-0 z-2 fw-bold"
+                                style="color: #f2a100;">
+                                -<strong>{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%</strong>
+                              </span>
+                            @endif
+                            <!-- BADGE: OUT OF STOCK (center overlay) -->
+                            @if ($product->stock_status === 'outofstock' || $product->quantity < 1)
+                              <span
+                                class="position-absolute top-50 start-50 translate-middle badge bg-secondary text-white z-2 opacity-75 fs-6 rounded px-3 py-2">
+                                OUT OF STOCK
+                              </span>
+                            @endif
+                            {{-- @if ($product->sale_price)
                               <span
                                 class="discount">-{{ round((($product->regular_price - $product->sale_price) / $product->regular_price) * 100) }}%
                               </span>
-                            @endif
+                            @endif --}}
                           </div>
                           <div class="product-content">
                             <h4 class="title">

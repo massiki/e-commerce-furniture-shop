@@ -8,5 +8,4 @@
 - bug logic coupon update, error terjadi saat data expired_data yang ditampilkan  kosong dan di update dengan mengirim data expired_date kosong error
 - fix bug loop iterasion in admin coupon
 - search product in admin navbar 
-- badge new product and stock out product
 - add show total product in brand and category

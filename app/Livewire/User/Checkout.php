@@ -40,6 +40,8 @@ class Checkout extends Component
 
     public function checkout()
     {
+
+
         $this->validate();
 
         // update data address user jika belum ada maka buat data address baru
@@ -69,6 +71,11 @@ class Checkout extends Component
         // Hitung total, subtotal dan diskon
         $subTotal = 0;
         foreach ($cartItems as $item) {
+            // cek instock dan quantity
+            if ($item->product->stock_status === 'outofstock' || $item->product->quantity <= 0) {
+                session()->flash('error', 'Sorry, the ' . $item->product->name . ' products  in your cart are out of stock.');
+                return;
+            }
             $price = $item->product->sale_price ?? $item->product->regular_price;
             $totalPrice = $price * $item->quantity;
             $subTotal += $totalPrice;
