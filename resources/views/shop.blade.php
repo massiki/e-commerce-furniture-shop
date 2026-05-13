@@ -14,8 +14,8 @@
             <div class="shop-top-bar">
               <div class="shop-text">
                 <p>
-                  <span>{{ $products->count() }}</span> Product Found of
-                  <span>{{ $allProducts->count() }}</span>
+                  <span>{{ $products->total() }}</span> Product Found of
+                  <span>{{ $totalCatalogCount }}</span>
                 </p>
               </div>
               <div class="shop-tabs">
@@ -32,14 +32,12 @@
                   </li>
                 </ul>
               </div>
-              <div class="shop-sort" wire:ignore>
+              <div class="shop-sort">
                 <span class="title">Sort By :</span>
-                <select class="select2-2">
-                  <option value="featured">
-                    Featured
-                  </option>
-                  <option value="rating">Rating</option>
-                  <option value="price">Price</option>
+                <select wire:model.live="sortBy" class="form-select form-select-sm d-inline-block w-auto">
+                  <option value="cheap">Cheap</option>
+                  <option value="expensive">Expensive</option>
+                  <option value="featured">Featured</option>
                 </select>
               </div>
             </div>
@@ -90,7 +88,7 @@
                             </li>
                             <li>
                               <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
-                                style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }}" @endauth 
+                                style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
                                 wire:click.prevent="toggleCart({{ $product->id }})"
                                 href="javascript:void(0)">
                                 <i class="pe-7s-shopbag"></i>
@@ -124,8 +122,8 @@
                                 class="pe-7s-search"></i></a>
                           </li>
                           <li>
-                            <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0' : '' }}" @endauth 
-                              style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }}" @endauth
+                            <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0' : '' }} @endauth"
+                              style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
                               wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
                               <i class="pe-7s-shopbag"></i>
                             </a>
@@ -167,16 +165,11 @@
 
             <!-- Page pagination Start -->
             <div class="page-pagination">
-              <ul class="pagination justify-content-center">
-                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-left"></i></a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link active" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#"><i class="fa fa-angle-right"></i></a></li>
-              </ul>
+              {{ $products->links() }}
             </div>
             <!-- Page pagination End -->
           </div>
+
           <div class="col-lg-3">
             <!-- Sidebar Start -->
             <div class="sidebar">
@@ -192,39 +185,18 @@
               <!-- Sidebar Widget End -->
               <!-- Sidebar Widget Start -->
               <div class="sidebar-widget">
-
                 <h4 class="widget-title">Filter By Categories</h4>
-
                 <div class="widget-checkbox widget-categories">
                   <ul class="checkbox-items">
-                    <li>
-                      <input type="checkbox" id="checkbox1">
-                      <label for="checkbox1"> <span></span>Office Chair</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="checkbox2">
-                      <label for="checkbox2"> <span></span>Dining Chair</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="checkbox3">
-                      <label for="checkbox3"> <span></span>Office Table</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="checkbox4">
-                      <label for="checkbox4"> <span></span>Dining Table</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="checkbox5">
-                      <label for="checkbox5"> <span></span>Bed Light</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="checkbox6">
-                      <label for="checkbox6"> <span></span>Sofa Set</label>
-                    </li>
-                    <li>
-                      <input type="checkbox" id="checkbox7">
-                      <label for="checkbox7"> <span></span>Office Chair</label>
-                    </li>
+                    @foreach ($categories as $category)
+                      <li>
+                        <input type="checkbox" id="category-{{ $category->id }}" name="categories[]"
+                          value="{{ $category->id }}" wire:model.live="selectedCategories">
+                        <label for="category-{{ $category->id }}">
+                          <span></span>{{ $category->name }}
+                        </label>
+                      </li>
+                    @endforeach
                   </ul>
                 </div>
               </div>
@@ -237,15 +209,15 @@
                 <div class="widget-checkbox">
                   <ul class="checkbox-items">
                     <li>
-                      <input type="checkbox" id="checkbox8">
+                      <input type="checkbox" id="checkbox8" wire:model.live="filterOnSale">
                       <label for="checkbox8"> <span></span>On Sale</label>
                     </li>
                     <li>
-                      <input type="checkbox" id="checkbox9">
+                      <input type="checkbox" id="checkbox9" wire:model.live="filterNew">
                       <label for="checkbox9"> <span></span>New</label>
                     </li>
                     <li>
-                      <input type="checkbox" id="checkbox10">
+                      <input type="checkbox" id="checkbox10" wire:model.live="filterInStock">
                       <label for="checkbox10"> <span></span>In Stock</label>
                     </li>
                   </ul>
