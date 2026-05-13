@@ -59,7 +59,7 @@
                 <tbody>
                   @forelse ($coupons as $coupon)
                     <tr>
-                      <th scope="row">1</th>
+                      <th scope="row">{{ $loop->iteration }}</th>
                       <td>{{ $coupon->code }} | {{ $coupon->type }}</td>
                       <td>
                         {{ $coupon->type == 'percent' ? $coupon->value . '%' : 'Rp ' . number_format($coupon->value, 0, ',', '.') }}
