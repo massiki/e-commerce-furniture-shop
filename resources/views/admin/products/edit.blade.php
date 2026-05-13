@@ -109,16 +109,16 @@
                   <div class="col-md-6">
                     <label class="form-label" for="stock_status">Stock</label>
                     <select class="form-select" id="stock_status" wire:model="stock_status">
-                      <option value="instock" @selected($stock_status == 'instock')>In Stock</option>
-                      <option value="outofstock" @selected($stock_status == 'outofstock')>Out of Stock</option>
+                      <option value="instock">In Stock</option>
+                      <option value="outofstock">Out of Stock</option>
                     </select>
                     <x-alert-error field="stock_status" />
                   </div>
                   <div class="col-md-6">
                     <label class="form-label" for="featured">Featured</label>
-                    <select class="form-select" id="featured" wire:model="featured">
-                      <option value="1" @selected($featured == '1')>Yes</option>
-                      <option value="0" @selected($featured == '0')>No</option>
+                    <select class="form-select" id="featured" wire:model.live="featured">
+                      <option value="1">Yes</option>
+                      <option value="0">No</option>
                     </select>
                     <x-alert-error field="featured" />
                   </div>

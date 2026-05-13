@@ -30,7 +30,7 @@ class Edit extends Component
     public ?string $sale_price = null;
     public ?string $quantity = null;
     public string $stock_status;
-    public bool $featured;
+    public int $featured;
     public string $slug = '';
 
     public Product $product;
@@ -70,7 +70,7 @@ class Edit extends Component
         $this->sale_price = $product->sale_price;
         $this->quantity = $product->quantity;
         $this->stock_status = $product->stock_status;
-        $this->featured = $product->featured;
+        $this->featured =  (int) $product->featured;
         $this->slug = $product->slug;
     }
 
