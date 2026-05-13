@@ -9,4 +9,3 @@
 - fix bug loop iterasion in admin coupon
 - search product in user navbar 
 - search product in admin navbar 
-- add custom paginate in shop page
