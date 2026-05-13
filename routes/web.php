@@ -19,6 +19,7 @@ use App\Livewire\Admin\Coupons\Create as CouponsCreate;
 use App\Livewire\Admin\Coupons\Edit as CouponsEdit;
 use App\Livewire\Admin\Users\Index as UsersIndex;
 use App\Livewire\Admin\Settings\Index as SettingsIndex;
+use App\Livewire\Admin\Contacts\Index as ContactIndex;
 use App\Livewire\Admin\Dashboard;
 use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
@@ -55,35 +56,37 @@ Route::prefix('user')->middleware('auth')->name('user.')->group(function () {
 });
 
 // admin
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-  Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
+Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
+  Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
-  Route::get('/brands', BrandsIndex::class)->name('admin.brands.index');
-  Route::get('/brands/create', BrandsCreate::class)->name('admin.brands.create');
-  Route::get('/brands/{brand}/edit', BrandsEdit::class)->name('admin.brands.edit');
+  Route::get('/brands', BrandsIndex::class)->name('brands.index');
+  Route::get('/brands/create', BrandsCreate::class)->name('brands.create');
+  Route::get('/brands/{brand}/edit', BrandsEdit::class)->name('brands.edit');
 
-  Route::get('/categories', CategoriesIndex::class)->name('admin.categories.index');
-  Route::get('/categories/create', CategoriesCreate::class)->name('admin.categories.create');
-  Route::get('/categories/{category}/edit', CategoriesEdit::class)->name('admin.categories.edit');
+  Route::get('/categories', CategoriesIndex::class)->name('categories.index');
+  Route::get('/categories/create', CategoriesCreate::class)->name('categories.create');
+  Route::get('/categories/{category}/edit', CategoriesEdit::class)->name('categories.edit');
 
-  Route::get('/products', ProductsIndex::class)->name('admin.products.index');
-  Route::get('/products/create', ProductsCreate::class)->name('admin.products.create');
-  Route::get('/products/{product}/edit', ProductsEdit::class)->name('admin.products.edit');
+  Route::get('/products', ProductsIndex::class)->name('products.index');
+  Route::get('/products/create', ProductsCreate::class)->name('products.create');
+  Route::get('/products/{product}/edit', ProductsEdit::class)->name('products.edit');
 
-  Route::get('/orders', OrdersIndex::class)->name('admin.orders.index');
-  Route::get('/orders/{order}', OrdersDetail::class)->name('admin.orders.detail');
+  Route::get('/orders', OrdersIndex::class)->name('orders.index');
+  Route::get('/orders/{order}', OrdersDetail::class)->name('orders.detail');
 
-  Route::get('/sliders', SlidersIndex::class)->name('admin.sliders.index');
-  Route::get('/sliders/create', SlidersCreate::class)->name('admin.sliders.create');
-  Route::get('/sliders/{slider}/edit', SlidersEdit::class)->name('admin.sliders.edit');
+  Route::get('/sliders', SlidersIndex::class)->name('sliders.index');
+  Route::get('/sliders/create', SlidersCreate::class)->name('sliders.create');
+  Route::get('/sliders/{slider}/edit', SlidersEdit::class)->name('sliders.edit');
 
-  Route::get('/coupons', CouponsIndex::class)->name('admin.coupons.index');
-  Route::get('/coupons/create', CouponsCreate::class)->name('admin.coupons.create');
-  Route::get('/coupons/{coupon}/edit', CouponsEdit::class)->name('admin.coupons.edit');
+  Route::get('/coupons', CouponsIndex::class)->name('coupons.index');
+  Route::get('/coupons/create', CouponsCreate::class)->name('coupons.create');
+  Route::get('/coupons/{coupon}/edit', CouponsEdit::class)->name('coupons.edit');
 
-  Route::get('/users', UsersIndex::class)->name('admin.users.index');
+  Route::get('/users', UsersIndex::class)->name('users.index');
 
-  Route::get('/settings', SettingsIndex::class)->name('admin.settings.index');
+  Route::get('/settings', SettingsIndex::class)->name('settings.index');
+
+  Route::get('/contact', ContactIndex::class)->name('contact.index');
 });
 
 Route::get('/session', function (Request $request) {

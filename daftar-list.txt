@@ -1,5 +1,4 @@
 - fix bug toggle dropdown user navbar
-- add user send contact
 - add reset password
 - add popup icon cart, wishlist and seach on featured product and sale product in home page
 - bug logic coupon update, error terjadi saat data expired_data yang ditampilkan  kosong dan di update dengan mengirim data expired_date kosong error
