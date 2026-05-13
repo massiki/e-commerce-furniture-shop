@@ -49,7 +49,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Slug</th>
-                    <th scope="col">Products</th>
+                    <th scope="col">Total Products</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -65,7 +65,7 @@
                         </div>
                       </td>
                       <td>{{ $category->slug }}</td>
-                      <td>-</td>
+                      <td>{{ $category->products->count() }}</td>
                       <td>
                         <div class="list-icon-function">
                           <a href="{{ route('admin.categories.edit', $category->id) }}" wire:navigate>

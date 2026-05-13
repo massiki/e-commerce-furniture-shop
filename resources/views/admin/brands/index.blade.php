@@ -49,7 +49,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Slug</th>
-                    <th scope="col">Products</th>
+                    <th scope="col">Total Products</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -65,7 +65,7 @@
                         </div>
                       </td>
                       <td>{{ $brand->slug }}</td>
-                      <td>-</td>
+                      <td>{{ $brand->products->count() }}</td>
                       <td>
                         <div class="list-icon-function" bis_skin_checked="1">
                           <a href="{{ route('admin.brands.edit', $brand->id) }}" wire:navigate>
