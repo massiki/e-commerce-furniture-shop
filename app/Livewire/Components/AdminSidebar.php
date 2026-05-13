@@ -56,6 +56,11 @@ class AdminSidebar extends Component
                 'url' => route('admin.settings.index'),
                 'icon' => asset('img/menu-icon/10.svg'),
             ],
+            [
+                'name' => 'Contact',
+                'url' => route('admin.contact.index'),
+                'icon' => asset('img/menu-icon/dashboard.svg'),
+            ],
         ];
     }
 
