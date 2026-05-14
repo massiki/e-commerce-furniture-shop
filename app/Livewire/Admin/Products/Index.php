@@ -6,9 +6,12 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class Index extends Component
 {
+    use WithPagination;
+
     #[Layout('layouts.admin')]
 
     public function delete(Product $product)

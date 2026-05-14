@@ -6,6 +6,7 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -40,8 +41,6 @@ class Checkout extends Component
 
     public function checkout()
     {
-
-
         $this->validate();
 
         // update data address user jika belum ada maka buat data address baru
@@ -74,6 +73,11 @@ class Checkout extends Component
             // cek instock dan quantity
             if ($item->product->stock_status === 'outofstock' || $item->product->quantity <= 0) {
                 session()->flash('error', 'Sorry, the ' . $item->product->name . ' products  in your cart are out of stock.');
+                return;
+            }
+            // cek apakah cukup quantity cukup
+            if ($item->quantity > $item->product->quantity) {
+                session()->flash('error', 'Sorry, the number of ' . $item->product->name . ' products in your cart exceeds the available stock.');
                 return;
             }
             $price = $item->product->sale_price ?? $item->product->regular_price;
@@ -111,10 +115,11 @@ class Checkout extends Component
             'order_status' => 'pending',
         ]);
 
-        // Simpan order items
+        // Simpan cart items ke order items
         foreach ($cartItems as $item) {
             $price = $item->product->sale_price ?? $item->product->regular_price;
             $totalPrice = $price * $item->quantity;
+            $item->product->update(['quantity' => $item->product->quantity - $item->quantity]);
             OrderItem::create([
                 'product_id' => $item->product_id,
                 'order_id' => $order->id,
