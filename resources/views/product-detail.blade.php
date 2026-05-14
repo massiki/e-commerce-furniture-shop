@@ -99,7 +99,7 @@
                 <div class="meta-action">
                   @if ($product->stock_status === 'instock' && $product->quantity > 0)
                     <button wire:click="toggleCart" class="btn btn-dark btn-hover-primary"
-                      style="@auth {{ $product->cartItems->isNotEmpty() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth">
+                      style="@auth {{ $product->cartItems->isNotEmpty() ? 'background-color: #f2a100' : '' }} @endauth">
                       {{ $product->cartItems->isNotEmpty() ? 'Added To Cart' : 'Add To Cart' }}
                     </button>
                   @else
@@ -108,7 +108,7 @@
                 </div>
                 <div class="meta-action">
                   <button class="action border-0" wire:click="toggleWishlist"
-                    style="@auth {{ $product->wishlists->isNotEmpty() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth">
+                    style="@auth {{ $product->wishlists->isNotEmpty() ? 'background-color: #f2a100' : '' }} @endauth">
                     <i class="pe-7s-like"></i>
                   </button>
                 </div>

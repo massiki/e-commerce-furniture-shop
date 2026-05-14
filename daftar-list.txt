@@ -5,4 +5,4 @@
 - search product in admin navbar 
 - add decrement quantity product when checkout
 - add update status order in admin and user
-- replace color pink with orange 
+- add fiture Customer Support Chat

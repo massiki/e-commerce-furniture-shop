@@ -103,7 +103,7 @@
                             </li>
                             <li>
                               <a class="action p-0 @auth {{ $product->wishlists->isNotEmpty() ? 'border-0 text-white' : '' }} @endauth"
-                                style="@auth {{ $product->wishlists->isNotEmpty() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
+                                style="@auth {{ $product->wishlists->isNotEmpty() ? 'background-color: #f2a100' : '' }} @endauth"
                                 wire:click.prevent="toggleWishlist({{ $product->id }})" href="javascript:void(0)">
                                 <i class="pe-7s-like"></i>
                               </a>
@@ -111,7 +111,7 @@
                             <li>
                               @if ($product->stock_status === 'instock' && $product->quantity > 0)
                                 <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
-                                  style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
+                                  style="@auth {{ $product->cartItems->first() ? 'background-color: #f2a100' : '' }} @endauth"
                                   wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
                                   <i class="pe-7s-shopbag"></i>
                                 </a>
@@ -169,15 +169,21 @@
                                 class="pe-7s-search"></i></a>
                           </li>
                           <li>
-                            <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0' : '' }} @endauth"
-                              style="@auth {{ $product->cartItems->first() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
-                              wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
-                              <i class="pe-7s-shopbag"></i>
-                            </a>
+                            @if ($product->stock_status === 'instock' && $product->quantity > 0)
+                              <a class="action p-0 @auth {{ $product->cartItems->first() ? 'border-0 text-white' : '' }} @endauth"
+                                style="@auth {{ $product->cartItems->first() ? 'background-color: #f2a100' : '' }} @endauth"
+                                wire:click.prevent="toggleCart({{ $product->id }})" href="javascript:void(0)">
+                                <i class="pe-7s-shopbag"></i>
+                              </a>
+                            @else
+                              <a class="action p-0 bg-secondary border-0 text-white" href="javascript:void(0)">
+                                <i class="pe-7s-shopbag"></i>
+                              </a>
+                            @endif
                           </li>
                           <li>
                             <a class="action p-0 @auth {{ $product->wishlists->isNotEmpty() ? 'border-0 text-white' : '' }} @endauth"
-                              style="@auth {{ $product->wishlists->isNotEmpty() ? 'background-color: rgb(255, 150, 150)' : '' }} @endauth"
+                              style="@auth {{ $product->wishlists->isNotEmpty() ? 'background-color: #f2a100' : '' }} @endauth"
                               wire:click.prevent="toggleWishlist({{ $product->id }})" href="javascript:void(0)">
                               <i class="pe-7s-like"></i>
                             </a>
