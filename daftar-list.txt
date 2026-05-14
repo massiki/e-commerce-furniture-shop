@@ -7,8 +7,11 @@
   1. link: https://cdn.shopify.com/s/files/1/0033/3538/9233/files/1905.png
 - add confirmation delete
 - replace input textarea with trix editor in input information and description product admin
-- add show quantity product in cart, detial product and wishlist
 - add badge in table quantity product admin when quantity product < 10
+- fix strukture table order items
+  add field product_name
+  add field product_image
+  add field product_price
 
 referensi
 https://vinotiliving.com/id/collections/sale-furniture-accessories/products/milan-top-marble-dining-table
