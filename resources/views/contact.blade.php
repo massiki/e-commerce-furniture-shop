@@ -66,10 +66,7 @@
                       class="fa fa-instagram"></i></a>
                 </li>
               </ul>
-
               <!-- Contact Social End -->
-
-              <img src="assets/images/contact-info.png" alt="Contact-info" />
             </div>
           </div>
           <div class="col-lg-8">

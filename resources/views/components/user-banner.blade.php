@@ -1,4 +1,5 @@
-<div class="section page-banner-section" style="background-image: url({{ asset('assets/images/page-banner.jpg') }})">
+<div class="section page-banner-section"
+  style="background-image: url({{ asset('assets/images/banner/page-banner.jpg') }})">
   <div class="container">
     <!-- Page Banner Content End -->
     <div class="page-banner-content">

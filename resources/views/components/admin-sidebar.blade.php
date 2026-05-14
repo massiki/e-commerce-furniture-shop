@@ -1,7 +1,12 @@
 <nav class="sidebar">
   <div class="logo d-flex justify-content-between">
-    <a class="large_logo" href="javascript:void(0)"><img src="{{ asset('img/logo.png') }}" alt=""></a>
-    <a class="small_logo" href="javascript:void(0)"><img src="{{ asset('img/mini_logo.png') }}" alt=""></a>
+    <a class="large_logo" href="javascript:void(0)">
+      <img src="{{ asset('assets/images/logo/logo-fikri.png') }}" alt="Logo" style="max-width: 30px;">
+      <span class="fw-bold text-primary fs-5 mt-1 ml-1">Fikri Amrullah</span>
+    </a>
+    <a class="small_logo" href="javascript:void(0)">
+      <img src="{{ asset('assets/images/logo/logo-fikri.ico') }}" alt="Logo">
+    </a>
     <div class="sidebar_close_icon d-lg-none">
       <i class="ti-close"></i>
     </div>
