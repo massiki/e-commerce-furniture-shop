@@ -1,8 +1,10 @@
 - fix bug toggle dropdown user navbar
 - add reset password
 - add popup icon cart, wishlist and seach on featured product and sale product in home page
-- bug logic coupon update, error terjadi saat data expired_data yang ditampilkan  kosong dan di update dengan mengirim data expired_date kosong error
 - search product in admin navbar 
 - add decrement quantity product when checkout
 - add update status order in admin and user
 - add fiture Customer Support Chat
+- add confirmation delete
+- replace logo and clean img
+- replace input textarea with trix editor in input information and description product admin
