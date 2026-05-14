@@ -78,9 +78,29 @@
                       </td>
                       <td>{{ $product->category ? $product->category->name : '-' }}</td>
                       <td>{{ $product->brand ? $product->brand->name : '-' }}</td>
-                      <td>{{ $product->featured ? 'Yes' : 'No' }}</td>
-                      <td>{{ $product->stock_status }}</td>
-                      <td>{{ $product->quantity }}</td>
+                      <td>
+                        @if ($product->featured)
+                          <i class="fa fa-star text-warning" title="Featured"></i>
+                        @else
+                          -
+                        @endif
+                      </td>
+                      <td>
+                        @if ($product->stock_status === 'instock')
+                          <span>In Stock</span>
+                        @else
+                          <span class="badge bg-danger">Out of Stock</span>
+                        @endif
+                      </td>
+                      <td>
+                        @if ($product->quantity <= 0)
+                          <span class="badge bg-danger">{{ $product->quantity }}</span>
+                        @elseif ($product->quantity <= 10)
+                          <span class="badge bg-warning">{{ $product->quantity }}</span>
+                        @else
+                          <span class="badge bg-success">{{ $product->quantity }}</span>
+                        @endif
+                      </td>
                       <td>
                         <div class="list-icon-function">
                           <a href="#" target="_blank">
