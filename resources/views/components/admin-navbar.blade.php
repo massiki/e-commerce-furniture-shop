@@ -6,7 +6,7 @@
           <i class="ti-menu"></i>
         </div>
         <div class="line_icon open_miniSide d-none d-lg-block">
-          <img src="{{ asset('img/line_img.png') }}" alt="">
+          <img src="{{ asset('assets/images/icon/hamburger.png') }}" alt="">
         </div>
         <div class="serach_field-area d-flex align-items-center">
           <div class="search_inner">
@@ -14,7 +14,7 @@
               <div class="search_field">
                 <input type="text" placeholder="Search">
               </div>
-              <button type="submit"> <img src="{{ asset('img/icon/icon_search.svg') }}" alt="">
+              <button type="submit"> <img src="{{ asset('assets/images/icon/icon_search.svg') }}" alt="">
               </button>
             </form>
           </div>
@@ -22,7 +22,7 @@
         <div class="header_right d-flex justify-content-between align-items-center">
           <div class="header_notification_warp d-flex align-items-center">
             <li>
-              <a class="bell_notification_clicker" href="#"> <img src="{{ asset('img/icon/bell.svg') }}"
+              <a class="bell_notification_clicker" href="#"> <img src="{{ asset('assets/images/icon/bell.svg') }}"
                   alt="">
                 <span>2</span>
               </a>
@@ -35,7 +35,7 @@
                   <!-- single_notify  -->
                   <div class="single_notify d-flex align-items-center">
                     <div class="notify_thumb">
-                      <a href="#"><img src="{{ asset('img/staf/2.png') }}" alt=""></a>
+                      <a href="#"><img src="{{ asset('assets/images/foto-fikri.jpg') }}" alt=""></a>
                     </div>
                     <div class="notify_content">
                       <a href="#">
@@ -47,7 +47,7 @@
                   <!-- single_notify  -->
                   <div class="single_notify d-flex align-items-center">
                     <div class="notify_thumb">
-                      <a href="#"><img src="{{ asset('img/staf/4.png') }}" alt=""></a>
+                      <a href="#"><img src="{{ asset('assets/images/foto-fikri.jpg') }}" alt=""></a>
                     </div>
                     <div class="notify_content">
                       <a href="#">
@@ -67,13 +67,13 @@
             </li>
           </div>
           <div class="profile_info">
-            <img src="{{ asset('img/client_img.png') }}" alt="#">
+            <img src="{{ asset('assets/images/foto-fikri.jpg') }}" alt="#">
             <div class="profile_info_iner">
               <div class="profile_author_name">
                 <p>Admin </p>
               </div>
               <div class="profile_info_details">
-                <a href="{{ asset('profile.html') }}">My Profile </a>
+                <a href="#">My Profile </a>
                 <a href="#" wire:click="logout">Log Out </a>
               </div>
             </div>

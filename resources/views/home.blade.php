@@ -80,7 +80,8 @@
           <div class="col-lg-4 col-md-6">
             <!-- Single Benefit Start -->
             <div class="single-benefit">
-              <img src="{{ asset('assets/images/icon/icon-1.png') }}" width="70" height="92" alt="Icon" />
+              <img src="{{ asset('assets/images/should-dinamis/icon-1.png') }}" width="70" height="92"
+                alt="Icon" />
               <h3 class="title">Free Shipping</h3>
               <p>
                 Get 10% cash back, free shipping, free
@@ -92,7 +93,8 @@
           <div class="col-lg-4 col-md-6">
             <!-- Single Benefit Start -->
             <div class="single-benefit">
-              <img src="{{ asset('assets/images/icon/icon-2.png') }}" width="70" height="92" alt="Icon" />
+              <img src="{{ asset('assets/images/should-dinamis/icon-2.png') }}" width="70" height="92"
+                alt="Icon" />
               <h3 class="title">Safe Payment</h3>
               <p>
                 Get 10% cash back, free shipping, free
@@ -104,7 +106,8 @@
           <div class="col-lg-4 col-md-6">
             <!-- Single Benefit Start -->
             <div class="single-benefit">
-              <img src="{{ asset('assets/images/icon/icon-3.png') }}" width="70" height="92" alt="Icon" />
+              <img src="{{ asset('assets/images/should-dinamis/icon-3.png') }}" width="70" height="92"
+                alt="Icon" />
               <h3 class="title">Online Support</h3>
               <p>
                 Get 10% cash back, free shipping, free
@@ -259,9 +262,8 @@
         <div class="col-lg-6">
           <!-- Single Banner Start -->
           <div class="single-banner-03">
-            <img src="{{ asset('assets/images/banner/banner-05.jpg') }}" width="570" height="299"
+            <img src="{{ asset('assets/images/should-dinamis/banner-05.jpg') }}" width="570" height="299"
               alt="Banner" />
-
             <div class="banner-content">
               <h6 class="sub-title">High-Quality</h6>
               <h3 class="title">
@@ -277,9 +279,8 @@
         <div class="col-lg-6">
           <!-- Single Banner Start -->
           <div class="single-banner-03">
-            <img src="{{ asset('assets/images/banner/banner-06.jpg') }}" width="570" height="299"
+            <img src="{{ asset('assets/images/should-dinamis/banner-06.jpg') }}" width="570" height="299"
               alt="Banner" />
-
             <div class="banner-content">
               <h6 class="sub-title">Best-Quality</h6>
               <h3 class="title">
@@ -351,7 +352,7 @@
               <div class="shape-3"></div>
 
               <div class="image-box">
-                <img src="{{ asset('assets/images/countdown.png') }}" width="480" height="383"
+                <img src="{{ asset('assets/images/should-dinamis/countdown.png') }}" width="480" height="383"
                   alt="Countdown" />
               </div>
             </div>

@@ -7,32 +7,30 @@
           <!-- Footer Widget Start -->
           <div class="footer-widget">
             <div class="footer-logo">
-              <a href="{{ asset('index.html') }}"><img src="{{ asset('assets/images/logo.png') }}" width="254"
-                  height="46" alt="Logo" /></a>
+              <a href="#"><img src="{{ asset('assets/images/logo/logo-fikri.png') }}" style="max-width: 50px"
+                  alt="Logo" /></a>
             </div>
-
             <div class="widget-about">
               <ul class="align-items-center">
-                <li class="ec-footer-link">ABC, Address Here, Country</li>
-                <li class="ec-footer-link"><span>Call Us:</span><a href="tel:+0000000000" bis_skin_checked="1">+000
-                    000 0000</a></li>
-                <li class="ec-footer-link"><span>Email:</span><a href="mailto:info@surfsidemedia.in"
-                    bis_skin_checked="1">+info@surfsidemedia.in</a></li>
+                <li class="ec-footer-link">Kp. Cigadog Rt.01/Rw.10 Kec. Cibiuk Kab. Garut</li>
+                <li class="ec-footer-link"><span>Call Us:</span><a href="tel:+6285294532451" bis_skin_checked="1">
+                    +62 852 9453 2451</a></li>
+                <li class="ec-footer-link"><span>Email:</span><a href="mailto:fikri.amrulloh15@gmail.com"
+                    bis_skin_checked="1">fikri.amrulloh15@gmail.com</a></li>
               </ul>
             </div>
             <div class="widget-social">
               <ul>
                 <li>
-                  <a href="#"><i class="fa fa-twitter"></i></a>
+                  <a href="https://github.com/massiki" target="_blank"><i class="fa fa-github"></i></a>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-tumblr"></i></a>
+                  <a href="https://www.linkedin.com/in/fikri-amrullah-5583b52b6/" target="_blank"><i
+                      class="fa fa-linkedin"></i></a>
                 </li>
                 <li>
-                  <a href="#"><i class="fa fa-facebook"></i></a>
-                </li>
-                <li>
-                  <a href="#"><i class="fa fa-instagram"></i></a>
+                  <a href="https://www.instagram.com/fikri.amrulloh.15/" target="_blank"><i
+                      class="fa fa-instagram"></i></a>
                 </li>
               </ul>
             </div>
@@ -61,11 +59,11 @@
           <div class="footer-widget">
             <h4 class="footer-widget-title">Information</h4>
             <ul class="footer-link">
-              <li><a href="{{ asset('about.html') }}">About Us</a></li>
+              <li><a href="#">About Us</a></li>
               <li><a href="#">How to Shop</a></li>
               <li><a href="#">FAQ</a></li>
-              <li><a href="{{ asset('contact.html') }}">Contact us</a></li>
-              <li><a href="{{ asset('login.html') }}">Log in</a></li>
+              <li><a href="{{ route('contact') }}" wire:navigate>Contact us</a></li>
+              <li><a href="{{ route('login') }}" wire:navigate>Log in</a></li>
             </ul>
           </div>
           <!-- Footer Widget End -->
@@ -75,9 +73,9 @@
           <div class="footer-widget">
             <h4 class="footer-widget-title">My Account</h4>
             <ul class="footer-link">
-              <li><a href="{{ asset('register.html') }}">Sign In</a></li>
-              <li><a href="{{ asset('cart.html') }}">View Cart</a></li>
-              <li><a href="{{ asset('wishlist.html') }}">My Wishlist</a></li>
+              <li><a href="{{ route('register') }}" wire:navigate>Sign In</a></li>
+              <li><a href="{{ route('user.cart') }}">View Cart</a></li>
+              <li><a href="{{ route('user.wishlist') }}">My Wishlist</a></li>
               <li><a href="#">Track My Order</a></li>
               <li><a href="#">Help</a></li>
             </ul>
@@ -95,7 +93,7 @@
     <div class="container">
       <div class="row" style="padding-top:12px; padding-bottom:12px;">
         <div class="col-md-6">
-          <p>&copy; 2025 Surfside Media All rights reserved.</p>
+          <p>&copy; {{ date('Y') }} Fikri Amrullah All rights reserved.</p>
         </div>
         <div class="col-md-6 text-end">
           <img src="{{ asset('assets/images/payment.png') }}" width="192" height="21" alt="Payment" />

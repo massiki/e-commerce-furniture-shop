@@ -6,8 +6,9 @@
         <div class="col-lg-3">
           <!-- Header Logo Start -->
           <div class="header-logo">
-            <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" width="254"
-                alt="Logo" /></a>
+            <a href="javascript:void(0)">
+              <img src="{{ asset('assets/images/logo/logo-fikri.png') }}" alt="Logo" style="max-width: 50px" />
+            </a>
           </div>
           <!-- Header Logo End -->
         </div>
@@ -103,8 +104,8 @@
           <div class="col">
             <!-- Header Logo Start -->
             <div class="header-logo text-center">
-              <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo.png') }}" width="154"
-                  height="46" alt="Logo" /></a>
+              <a href="javascript:void(0)"><img src="{{ asset('assets/images/logo/logo-fikri.png') }}"
+                  style="max-width: 40px" alt="Logo" /></a>
             </div>
             <!-- Header Logo End -->
           </div>

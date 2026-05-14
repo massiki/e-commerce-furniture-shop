@@ -5,6 +5,10 @@
 - add decrement quantity product when checkout
 - add update status order in admin and user
 - add fiture Customer Support Chat
+  1. link: https://cdn.shopify.com/s/files/1/0033/3538/9233/files/1905.png
 - add confirmation delete
-- replace logo and clean img
+- replace logo and clean assets (working)
 - replace input textarea with trix editor in input information and description product admin
+
+referensi
+https://vinotiliving.com/id/collections/sale-furniture-accessories/products/milan-top-marble-dining-table
