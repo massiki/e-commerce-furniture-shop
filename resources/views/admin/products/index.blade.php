@@ -107,6 +107,7 @@
                   @endforelse
                 </tbody>
               </table>
+              {{ $products->links(data: ['scrollTo' => false]) }}
             </div>
           </div>
         </div>

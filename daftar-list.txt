@@ -2,13 +2,13 @@
 - add reset password
 - add popup icon cart, wishlist and seach on featured product and sale product in home page
 - search product in admin navbar 
-- add decrement quantity product when checkout
 - add update status order in admin and user
 - add fiture Customer Support Chat
   1. link: https://cdn.shopify.com/s/files/1/0033/3538/9233/files/1905.png
 - add confirmation delete
-- replace logo and clean assets (working)
 - replace input textarea with trix editor in input information and description product admin
+- add show quantity product in cart, detial product and wishlist
+- add badge in table quantity product admin when quantity product < 10
 
 referensi
 https://vinotiliving.com/id/collections/sale-furniture-accessories/products/milan-top-marble-dining-table
