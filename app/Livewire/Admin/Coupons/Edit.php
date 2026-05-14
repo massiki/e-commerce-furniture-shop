@@ -16,7 +16,7 @@ class Edit extends Component
     public string $type;
     public string $value;
     public string $cart_value;
-    public ?string $expired_date;
+    public ?string $expired_date = null;
 
     public Coupon $coupon;
 
@@ -58,7 +58,7 @@ class Edit extends Component
         ]);
 
         session()->flash('success', 'Coupon updated successfully!');
-        return redirect()->route('admin.coupons.index');
+        $this->redirect(route('admin.coupons.index'), true);
     }
 
     public function render()

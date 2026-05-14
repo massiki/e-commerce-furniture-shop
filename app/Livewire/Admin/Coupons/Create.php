@@ -42,7 +42,7 @@ class Create extends Component
         ]);
 
         session()->flash('success', 'Coupon created successfully!');
-        return redirect()->route('admin.coupons.index');
+        return $this->redirect(route('admin.coupons.index'), true);
     }
 
     public function render()
