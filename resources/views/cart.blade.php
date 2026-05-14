@@ -66,8 +66,9 @@
                         @endif
                       </div>
                       <div class="product-size-color">
-                        <p>Size <span>-</span></p>
-                        <p>Color <span>-</span></p>
+                        <p>Size: <span>-</span></p>
+                        <p>Color: <span>-</span></p>
+                        <p>Stock: <span>{{ $items->product->quantity }}</span></p>
                       </div>
                     </td>
                     <td class="quantity">

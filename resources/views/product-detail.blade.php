@@ -119,6 +119,12 @@
 
               <div class="product-info">
                 <div class="single-info">
+                  <span class="lable">Stock:</span>
+                  <span class="value">
+                    <a href="javascript:void(0)">{{ $product->quantity }}</a>
+                  </span>
+                </div>
+                <div class="single-info">
                   <span class="lable">Categories:</span>
                   <span class="value">
                     <a href="javascript:void(0)">{{ $product->category->name }}</a>
@@ -208,7 +214,8 @@
                 <!-- Single Comment Start  -->
                 <div class="single-reviews">
                   <div class="comment-author">
-                    <img src="assets/images/author/author-1.png" width="100" height="100" alt="author" />
+                    <img src="{{ asset('assets/images/foto-fikri.jpg') }}" width="100" height="100"
+                      alt="author" />
                   </div>
                   <div class="comment-content">
                     <div class="author-name-rating">
@@ -232,7 +239,8 @@
                 <!-- Single Comment Start  -->
                 <div class="single-reviews">
                   <div class="comment-author">
-                    <img src="assets/images/author/author-2.png" width="100" height="100" alt="author" />
+                    <img src="{{ asset('assets/images/foto-fikri.jpg') }}" width="100" height="100"
+                      alt="author" />
                   </div>
                   <div class="comment-content">
                     <div class="author-name-rating">
@@ -256,7 +264,8 @@
                 <!-- Single Comment Start  -->
                 <div class="single-reviews">
                   <div class="comment-author">
-                    <img src="assets/images/author/author-3.png" width="100" height="100" alt="author" />
+                    <img src="{{ asset('assets/images/foto-fikri.jpg') }}" width="100" height="100"
+                      alt="author" />
                   </div>
                   <div class="comment-content">
                     <div class="author-name-rating">
