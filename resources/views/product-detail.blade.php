@@ -130,7 +130,7 @@
                 <div class="single-info">
                   <span class="lable">Categories:</span>
                   <span class="value">
-                    <a href="javascript:void(0)">{{ $product->category->name }}</a>
+                    <a href="javascript:void(0)">{{ $product->category->name ?? '-' }}</a>
                   </span>
                 </div>
                 <div class="single-info">

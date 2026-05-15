@@ -4,7 +4,6 @@
 - search product in admin navbar 
 - add update status order in admin and user
 - replace input textarea with trix editor in input information and description product admin
-- add confirmation order page after checkout
 - replace ui order detail in user
 - add fiture comment product
 
