@@ -76,7 +76,8 @@
                               <i class="fa fa-edit"></i>
                             </div>
                           </a>
-                          <form action="#" wire:submit="delete({{ $coupon->id }})">
+                          <form wire:submit="delete({{ $coupon->id }})"
+                            wire:confirm="Are you sure you want to delete this data?">
                             <button type="submit" class="btn item text-danger delete">
                               <i class="fa fa-trash"></i>
                             </button>
