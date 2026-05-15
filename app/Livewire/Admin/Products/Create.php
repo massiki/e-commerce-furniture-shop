@@ -81,7 +81,7 @@ class Create extends Component
             'information' => $this->information,
             'description' => $this->description,
             'image' => $imagePath,
-            'images' => json_encode($imagesPath),
+            'images' => $imagesPath,
             'regular_price' => $this->regular_price,
             'sale_price' => $this->sale_price,
             'quantity' => $this->quantity,

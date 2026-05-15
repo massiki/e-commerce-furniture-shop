@@ -33,7 +33,7 @@ class ProductDetail extends Component
         if (!empty($product->image)) {
             $images[] = $product->image;
         }
-        $extraImages = json_decode($product->images ?? '[]', true) ?: [];
+        $extraImages = $product->images ?? [];
         foreach ($extraImages as $img) {
             if (!empty($img)) {
                 $images[] = $img;

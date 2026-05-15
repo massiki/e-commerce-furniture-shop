@@ -64,7 +64,9 @@
                     <tr>
                       <td>{{ $loop->iteration }}</td>
                       <td>
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->image }}" height="52">
+                        <img
+                          src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image) ? asset('storage/' . $product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                          alt="" height="52">
                         <p class="d-inline-block align-middle mb-0">
                           <a href="#" class="d-inline-block align-middle mb-0 f_s_16 f_w_600 color_theme2">
                             {{ $product->name }}

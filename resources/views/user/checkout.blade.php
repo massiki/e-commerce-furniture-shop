@@ -104,7 +104,9 @@
                       <tr>
                         <td class="Product-name">
                           <p class="order-products">
-                            <img src="{{ asset('storage/' . $item['image']) }}" class="order-img" width="75">
+                            <img
+                              src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($item['image']) ? asset('storage/' . $item['image']) : asset('assets/images/placehold-400x400.svg') }}"
+                              class="order-img" width="75">
                             &nbsp; {{ $item['nameProduct'] }} × {{ $item['quantity'] }}
                           </p>
                         </td>

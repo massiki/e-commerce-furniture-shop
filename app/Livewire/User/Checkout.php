@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Storage;
 
 class Checkout extends Component
 {
@@ -115,16 +116,36 @@ class Checkout extends Component
             'order_status' => 'pending',
         ]);
 
-        // Simpan cart items ke order items
         foreach ($cartItems as $item) {
+            // mengurangi stock/quantity
             $price = $item->product->sale_price ?? $item->product->regular_price;
             $totalPrice = $price * $item->quantity;
             $item->product->update(['quantity' => $item->product->quantity - $item->quantity]);
+
+            // copy image dari folder product ke folder order
+            $originalImage = $item->product->image;
+            $orderImagePath = null;
+            if ($originalImage) {
+                $imageName = basename($originalImage);
+                $orderStoragePath = 'orders/' . $imageName;
+                if (!Storage::disk('public')->exists($orderStoragePath)) {
+                    if (Storage::disk('public')->exists($originalImage)) {
+                        Storage::disk('public')->copy($originalImage, $orderStoragePath);
+                    }
+                }
+                $orderImagePath = $orderStoragePath;
+            }
+
             OrderItem::create([
-                'product_id' => $item->product_id,
-                'order_id' => $order->id,
-                'price' => $price,
-                'quantity' => $item->quantity,
+                'product_id'     => $item->product_id,
+                'order_id'       => $order->id,
+                'price'          => $price,
+                'quantity'       => $item->quantity,
+                'product_name'   => $item->product->name,
+                'product_slug'   => $item->product->slug,
+                'product_image'  => $orderImagePath,
+                'category_name'   => $item->product->category->name,
+                'brand_name'   => $item->product->brand->name,
             ]);
         }
 

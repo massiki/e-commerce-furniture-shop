@@ -44,7 +44,9 @@
                 @foreach ($cartItems as $items)
                   <tr>
                     <td class="product-thumb">
-                      <img src="{{ asset('storage/' . $items->product->image) }}" alt="" />
+                      <img
+                        src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($items->product->image) ? asset('storage/' . $items->product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                        alt="" />
                     </td>
                     <td class="product-info">
                       <h6 class="name">

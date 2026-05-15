@@ -27,8 +27,9 @@
 
                 <!-- Slider images Start -->
                 <div class="slider-images">
-                  <img src="{{ asset('storage/' . $slider->image) }}" width="707" height="477"
-                    alt="{{ $slider->name }}" />
+                  <img
+                    src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($slider->image) ? asset('storage/' . $slider->image) : asset('assets/images/placehold-700x477.svg') }}"
+                    width="707" height="477" alt="{{ $slider->name }}" />
                 </div>
                 <!-- Slider images End -->
               </div>
@@ -57,8 +58,9 @@
             <!-- Brand Logo Wrapper Start -->
             @foreach ($categories as $category)
               <div class="swiper-slide single-brand-02">
-                <a href="#" wire:navigate><img src="{{ asset('storage/' . $category->image) }}" width="118"
-                    height="87" alt="{{ $category->name }}" /></a>
+                <a href="#" wire:navigate><img
+                    src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($category->image) ? asset('storage/' . $category->image) : asset('assets/images/placehold-400x400.svg') }}"
+                    width="118" height="87" alt="" /></a>
                 <h4 class="title mt-3"><a href="#" wire:navigate>{{ $category->name }}</a></h4>
               </div>
             @endforeach
@@ -136,8 +138,9 @@
             <!-- Brand Logo Wrapper Start -->
             @foreach ($brands as $brand)
               <div class="swiper-slide single-brand-02">
-                <a href="#" wire:navigate><img src="{{ asset('storage/' . $brand->image) }}" width="118"
-                    height="87" alt="{{ $brand->name }}" /></a>
+                <a href="#" wire:navigate><img
+                    src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($brand->image) ? asset('storage/' . $brand->image) : asset('assets/images/placehold-400x400.svg') }}"
+                    width="118" height="87" alt="" /></a>
                 <h4 class="title mt-3"><a href="#" wire:navigate>{{ $brand->name }}</a></h4>
               </div>
             @endforeach
@@ -193,8 +196,9 @@
                         @endif
                         <!-- Existing Product Image -->
                         <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
-                          <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
-                            alt="{{ $product->name }}">
+                          <img
+                            src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image) ? asset('storage/' . $product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                            width="270" height="303" alt="">
                         </a>
                         <ul class="product-meta">
                           <li>
@@ -425,8 +429,9 @@
                             @endif
                             <a href="{{ route('product.detail', $product->slug) }}" class="swiper-no-swiping"
                               wire:navigate>
-                              <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
-                                alt="{{ $product->name }}" />
+                              <img
+                                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image) ? asset('storage/' . $product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                                width="270" height="303" alt="{{ $product->name }}" />
                             </a>
                           </div>
                           <div class="product-content">
@@ -530,8 +535,9 @@
                             @endif
                             <a href="{{ route('product.detail', $product->slug) }}" class="swiper-no-swiping"
                               wire:navigate>
-                              <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
-                                alt="{{ $product->name }}" />
+                              <img
+                                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image) ? asset('storage/' . $product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                                width="270" height="303" alt="{{ $product->name }}" />
                             </a>
                           </div>
                           <div class="product-content">

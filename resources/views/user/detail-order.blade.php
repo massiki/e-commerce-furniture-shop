@@ -146,25 +146,26 @@
                         <tr>
                           <td>
                             <div class="d-flex flex-wrap align-items-center gap-3 text-start" style="min-width: 0;">
-                              <img src="{{ asset('storage/' . $item->product->image) }}"
-                                alt="{{ $item->product->name ?? '' }}" class="rounded-circle flex-shrink-0"
+                              <img
+                                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($item->product_image) ? asset('storage/' . $item->product_image) : asset('assets/images/placehold-400x400.svg') }}"
+                                alt="{{ $item->product_name ?? '' }}" class="rounded-circle flex-shrink-0"
                                 style="width: 56px; height: 56px; object-fit: cover;">
                               <div style="min-width: 0;">
-                                <a href="{{ route('product.detail', $item->product->slug ?? '') }}" wire:navigate
+                                <a href="{{ route('product.detail', $item->product_slug ?? '') }}" wire:navigate
                                   class="fw-semibold text-dark text-decoration-none"
                                   style="word-break: break-word; white-space: normal;">
-                                  {{ $item->product->name ?? '-' }}
+                                  {{ $item->product_name ?? '-' }}
                                 </a>
                               </div>
                             </div>
                           </td>
                           <td class="text-center">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
                           <td class="text-center">{{ $item->quantity }}</td>
-                          <td class="text-center">{{ $item->product->category->name ?? '-' }}</td>
-                          <td class="text-center">{{ $item->product->brand->name ?? '-' }}</td>
+                          <td class="text-center">{{ $item->category_name ?? '-' }}</td>
+                          <td class="text-center">{{ $item->brand_name ?? '-' }}</td>
                           <td class="text-center">{{ $item->return_status ?? 'No' }}</td>
                           <td class="text-center">
-                            <a href="{{ route('product.detail', $item->product->slug ?? '') }}" wire:navigate
+                            <a href="{{ route('product.detail', $item->product_slug ?? '') }}" wire:navigate
                               class="btn btn-sm p-0" title="View product">
                               <i class="fa fa-eye"></i>
                             </a>

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('code')->unique();
             $table->enum('type', ['percent', 'fixed']);
-            $table->integer('value');
-            $table->integer('cart_value');
+            $table->decimal('value', 12);
+            $table->decimal('cart_value', 12);
             $table->date('expired_date')->nullable();
             $table->timestamps();
         });
