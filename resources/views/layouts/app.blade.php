@@ -42,8 +42,10 @@
   <!-- Footer Section End -->
 
   <!--Back To Start-->
-  <button id="backBtn" class="back-to-top"><i class="pe-7s-angle-up"></i></button>
+  <button id="backBtn" class="back-to-top d-none"><i class="pe-7s-angle-up"></i></button>
   <!--Back To End-->
+
+  <x-support-chat />
 
   <!-- JS
     ============================================ -->

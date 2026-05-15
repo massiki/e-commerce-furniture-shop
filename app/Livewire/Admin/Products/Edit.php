@@ -67,7 +67,7 @@ class Edit extends Component
         $this->oldImage = $product->image;
         $this->oldImages = $product->images ?? [];
         $this->regular_price = number_format($product->regular_price, 0, ',', '');
-        $this->sale_price = number_format($product->sale_price, 0, ',', '');
+        $this->sale_price = $product->sale_price === null ? null : number_format($product->sale_price, 0, ',', '');
         $this->quantity = $product->quantity;
         $this->stock_status = $product->stock_status;
         $this->featured =  (int) $product->featured;
