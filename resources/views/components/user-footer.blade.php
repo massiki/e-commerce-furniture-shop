@@ -41,16 +41,9 @@
           <div class="footer-widget">
             <h4 class="footer-widget-title">Our Categories</h4>
             <ul class="footer-link footer-link-m">
-              <li><a href="#">Category 1</a></li>
-              <li><a href="#">Category 2</a></li>
-              <li><a href="#">Category 3</a></li>
-              <li><a href="#">Category 4</a></li>
-              <li><a href="#">Category 5</a></li>
-              <li><a href="#">Category 6</a></li>
-              <li><a href="#">Category 7</a></li>
-              <li><a href="#">Category 8</a></li>
-              <li><a href="#">Category 9</a></li>
-              <li><a href="#">Category 10</a></li>
+              @foreach ($categories as $category)
+                <li><a href="javascript:void(0)">{{ $category->name }}</a></li>
+              @endforeach
             </ul>
           </div>
         </div>

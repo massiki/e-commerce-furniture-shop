@@ -3,13 +3,10 @@
 - add popup icon cart, wishlist and seach on featured product and sale product in home page
 - search product in admin navbar 
 - add update status order in admin and user
-- add fiture Customer Support Chat (working)
-  1. link: https://cdn.shopify.com/s/files/1/0033/3538/9233/files/1905.png
-  fix input sale price bug
 - replace input textarea with trix editor in input information and description product admin
 - add confirmation order page after checkout
 - replace ui order detail in user
-- add show category in footer
+- add fiture comment product
 
 referensi
 https://vinotiliving.com/id/collections/sale-furniture-accessories/products/milan-top-marble-dining-table
