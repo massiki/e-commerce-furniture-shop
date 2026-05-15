@@ -76,7 +76,8 @@
                               <i class="fa fa-edit"></i>
                             </div>
                           </a>
-                          <form action="#" wire:submit="delete({{ $slider->id }})" style="display:inline;">
+                          <form wire:submit="delete({{ $slider->id }})" style="display:inline;"
+                            wire:confirm="Are you sure you want to delete this data?">
                             <button type="submit" class="item text-danger delete"
                               style="background:none;border:none;padding:0;">
                               <i class="fa fa-trash"></i>
