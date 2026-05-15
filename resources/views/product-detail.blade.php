@@ -18,7 +18,9 @@
                   <div class="swiper-wrapper">
                     @foreach ($allImages as $img)
                       <div class="swiper-slide single-img zoom">
-                        <img src="{{ asset('storage/' . $img) }}" width="570" height="604" alt="Product Image" />
+                        <img
+                          src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($img) ? asset('storage/' . $img) : asset('assets/images/placehold-400x400.svg') }}"
+                          width="570" height="604" alt="Product Image" />
                       </div>
                     @endforeach
                   </div>
@@ -32,8 +34,9 @@
                   <div class="swiper-wrapper">
                     @foreach ($allImages as $img)
                       <div class="swiper-slide">
-                        <img src="{{ asset('storage/' . $img) }}" width="88" height="93"
-                          alt="Product Thumbnail" />
+                        <img
+                          src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($img) ? asset('storage/' . $img) : asset('assets/images/placehold-400x400.svg') }}"
+                          width="88" height="93" alt="Product Thumbnail" />
                       </div>
                     @endforeach
                   </div>
