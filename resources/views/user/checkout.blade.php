@@ -1,215 +1,155 @@
-<div>
-  <!-- Page Banner Section Start -->
+<div class="commerce-page">
   @livewire('components.user-banner', ['title' => 'Checkout'])
-  <!-- Page Banner Section End -->
 
-  <!-- Shopping Cart Section Start -->
   <div class="section section-padding">
     <div class="container">
       <form wire:submit="checkout">
-        <div class="row">
+        <div class="row g-4">
           <div class="col-lg-7">
-            <!-- Checkout Form Start -->
-            <div class="checkout-form">
-              <div class="checkout-title">
-                <h4 class="title">Shipping details</h4>
-              </div>
+            <div class="commerce-card">
+              <h2 class="commerce-card__title">Shipping Details</h2>
+              <p class="commerce-card__subtitle">Fill in your delivery information</p>
 
-              <div class="row mt-5">
+              <div class="row g-3">
                 <div class="col-md-6">
-                  <div class="form-floating my-3">
-                    <input type="text" class="form-control" wire:model="name">
-                    <label for="name">Full Name *</label>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-name" wire:model="name"
+                      placeholder="Full Name">
+                    <label for="checkout-name">Full Name *</label>
                     <x-alert-error field="name" />
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-floating my-3">
-                    <input type="text" class="form-control" wire:model="phone">
-                    <label for="phone">Phone Number *</label>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-phone" wire:model="phone"
+                      placeholder="Phone">
+                    <label for="checkout-phone">Phone Number *</label>
                     <x-alert-error field="phone" />
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-floating my-3">
-                    <input type="text" class="form-control" wire:model="province">
-                    <label for="province">Province *</label>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-province" wire:model="province"
+                      placeholder="Province">
+                    <label for="checkout-province">Province *</label>
                     <x-alert-error field="province" />
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-floating mt-3 mb-3">
-                    <input type="text" class="form-control" wire:model="city">
-                    <label for="city">City *</label>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-city" wire:model="city" placeholder="City">
+                    <label for="checkout-city">City *</label>
                     <x-alert-error field="city" />
                   </div>
                 </div>
                 <div class="col-md-4">
-                  <div class="form-floating my-3">
-                    <input type="text" class="form-control" wire:model="district">
-                    <label for="district">District *</label>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-district" wire:model="district"
+                      placeholder="District">
+                    <label for="checkout-district">District *</label>
                     <x-alert-error field="district" />
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-floating my-3">
-                    <input type="text" class="form-control" wire:model="subdistrict">
-                    <label for="subdistrict">Subdistrict *</label>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-subdistrict" wire:model="subdistrict"
+                      placeholder="Subdistrict">
+                    <label for="checkout-subdistrict">Subdistrict *</label>
                     <x-alert-error field="subdistrict" />
                   </div>
                 </div>
                 <div class="col-md-6">
-                  <div class="form-floating my-3">
-                    <input type="text" class="form-control" wire:model="postal_code">
-                    <label for="postal_code">Postal Code *</label>
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-postal" wire:model="postal_code"
+                      placeholder="Postal Code">
+                    <label for="checkout-postal">Postal Code *</label>
                     <x-alert-error field="postal_code" />
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <div class="form-floating my-3">
-                    <input type="text" class="form-control" wire:model="full_address">
-                    <label for="full_address">Full Address *</label>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-address" wire:model="full_address"
+                      placeholder="Full Address">
+                    <label for="checkout-address">Full Address *</label>
                     <x-alert-error field="full_address" />
                   </div>
                 </div>
-                <div class="col-md-12">
-                  <div class="form-floating my-3">
-                    <input type="text" class="form-control" wire:model="address_note">
-                    <label for="address_note">Address Note</label>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="checkout-note" wire:model="address_note"
+                      placeholder="Address Note">
+                    <label for="checkout-note">Address Note</label>
                     <x-alert-error field="address_note" />
                   </div>
                 </div>
               </div>
-
-
             </div>
-            <!-- Checkout Form End -->
           </div>
+
           <div class="col-lg-5">
-            <div class="checkout-order">
-              <div class="checkout-title">
-                <h4 class="title">Your Order</h4>
+            <div class="commerce-card">
+              <h2 class="commerce-card__title">Your Order</h2>
+              <p class="commerce-card__subtitle">{{ count($orderItems) }} item(s) in your cart</p>
+
+              <div class="commerce-checkout-items mb-3">
+                @foreach ($orderItems as $item)
+                  <div class="commerce-checkout-item">
+                    <img
+                      src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($item['image']) ? asset('storage/' . $item['image']) : asset('assets/images/placehold-400x400.svg') }}"
+                      alt="" class="commerce-checkout-item__img">
+                    <div class="commerce-checkout-item__info">
+                      <p class="commerce-checkout-item__name">{{ $item['nameProduct'] }}</p>
+                      <p class="commerce-checkout-item__qty">Qty: {{ $item['quantity'] }}</p>
+                    </div>
+                    <span class="commerce-checkout-item__price">Rp
+                      {{ number_format($item['totalPrice'], 0, ',', '.') }}</span>
+                  </div>
+                @endforeach
               </div>
 
-              <div class="checkout-order-table table-responsive">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th class="Product-name">Product</th>
-                      <th class="Product-price">Total</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    @foreach ($orderItems as $item)
-                      <tr>
-                        <td class="Product-name">
-                          <p class="order-products">
-                            <img
-                              src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($item['image']) ? asset('storage/' . $item['image']) : asset('assets/images/placehold-400x400.svg') }}"
-                              class="order-img" width="75">
-                            &nbsp; {{ $item['nameProduct'] }} × {{ $item['quantity'] }}
-                          </p>
-                        </td>
-                        <td class="Product-price">
-                          <p>Rp {{ number_format($item['totalPrice'], 0, ',', '.') }}</p>
-                        </td>
-                      </tr>
-                    @endforeach
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <td class="Product-name">
-                        <p>Subtotal</p>
-                      </td>
-                      <td class="Product-price">
-                        <p>Rp {{ number_format($subTotal, 0, ',', '.') }}</p>
-                      </td>
-                    </tr>
-                    @if (session('coupon'))
-                      <tr>
-                        <td class="Product-name">
-                          <p class="value">Vocher | {{ session('coupon.type') }}</p>
-                        </td>
-                        <td class="Product-price">
-                          <p class="price text-end">
-                            - Rp {{ number_format($discount, 0, ',', '.') }}
-                          </p>
-                        </td>
-                      </tr>
-                    @endif
-                    <tr>
-                      <td class="Product-name">
-                        <p>Total</p>
-                      </td>
-                      <td class="total-price">
-                        <p>Rp {{ number_format($total, 0, ',', '.') }}</p>
-                      </td>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-
-              <div class="checkout-payment">
-                <ul>
-                  <li>
-                    <div class="single-payment">
-                      <div class="payment-radio radio">
-                        <input type="radio" name="mode" id="cod" value="cod" wire:model="payment_method"
-                          checked>
-                        <label for="cod"><span></span> Cash on Delivery (COD)</label>
-                        <div class="payment-details" style="display: block;">
-                          <p>Pay with cash upon delivery.</p>
-                        </div>
-                      </div>
-                      <x-alert-error field="payment_method" />
-                      @if (session('error'))
-                        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-                          {{ session('error') }}
-                          <button type="button" class="btn-close" data-bs-dismiss="alert"
-                            aria-label="Close"></button>
-                        </div>
-                      @endif
-                    </div>
-                  </li>
-                  {{-- <li>
-                    <div class="single-payment">
-                      <div class="payment-radio radio">
-                        <input type="radio" name="mode" id="bank_transfer" value="bank_transfer"
-                          wire:model="payment_method">
-                        <label for="bank_transfer"><span></span> Bank Transfer</label>
-                        <div class="payment-details">
-                          <p>Transfer the total payment to our bank account. Further instructions will be provided after
-                            order placement.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div class="single-payment">
-                      <div class="payment-radio radio">
-                        <input type="radio" name="mode" id="e_wallet" value="e_wallet"
-                          wire:model="payment_method">
-                        <label for="e_wallet"><span></span> E-Wallet</label>
-                        <div class="payment-details">
-                          <p>Pay securely using your preferred e-wallet service such as GoPay, OVO, or Dana.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </li> --}}
-                </ul>
-
-                <div class="single-form">
-                  <button type="submit" class="btn btn-primary btn-hover-dark d-block" wire:loading.attr="disabled">
-                    <span wire:loading.remove>Place Order</span>
-                    <span wire:loading>Processing...</span>
-                  </button>
+              <div class="commerce-summary">
+                <div class="commerce-summary-row">
+                  <span>Subtotal</span>
+                  <span>Rp {{ number_format($subTotal, 0, ',', '.') }}</span>
+                </div>
+                @if (session('coupon'))
+                  <div class="commerce-summary-row">
+                    <span>Voucher | {{ session('coupon.type') }}</span>
+                    <span class="text-success">- Rp {{ number_format($discount, 0, ',', '.') }}</span>
+                  </div>
+                @endif
+                <div class="commerce-summary-row commerce-summary-row--total">
+                  <span>Total</span>
+                  <span class="price">Rp {{ number_format($total, 0, ',', '.') }}</span>
                 </div>
               </div>
+
+              <div class="commerce-payment-option">
+                <div class="payment-radio radio">
+                  <input type="radio" name="mode" id="cod" value="cod" wire:model="payment_method"
+                    checked>
+                  <label for="cod"><span></span> Cash on Delivery (COD)</label>
+                  <div class="payment-details" style="display: block;">
+                    <p>Pay with cash upon delivery.</p>
+                  </div>
+                </div>
+                <x-alert-error field="payment_method" />
+                @if (session('error'))
+                  <div class="alert alert-danger alert-dismissible fade show mt-3 mb-0" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                  </div>
+                @endif
+              </div>
+
+              <button type="submit" class="border-0 commerce-btn-primary w-100" wire:loading.attr="disabled">
+                <span wire:loading.remove>Place Order</span>
+                <span wire:loading>Processing...</span>
+              </button>
             </div>
           </div>
         </div>
       </form>
     </div>
   </div>
-  <!-- Shopping Cart Section End -->
 </div>

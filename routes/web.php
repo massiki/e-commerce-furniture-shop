@@ -30,6 +30,7 @@ use App\Livewire\ProductDetail;
 use App\Livewire\Shop;
 use App\Livewire\User\Checkout;
 use App\Livewire\User\Dashboard as UserDashboard;
+use App\Livewire\User\OrderConfirmed;
 use App\Livewire\User\OrderDetail as UserOrderDetail;
 use App\Livewire\Wishlist;
 use Illuminate\Http\Request;
@@ -50,6 +51,7 @@ Route::middleware('guest')->group(function () {
 Route::prefix('user')->middleware('auth')->name('user.')->group(function () {
   Route::get('/dashboard', UserDashboard::class)->name('dashboard');
   Route::get('/orders/{order}', UserOrderDetail::class)->name('orders.detail');
+  Route::get('/orders/{order}/confirmed', OrderConfirmed::class)->name('orders.confirmed');
   Route::get('/checkout', Checkout::class)->name('checkout');
   Route::get('/cart', Cart::class)->name('cart');
   Route::get('/wishlist', Wishlist::class)->name('wishlist');

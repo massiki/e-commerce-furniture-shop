@@ -144,14 +144,15 @@ class Checkout extends Component
                 'product_name'   => $item->product->name,
                 'product_slug'   => $item->product->slug,
                 'product_image'  => $orderImagePath,
-                'category_name'   => $item->product->category->name,
-                'brand_name'   => $item->product->brand->name,
+                'category_name'   => $item->product->category->name ?? '-',
+                'brand_name'   => $item->product->brand->name ?? '-',
             ]);
         }
 
         $cart->items()->delete();
-        session()->flash('success', 'Your order has been placed!');
-        return $this->redirect(route('user.dashboard'), true);
+        session()->forget('coupon');
+
+        return $this->redirect(route('user.orders.confirmed', $order), true);
     }
 
     public function render()

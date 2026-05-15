@@ -1,44 +1,29 @@
-<div>
-  <!-- Page Banner Section Start -->
+<div class="commerce-page">
   @livewire('components.user-banner', ['title' => 'Wishlist'])
-  <!-- Page Banner Section End -->
 
-  <!-- Shopping Cart Section Start -->
   <div class="section section-padding">
     <div class="container">
       @if ($wishlists->count() == 0)
-        <!-- empty cart Start -->
-        <div class="cart-wrapper">
-          <div class="empty-cart text-center pb-5">
-            <h2 class="empty-cart-title">
-              There are no more items in your wishlist
-            </h2>
-            <div class="empty-cart-img">
-              <img src="{{ asset('assets/images/wishlist.png') }}" alt="Cart">
-            </div>
-            <p>No item found in your wishlist</p>
-            <a href="{{ route('shop') }}" wire:navigate class="btn btn-info btn-hover-dark">Wishlist Now</a>
-          </div>
+        <div class="commerce-card commerce-empty">
+          <img src="{{ asset('assets/images/wishlist.png') }}" alt="Wishlist" class="commerce-empty__icon">
+          <h2 class="commerce-empty__title">Your wishlist is empty</h2>
+          <p class="commerce-empty__text">Save your favorite products here.</p>
+          <a href="{{ route('shop') }}" wire:navigate class="commerce-btn-primary">Browse Products</a>
         </div>
-        <!-- empty cart End -->
       @else
-        <!-- Cart Wrapper Start -->
-        <div class="cart-wrapper">
-          <div class="cart-table table-responsive">
-            <table class="table">
+        <div class="commerce-card">
+          <h2 class="commerce-card__title">My Wishlist</h2>
+          <p class="commerce-card__subtitle">{{ $wishlists->count() }} item(s) saved</p>
+
+          <div class="commerce-table-wrap">
+            <table class="table commerce-table">
               <thead>
                 <tr>
                   <th class="product-thumb">Image</th>
-                  <th class="product-info">
-                    product Information
-                  </th>
+                  <th class="product-info">Product</th>
                   <th class="product-quantity">Quantity</th>
-                  <th class="product-total-price">
-                    Total Price
-                  </th>
-                  <th class="product-add-to-cart">
-                    Add to Cart
-                  </th>
+                  <th class="product-total-price">Price</th>
+                  <th class="product-add-to-cart">Add to Cart</th>
                   <th class="product-action">Action</th>
                 </tr>
               </thead>
@@ -68,8 +53,6 @@
                         @endif
                       </div>
                       <div class="product-size-color">
-                        <p>Size: <span>-</span></p>
-                        <p>Color: <span>-</span></p>
                         <p>Stock: <span>{{ $product->quantity }}</span></p>
                       </div>
                     </td>
@@ -91,14 +74,15 @@
                     </td>
                     <td class="product-add-to-cart">
                       @if ($product->stock_status === 'instock' && $product->quantity > 0)
-                        <a href="javascript:void(0)" class="btn btn-dark btn-hover-primary"
+                        <a href="javascript:void(0)" class="commerce-btn-primary btn-sm"
                           wire:click.prevent="addToCart({{ $product->id }})">Add to Cart</a>
                       @else
-                        <a href="javascript:void(0)" class="btn btn-secondary">Out Of Stock</a>
+                        <span class="badge bg-secondary">Out Of Stock</span>
                       @endif
                     </td>
                     <td class="product-action">
-                      <button class="remove" wire:click.prevent="remove({{ $wishlist->id }})">
+                      <button type="button" class="remove" wire:click.prevent="remove({{ $wishlist->id }})"
+                        aria-label="Remove from wishlist">
                         <i class="pe-7s-trash"></i>
                       </button>
                     </td>
@@ -108,9 +92,7 @@
             </table>
           </div>
         </div>
-        <!-- Cart Wrapper End -->
       @endif
     </div>
   </div>
-  <!-- Shopping Cart Section End -->
 </div>

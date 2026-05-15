@@ -1,42 +1,28 @@
-<div>
-  <!-- Page Banner Section Start -->
+<div class="commerce-page">
   @livewire('components.user-banner', ['title' => 'Cart'])
-  <!-- Page Banner Section End -->
 
-  <!-- Shopping Cart Section Start -->
   <div class="section section-padding">
     <div class="container">
       @if ($cartItems->count() == 0)
-        <!-- empty cart Start -->
-        <div class="cart-wrapper">
-          <div class="empty-cart text-center pb-5">
-            <h2 class="empty-cart-title">
-              There are no more items in your cart
-            </h2>
-            <div class="empty-cart-img">
-              <img src="{{ asset('assets/images/cart.png') }}" alt="Cart">
-            </div>
-            <p>No item found in your cart</p>
-            <a href="{{ route('shop') }}" wire:navigate class="btn btn-info btn-hover-dark">Continue browsing</a>
-          </div>
+        <div class="commerce-card commerce-empty">
+          <img src="{{ asset('assets/images/cart.png') }}" alt="Cart" class="commerce-empty__icon">
+          <h2 class="commerce-empty__title">Your cart is empty</h2>
+          <p class="commerce-empty__text">There are no items in your cart yet.</p>
+          <a href="{{ route('shop') }}" wire:navigate class="commerce-btn-primary">Continue Shopping</a>
         </div>
-
-        <!-- empty cart End -->
       @else
-        <!-- Cart Wrapper Start -->
-        <div class="cart-wrapper">
-          <div class="cart-table table-responsive">
-            <table class="table">
+        <div class="commerce-card mb-0">
+          <h2 class="commerce-card__title">Shopping Cart</h2>
+          <p class="commerce-card__subtitle">{{ $cartItems->count() }} item(s) in your cart</p>
+
+          <div class="commerce-table-wrap">
+            <table class="table commerce-table">
               <thead>
                 <tr>
                   <th class="product-thumb">Image</th>
-                  <th class="product-info">
-                    product Information
-                  </th>
+                  <th class="product-info">Product</th>
                   <th class="product-quantity">Quantity</th>
-                  <th class="product-total-price">
-                    Total Price
-                  </th>
+                  <th class="product-total-price">Total</th>
                   <th class="product-action">Action</th>
                 </tr>
               </thead>
@@ -46,7 +32,7 @@
                     <td class="product-thumb">
                       <img
                         src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($items->product->image) ? asset('storage/' . $items->product->image) : asset('assets/images/placehold-400x400.svg') }}"
-                        alt="" />
+                        alt="{{ $items->product->name }}" />
                     </td>
                     <td class="product-info">
                       <h6 class="name">
@@ -68,20 +54,14 @@
                         @endif
                       </div>
                       <div class="product-size-color">
-                        <p>Size: <span>-</span></p>
-                        <p>Color: <span>-</span></p>
                         <p>Stock: <span>{{ $items->product->quantity }}</span></p>
                       </div>
                     </td>
                     <td class="quantity">
                       <div class="product-quantity d-inline-flex">
-                        <button type="button" class="" wire:click.prevent="decrement({{ $items->id }})">
-                          -
-                        </button>
+                        <button type="button" wire:click.prevent="decrement({{ $items->id }})">-</button>
                         <input type="text" disabled value="{{ $items->quantity }}" />
-                        <button type="button" class="" wire:click.prevent="increment({{ $items->id }})">
-                          +
-                        </button>
+                        <button type="button" wire:click.prevent="increment({{ $items->id }})">+</button>
                       </div>
                     </td>
                     <td class="product-total-price">
@@ -90,7 +70,8 @@
                       </span>
                     </td>
                     <td class="product-action">
-                      <button class="remove" wire:click.prevent="remove({{ $items->id }})">
+                      <button type="button" class="remove" wire:click.prevent="remove({{ $items->id }})"
+                        aria-label="Remove item">
                         <i class="pe-7s-trash"></i>
                       </button>
                     </td>
@@ -99,350 +80,91 @@
               </tbody>
             </table>
           </div>
-          <!-- Cart Wrapper End -->
-          <!-- Cart btn Start -->
-          <div class="cart-btn">
-            <div class="left-btn">
-              <a href="{{ route('shop') }}" wire:navigate class="btn btn-dark btn-hover-primary">Continue Shopping</a>
-            </div>
-            <div class="right-btn">
-              <button wire:click="clear" class="btn btn-outline-dark">Clear Cart</button>
-            </div>
+
+          <div class="commerce-actions">
+            <a href="{{ route('shop') }}" wire:navigate class="commerce-btn-outline">Continue Shopping</a>
+            <button type="button" wire:click="clear" class="commerce-btn-outline">Clear Cart</button>
           </div>
         </div>
-        <!-- Cart btn Start -->
 
-        <div class="row">
+        <div class="row g-4 mt-1">
           <div class="col-lg-4">
-            <!-- Cart Shipping Start -->
-            <div class="cart-shipping">
-              <div class="cart-title">
-                <h4 class="title">Calculate Shipping</h4>
-                <p>Estimate your shipping fee *</p>
-              </div>
+            <div class="commerce-card">
+              <h2 class="commerce-card__title">Calculate Shipping</h2>
+              <p class="commerce-card__subtitle">Estimate your shipping fee *</p>
               <div class="cart-form" wire:ignore>
-                <p>Calculate shipping</p>
                 <form action="#">
-                  <div class="single-select2">
+                  <div class="single-select2 mb-3">
                     <div class="form-select2">
                       <select class="select2">
-                        <option value="0">
-                          Select a country…
-                        </option>
-                        <option value="1">
-                          Bangladesh
-                        </option>
-                        <option value="2">
-                          Canada
-                        </option>
-                        <option value="3">
-                          Colombia
-                        </option>
-                        <option value="4">
-                          Indonesia
-                        </option>
-                        <option value="5">Italy</option>
-                        <option value="6">
-                          Pakistan
-                        </option>
-                        <option value="7">
-                          Turkey
-                        </option>
+                        <option value="0">Select a country…</option>
+                        <option value="4">Indonesia</option>
                       </select>
                     </div>
                   </div>
-                  <div class="single-select2">
+                  <div class="single-select2 mb-3">
                     <div class="form-select2">
                       <select class="select2">
-                        <option value="">
-                          Select an option…
-                        </option>
-                        <option value="BAG">
-                          Bagerhat
-                        </option>
-                        <option value="BAN">
-                          Bandarban
-                        </option>
-                        <option value="BAR">
-                          Barguna
-                        </option>
-                        <option value="BARI">
-                          Barisal
-                        </option>
-                        <option value="BHO">
-                          Bhola
-                        </option>
-                        <option value="BOG">
-                          Bogra
-                        </option>
-                        <option value="BRA">
-                          Brahmanbaria
-                        </option>
-                        <option value="CHA">
-                          Chandpur
-                        </option>
-                        <option value="CHI">
-                          Chittagong
-                        </option>
-                        <option value="CHU">
-                          Chuadanga
-                        </option>
-                        <option value="COM">
-                          Comilla
-                        </option>
-                        <option value="COX">
-                          Cox's Bazar
-                        </option>
-                        <option value="DHA">
-                          Dhaka
-                        </option>
-                        <option value="DIN">
-                          Dinajpur
-                        </option>
-                        <option value="FAR">
-                          Faridpur
-                        </option>
-                        <option value="FEN">
-                          Feni
-                        </option>
-                        <option value="GAI">
-                          Gaibandha
-                        </option>
-                        <option value="GAZI">
-                          Gazipur
-                        </option>
-                        <option value="GOP">
-                          Gopalganj
-                        </option>
-                        <option value="HAB">
-                          Habiganj
-                        </option>
-                        <option value="JAM">
-                          Jamalpur
-                        </option>
-                        <option value="JES">
-                          Jessore
-                        </option>
-                        <option value="JHA">
-                          Jhalokati
-                        </option>
-                        <option value="JHE">
-                          Jhenaidah
-                        </option>
-                        <option value="JOY">
-                          Joypurhat
-                        </option>
-                        <option value="KHA">
-                          Khagrachhari
-                        </option>
-                        <option value="KHU">
-                          Khulna
-                        </option>
-                        <option value="KIS">
-                          Kishoreganj
-                        </option>
-                        <option value="KUR">
-                          Kurigram
-                        </option>
-                        <option value="KUS">
-                          Kushtia
-                        </option>
-                        <option value="LAK">
-                          Lakshmipur
-                        </option>
-                        <option value="LAL">
-                          Lalmonirhat
-                        </option>
-                        <option value="MAD">
-                          Madaripur
-                        </option>
-                        <option value="MAG">
-                          Magura
-                        </option>
-                        <option value="MAN">
-                          Manikganj
-                        </option>
-                        <option value="MEH">
-                          Meherpur
-                        </option>
-                        <option value="MOU">
-                          Moulvibazar
-                        </option>
-                        <option value="MUN">
-                          Munshiganj
-                        </option>
-                        <option value="MYM">
-                          Mymensingh
-                        </option>
-                        <option value="NAO">
-                          Naogaon
-                        </option>
-                        <option value="NAR">
-                          Narail
-                        </option>
-                        <option value="NARG">
-                          Narayanganj
-                        </option>
-                        <option value="NARD">
-                          Narsingdi
-                        </option>
-                        <option value="NAT">
-                          Natore
-                        </option>
-                        <option value="NAW">
-                          Nawabganj
-                        </option>
-                        <option value="NET">
-                          Netrakona
-                        </option>
-                        <option value="NIL">
-                          Nilphamari
-                        </option>
-                        <option value="NOA">
-                          Noakhali
-                        </option>
-                        <option value="PAB">
-                          Pabna
-                        </option>
-                        <option value="PAN">
-                          Panchagarh
-                        </option>
-                        <option value="PAT">
-                          Patuakhali
-                        </option>
-                        <option value="PIR">
-                          Pirojpur
-                        </option>
-                        <option value="RAJB">
-                          Rajbari
-                        </option>
-                        <option value="RAJ">
-                          Rajshahi
-                        </option>
-                        <option value="RAN">
-                          Rangamati
-                        </option>
-                        <option value="RANP">
-                          Rangpur
-                        </option>
-                        <option value="SAT">
-                          Satkhira
-                        </option>
-                        <option value="SHA">
-                          Shariatpur
-                        </option>
-                        <option value="SHE">
-                          Sherpur
-                        </option>
-                        <option value="SIR">
-                          Sirajganj
-                        </option>
-                        <option value="SUN">
-                          Sunamganj
-                        </option>
-                        <option value="SYL">
-                          Sylhet
-                        </option>
-                        <option value="TAN">
-                          Tangail
-                        </option>
-                        <option value="THA">
-                          Thakurgaon
-                        </option>
+                        <option value="">Select an option…</option>
+                        <option value="DHA">Dhaka</option>
                       </select>
                     </div>
                   </div>
-                  <div class="single-form">
-                    <input class="form-control" type="text" placeholder="Postcode/ziip" />
+                  <div class="mb-3">
+                    <input class="form-control" type="text" placeholder="Postcode / ZIP" />
                   </div>
-                  <div class="single-form">
-                    <button class="btn btn-dark btn-hover-primary">
-                      Update totals
-                    </button>
-                  </div>
+                  <button type="button" class="commerce-btn-outline w-100">Update totals</button>
                 </form>
               </div>
             </div>
-            <!-- Cart Shipping End -->
           </div>
+
           <div class="col-lg-4">
-            <!-- Cart Shipping Start -->
-            <div class="cart-shipping">
-              <div class="cart-title">
-                <h4 class="title">Coupon Code</h4>
-                <p>Enter your coupon code if you have one.</p>
-              </div>
-              <div class="cart-form">
-                <form wire:submit="{{ session('coupon') ? 'removeCoupon' : 'applyCoupon' }}">
-                  <div class="single-form">
-                    <input class="form-control" type="text" placeholder="Enter your coupon code.."
-                      wire:model="code">
-                    @if (session('success'))
-                      <span class="text-success">{{ session('success') }}</span>
-                    @elseif (session('error'))
-                      <span class="text-danger">{{ session('error') }}</span>
-                    @endif
-                  </div>
-                  <div class="single-form">
-                    <button type="submit" class="btn btn-dark btn-hover-primary">
-                      {{ session('coupon') ? 'Remove Coupon' : 'Apply Coupon' }}
-                    </button>
-                  </div>
-                </form>
-              </div>
+            <div class="commerce-card">
+              <h2 class="commerce-card__title">Coupon Code</h2>
+              <p class="commerce-card__subtitle">Enter your coupon code if you have one.</p>
+              <form wire:submit="{{ session('coupon') ? 'removeCoupon' : 'applyCoupon' }}">
+                <div class="mb-3">
+                  <input class="form-control" type="text" placeholder="Enter coupon code" wire:model="code">
+                  @if (session('success'))
+                    <span class="text-success d-block mt-2 small">{{ session('success') }}</span>
+                  @elseif (session('error'))
+                    <span class="text-danger d-block mt-2 small">{{ session('error') }}</span>
+                  @endif
+                </div>
+                <button type="submit" class="commerce-btn-outline w-100">
+                  {{ session('coupon') ? 'Remove Coupon' : 'Apply Coupon' }}
+                </button>
+              </form>
             </div>
-            <!-- Cart Shipping End -->
           </div>
+
           <div class="col-lg-4">
-            <!-- Cart Totals Start -->
-            <div class="cart-totals">
-              <div class="cart-title">
-                <h4 class="title">Cart totals</h4>
+            <div class="commerce-card">
+              <h2 class="commerce-card__title">Cart Totals</h2>
+              <div class="commerce-summary mb-4">
+                <div class="commerce-summary-row">
+                  <span>Subtotal</span>
+                  <span>Rp {{ number_format($subtotal, 0, ',', '.') }}</span>
+                </div>
+                @if (session('coupon'))
+                  <div class="commerce-summary-row">
+                    <span>Voucher | {{ session('coupon.type') }}</span>
+                    <span class="text-success">- Rp {{ number_format($discount, 0, ',', '.') }}</span>
+                  </div>
+                @endif
+                <div class="commerce-summary-row commerce-summary-row--total">
+                  <span>Total</span>
+                  <span class="price">Rp {{ number_format($total, 0, ',', '.') }}</span>
+                </div>
               </div>
-              <div class="cart-total-table">
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p class="value">Subtotal</p>
-                      </td>
-                      <td>
-                        <p class="price text-end">Rp {{ number_format($subtotal, 0, ',', '.') }}</p>
-                      </td>
-                    </tr>
-                    @if (session('coupon'))
-                      <tr>
-                        <td>
-                          <p class="value">Vocher | {{ session('coupon.type') }}</p>
-                        </td>
-                        <td>
-                          <p class="price text-end">
-                            - Rp {{ number_format($discount, 0, ',', '.') }}
-                          </p>
-                        </td>
-                      </tr>
-                    @endif
-                    <tr>
-                      <td>
-                        <p class="value">Total</p>
-                      </td>
-                      <td>
-                        <p class="price text-end">Rp {{ number_format($total, 0, ',', '.') }}</p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="cart-total-btn">
-                <a href="{{ route('user.checkout') }}" wire:navigate
-                  class="btn btn-dark btn-hover-primary btn-block">Proceed To Checkout</a>
-              </div>
+              <a href="{{ route('user.checkout') }}" wire:navigate class="commerce-btn-primary w-100 text-center">
+                Proceed To Checkout
+              </a>
             </div>
-            <!-- Cart Totals End -->
           </div>
         </div>
       @endif
     </div>
   </div>
-  <!-- Shopping Cart Section End -->
 </div>
