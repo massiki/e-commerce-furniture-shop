@@ -75,8 +75,9 @@
                               </span>
                             @endif
                             <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
-                              <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
-                                alt="product" />
+                              <img
+                                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image) ? asset('storage/' . $product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                                width="270" height="303" alt="product" />
                             </a>
                           </div>
                           <div class="product-content">
@@ -160,8 +161,9 @@
                           </span>
                         @endif
                         <a href="{{ route('product.detail', $product->slug) }}" wire:navigate>
-                          <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
-                            alt="{{ $product->name }}" />
+                          <img
+                            src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image) ? asset('storage/' . $product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                            width="270" height="303" alt="{{ $product->name }}" />
                         </a>
                         <ul class="product-meta">
                           <li>

@@ -49,7 +49,9 @@
                   @endphp
                   <tr>
                     <td class="product-thumb">
-                      <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name ?? '-' }}" />
+                      <img
+                        src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image) ? asset('storage/' . $product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                        alt="{{ $product->name ?? '-' }}" />
                     </td>
                     <td class="product-info">
                       <h6 class="name">

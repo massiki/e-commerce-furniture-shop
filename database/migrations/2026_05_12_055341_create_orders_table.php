@@ -16,10 +16,10 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained()
                 ->onDelete('cascade');
-            $table->decimal('subtotal');
-            $table->decimal('discount')->default(0);
-            $table->decimal('shipping_cost')->default(0);
-            $table->decimal('total');
+            $table->decimal('subtotal', 12);
+            $table->decimal('discount', 12)->default(0);
+            $table->decimal('shipping_cost', 12)->default(0);
+            $table->decimal('total', 12);
             $table->string('name');
             $table->string('phone');
             $table->string('province');       // Provinsi
@@ -33,19 +33,19 @@ return new class extends Migration
             $table->enum('payment_method', [
                 'cod',
                 'bank_transfer',
-                'e_wallet'
+                'e_wallet',
             ]);
             $table->enum('payment_status', [
                 'unpaid',
                 'paid',
-                'failed'
+                'failed',
             ])->default('unpaid');
             $table->enum('order_status', [
                 'pending',
                 'processed',
                 'shipped',
                 'delivered',
-                'cancelled'
+                'cancelled',
             ])->default('pending');
             $table->date('delivered_date')->nullable();
             $table->date('cancelled_date')->nullable();

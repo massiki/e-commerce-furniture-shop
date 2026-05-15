@@ -10,7 +10,7 @@
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/logo/logo-fikri.ico') }}">
 
   <!-- CSS
     ============================================ -->

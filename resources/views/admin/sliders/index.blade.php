@@ -62,7 +62,9 @@
                     <tr>
                       <th scope="row">{{ $loop->iteration }}</th>
                       <td>
-                        <img src="{{ asset('storage/' . $slider->image) }}" alt="{{ $slider->title }}" height="52">
+                        <img
+                          src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($slider->image) ? asset('storage/' . $slider->image) : asset('assets/images/placehold-700x477.svg') }}"
+                          alt="{{ $slider->title }}" height="52">
                       </td>
                       <td>{{ $slider->title }}</td>
                       <td>{{ $slider->tagline }}</td>

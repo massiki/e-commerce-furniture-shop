@@ -59,8 +59,11 @@
                       <th scope="row">{{ $loop->iteration }}</th>
                       <td>
                         <div class="customer d-flex align-items-center">
-                          <div class="thumb_34 mr_15 mt-0"><img class="img-fluid"
-                              src="{{ asset('storage/' . $category->image) }}" alt=""></div>
+                          <div class="thumb_34 mr_15 mt-0">
+                            <img class="img-fluid"
+                              src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($category->image) ? asset('storage/' . $category->image) : asset('assets/images/placehold-400x400.svg') }}"
+                              alt="">
+                          </div>
                           <span class="f_s_12 f_w_600 color_text_5">{{ $category->name }}</span>
                         </div>
                       </td>

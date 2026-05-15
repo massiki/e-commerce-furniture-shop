@@ -20,7 +20,7 @@ class Index extends Component
             Storage::disk('public')->delete($product->image);
         }
         if ($product->images) {
-            foreach (json_decode($product->images) as $img) {
+            foreach ($product->images as $img) {
                 Storage::disk('public')->delete($img);
             }
         }

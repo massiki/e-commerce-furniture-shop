@@ -60,7 +60,9 @@
                       <td>
                         <div class="customer d-flex align-items-center">
                           <div class="thumb_34 mr_15 mt-0"><img class="img-fluid"
-                              src="{{ asset('storage/' . $brand->image) }}" alt="{{ $brand->name }}"></div>
+                              src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($brand->image) ? asset('storage/' . $brand->image) : asset('assets/images/placehold-400x400.svg') }}"
+                              alt="">
+                          </div>
                           <span class="f_s_12 f_w_600 color_text_5">{{ $brand->name }}</span>
                         </div>
                       </td>

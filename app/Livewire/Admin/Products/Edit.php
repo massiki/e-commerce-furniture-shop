@@ -65,9 +65,9 @@ class Edit extends Component
         $this->information = $product->information;
         $this->description = $product->description;
         $this->oldImage = $product->image;
-        $this->oldImages = json_decode($product->images) ?? [];
-        $this->regular_price = $product->regular_price;
-        $this->sale_price = $product->sale_price;
+        $this->oldImages = $product->images ?? [];
+        $this->regular_price = number_format($product->regular_price, 0, ',', '');
+        $this->sale_price = number_format($product->sale_price, 0, ',', '');
         $this->quantity = $product->quantity;
         $this->stock_status = $product->stock_status;
         $this->featured =  (int) $product->featured;
@@ -127,7 +127,7 @@ class Edit extends Component
             'information' => $this->information,
             'description' => $this->description,
             'image' => $imagePath,
-            'images' => json_encode($imagesPath),
+            'images' => $imagesPath,
             'regular_price' => $this->regular_price,
             'sale_price' => $this->sale_price,
             'quantity' => $this->quantity,

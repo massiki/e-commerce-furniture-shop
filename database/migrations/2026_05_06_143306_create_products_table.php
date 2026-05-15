@@ -22,8 +22,8 @@ return new class extends Migration
             $table->text('description');
             $table->string('image');
             $table->json('images')->nullable();
-            $table->integer('regular_price');
-            $table->integer('sale_price')->nullable();
+            $table->decimal('regular_price', 12);
+            $table->decimal('sale_price', 12)->nullable();
             $table->unsignedInteger('quantity')->default(10);
             $table->enum('stock_status', ['instock', 'outofstock']);
             $table->boolean('featured')->default(false);
@@ -39,6 +39,7 @@ return new class extends Migration
                 ->nullOnDelete();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

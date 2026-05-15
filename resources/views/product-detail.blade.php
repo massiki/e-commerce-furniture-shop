@@ -415,8 +415,9 @@
                           <div class="product-images">
                             <a href="{{ route('product.detail', $product->slug) }}" class="swiper-no-swiping"
                               wire:navigate>
-                              <img src="{{ asset('storage/' . $product->image) }}" width="270" height="303"
-                                alt="{{ $product->name }}" />
+                              <img
+                                src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($product->image) ? asset('storage/' . $product->image) : asset('assets/images/placehold-400x400.svg') }}"
+                                width="270" height="303" alt="{{ $product->name }}" />
                             </a>
                             <!-- BADGE: NEW (top left) -->
                             @if ($product->created_at >= now()->subDays(30))
