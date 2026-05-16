@@ -5,6 +5,8 @@
 - replace input textarea with trix editor in input information and description product admin
 - replace ui order detail in user
 - add fiture comment product
+- show data grafict in admin dashboard
+- show data user
 
 referensi
 https://vinotiliving.com/id/collections/sale-furniture-accessories/products/milan-top-marble-dining-table

@@ -75,7 +75,7 @@
                         📦
                       </div>
                       <div bis_skin_checked="1">
-                        <h5>12</h5>
+                        <h5>{{ $totalOrders }}</h5>
                         <span>Total Orders</span>
                       </div>
                     </div>
@@ -89,7 +89,7 @@
                         💰
                       </div>
                       <div bis_skin_checked="1">
-                        <h5>7436.66</h5>
+                        <h5>Rp {{ number_format($totalAmount, 0, ',', '.') }}</h5>
                         <span>Total Amount</span>
                       </div>
                     </div>
@@ -103,7 +103,7 @@
                         ⏳
                       </div>
                       <div bis_skin_checked="1">
-                        <h5>11</h5>
+                        <h5>{{ $pendingOrders }}</h5>
                         <span>Pending Orders</span>
                       </div>
                     </div>
@@ -117,7 +117,7 @@
                         💰
                       </div>
                       <div bis_skin_checked="1">
-                        <h5>7291.46</h5>
+                        <h5>Rp {{ number_format($pendingOrdersAmount, 0, ',', '.') }}</h5>
                         <span>Pending Orders Amount</span>
                       </div>
                     </div>
@@ -131,7 +131,7 @@
                         ✅
                       </div>
                       <div bis_skin_checked="1">
-                        <h5>1</h5>
+                        <h5>{{ $deliveredOrders }}</h5>
                         <span>Delivered Orders</span>
                       </div>
                     </div>
@@ -145,7 +145,7 @@
                         💰
                       </div>
                       <div bis_skin_checked="1">
-                        <h5>145.2</h5>
+                        <h5>Rp {{ number_format($deliveredOrdersAmount, 0, ',', '.') }}</h5>
                         <span>Delivered Orders Amount</span>
                       </div>
                     </div>
@@ -159,7 +159,7 @@
                         🚫
                       </div>
                       <div bis_skin_checked="1">
-                        <h5>0</h5>
+                        <h5>{{ $canceledOrders }}</h5>
                         <span>Canceled Orders</span>
                       </div>
                     </div>
@@ -173,7 +173,7 @@
                         💰
                       </div>
                       <div bis_skin_checked="1">
-                        <h5>0</h5>
+                        <h5>Rp {{ number_format($canceledOrdersAmount, 0, ',', '.') }}</h5>
                         <span>Canceled Orders Amount</span>
                       </div>
                     </div>
@@ -196,7 +196,7 @@
                 </div>
               </div>
               <div class="col-lg-8" bis_skin_checked="1">
-                <a href="orders.html" class="btn_1 float-end">View All Orders</a>
+                <a href="{{ route('admin.orders.index') }}" wire:navigate class="btn_1 float-end">View All Orders</a>
               </div>
             </div>
           </div>
@@ -204,11 +204,10 @@
             <table class="table table-striped table-bordered">
               <thead>
                 <tr>
-                  <th class="col">OrderNo</th>
+                  <th class="col">No</th>
                   <th class="col">Name</th>
                   <th class="col">Phone</th>
                   <th class="col">Subtotal</th>
-                  <th class="col">Tax</th>
                   <th class="col">Total</th>
                   <th class="col">Status</th>
                   <th class="col">Order Date</th>
@@ -218,241 +217,69 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="text-center">12</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$788</td>
-                  <td class="text-center">$165.48</td>
-                  <td class="text-center">$953.48</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-15 15:48:43</td>
-                  <td class="text-center">4</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
+                @forelse($orders as $order)
+                  <tr>
+                    <td class="text-center">{{ $loop->iteration }}</td>
+                    <td class="text-center">{{ $order->name }}</td>
+                    <td class="text-center">{{ $order->phone }}</td>
+                    <td class="text-center">
+                      Rp {{ number_format($order->subtotal, 0, ',', '.') }}
+                    </td>
+                    <td class="text-center">
+                      Rp {{ number_format($order->total, 0, ',', '.') }}
+                    </td>
+                    <td class="text-center">
+                      @switch($order->order_status)
+                        @case('pending')
+                          <span class="badge bg-secondary">Pending</span>
+                        @break
+
+                        @case('processed')
+                          <span class="badge bg-info text-white">Processed</span>
+                        @break
+
+                        @case('shipped')
+                          <span class="badge bg-primary">Shipped</span>
+                        @break
+
+                        @case('delivered')
+                          <span class="badge bg-success">Delivered</span>
+                        @break
+
+                        @case('cancelled')
+                          <span class="badge bg-danger">Cancelled</span>
+                        @break
+
+                        @default
+                          <span class="badge bg-warning text-dark">{{ ucfirst($order->order_status) }}</span>
+                      @endswitch
+                    </td>
+                    <td class="text-center">{{ $order->created_at->translatedFormat('d M Y') }}</td>
+                    <td class="text-center">{{ $order->orderItems->count() }}</td>
+                    <td class="text-center">
+                      {{ $order->order_status === 'delivered' && $order->delivered_date ? $order->delivered_date->translatedFormat('d M Y') : '' }}
+                    </td>
+                    <td class="text-center">
+                      <a href="{{ route('admin.orders.detail', $order->id) }}" wire:navigate>
+                        <div class="list-icon-function view-icon">
+                          <div class="item eye">
+                            <i class="fa fa-eye"></i>
+                          </div>
                         </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">11</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$630</td>
-                  <td class="text-center">$132.3</td>
-                  <td class="text-center">$762.3</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-12 07:36:30</td>
-                  <td class="text-center">3</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">10</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$158</td>
-                  <td class="text-center">$33.18</td>
-                  <td class="text-center">$191.18</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-12 07:30:28</td>
-                  <td class="text-center">1</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">9</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$510</td>
-                  <td class="text-center">$107.1</td>
-                  <td class="text-center">$617.1</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-12 07:24:05</td>
-                  <td class="text-center">2</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">8</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$510</td>
-                  <td class="text-center">$107.1</td>
-                  <td class="text-center">$617.1</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-12 07:13:14</td>
-                  <td class="text-center">2</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">7</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$368</td>
-                  <td class="text-center">$77.28</td>
-                  <td class="text-center">$445.28</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-12 07:08:59</td>
-                  <td class="text-center">2</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">6</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$788</td>
-                  <td class="text-center">$165.48</td>
-                  <td class="text-center">$953.48</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-12 07:04:58</td>
-                  <td class="text-center">4</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">5</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$788</td>
-                  <td class="text-center">$165.48</td>
-                  <td class="text-center">$953.48</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-06 16:58:13</td>
-                  <td class="text-center">4</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">4</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$788</td>
-                  <td class="text-center">$165.48</td>
-                  <td class="text-center">$953.48</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-06 16:50:00</td>
-                  <td class="text-center">4</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-center">3</td>
-                  <td class="text-center">Sudhir Kumar</td>
-                  <td class="text-center">1234567890</td>
-                  <td class="text-center">$368</td>
-                  <td class="text-center">$77.28</td>
-                  <td class="text-center">$445.28</td>
-                  <td class="text-center">
-                    <span class="badge bg-warning">Ordered</span>
-                  </td>
-                  <td class="text-center">2025-07-06 16:44:53</td>
-                  <td class="text-center">2</td>
-                  <td class="text-center"></td>
-                  <td class="text-center">
-                    <a href="order-details.html">
-                      <div class="list-icon-function view-icon" bis_skin_checked="1">
-                        <div class="item eye" bis_skin_checked="1">
-                          <i class="fa fa-eye"></i>
-                        </div>
-                      </div>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      </a>
+                    </td>
+                  </tr>
+                  @empty
+                    <tr>
+                      <td colspan="11" class="text-center">No orders found.</td>
+                    </tr>
+                  @endforelse
+                </tbody>
+              </table>
+              </table>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
