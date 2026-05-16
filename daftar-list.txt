@@ -2,7 +2,6 @@
 - add reset password
 - add popup icon cart, wishlist and seach on featured product and sale product in home page
 - search product in admin navbar 
-- add update status order in admin and user
 - replace input textarea with trix editor in input information and description product admin
 - replace ui order detail in user
 - add fiture comment product

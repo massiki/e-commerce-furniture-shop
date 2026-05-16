@@ -134,6 +134,7 @@
                         @endforelse
                       </tbody>
                     </table>
+                    {{ $orders->links(data: ['scrollTo' => false]) }}
                   </div>
                 </div>
               </div>

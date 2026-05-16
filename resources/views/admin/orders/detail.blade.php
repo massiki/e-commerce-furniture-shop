@@ -39,7 +39,7 @@
                   <tr>
                     <th>Order No</th>
                     <td>{{ $order->id }}</td>
-                    <th>Mobile</th>
+                    <th>Phone</th>
                     <td>{{ $order->phone }}</td>
                     <th>Total</th>
                     <td>Rp {{ number_format($order->total, 0, ',', '.') }}</td>
@@ -51,7 +51,6 @@
                     <td>
                       {{ $order->delivered_date ? $order->delivered_date->translatedFormat('d F Y') : '-' }}
                     </td>
-
                     <th>Canceled Date</th>
                     <td>{{ $order->cancelled_date ? $order->cancelled_date->translatedFormat('d F Y') : '-' }}</td>
                   </tr>
@@ -114,20 +113,21 @@
                     <tr>
                       <td class="pname img-thumb">
                         <div class="image">
-                          <img src="{{ asset('storage/' . $item->product->image) }}"
-                            alt="{{ $item->product->name ?? '' }}" class="image" style="max-height: 75px;">
+                          <img
+                            src="{{ \Illuminate\Support\Facades\Storage::disk('public')->exists($item->product_image) ? asset('storage/' . $item->product_image) : asset('assets/images/placehold-400x400.svg') }}"
+                            alt="{{ $item->product_name ?? '' }}" class="image" style="max-height: 75px;">
                         </div>
                         <div class="name">
-                          <a href="{{ route('product.detail', $item->product->slug ?? '') }}" target="_black"
+                          <a href="{{ route('product.detail', $item->product_slug ?? '') }}" target="_black"
                             class="body-title-2">
-                            {{ $item->product->name ?? '' }}
+                            {{ $item->product_name ?? '' }}
                           </a>
                         </div>
                       </td>
                       <td class="text-center">Rp {{ number_format($item->price, 0, ',', '.') }}</td>
                       <td class="text-center">{{ $item->quantity }}</td>
-                      <td class="text-center">{{ $item->product->category->name ?? '-' }}</td>
-                      <td class="text-center">{{ $item->product->brand->name ?? '-' }}</td>
+                      <td class="text-center">{{ $item->category_name ?? '-' }}</td>
+                      <td class="text-center">{{ $item->brand_name ?? '-' }}</td>
                       <td class="text-center">{{ $item->options ?? '-' }}</td>
                       <td class="text-center">
                         {{ $item->return_status ?? 'No' }}
@@ -149,7 +149,6 @@
                 </tbody>
               </table>
             </div>
-
             <div class="divider"></div>
             <div>
               <!-- Add any additional info if needed -->
@@ -231,24 +230,50 @@
 
         <div class="wg-box mt-5">
           <h5>Update Order Status</h5>
-          <form>
-            <div class="row">
-              <div class="col-md-3">
-                <div class="select">
-                  <select id="order_status" name="order_status" class="form-select">
-                    <option value="ordered" {{ $order->order_status === 'ordered' ? 'selected' : '' }}>Ordered</option>
-                    <option value="delivered" {{ $order->order_status === 'delivered' ? 'selected' : '' }}>Delivered
-                    </option>
-                    <option value="canceled" {{ $order->order_status === 'canceled' ? 'selected' : '' }}>Canceled
-                    </option>
-                  </select>
+          <x-alert-success />
+          @if ($order->order_status === 'pending')
+            <form wire:submit.prevent="updateStatus">
+              <div class="row">
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary tf-button w208">Process</button>
                 </div>
               </div>
-              <div class="col-md-3">
-                <button type="submit" class="btn btn-primary tf-button w208">Update Status</button>
+            </form>
+          @elseif($order->order_status === 'processed')
+            <form wire:submit.prevent="updateStatus">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="select">
+                    <select id="order_status" name="order_status" class="form-select" wire:model.live="orderStatus">
+                      <option value="">Select Option</option>
+                      <option value="shipped">Shipped</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary tf-button w208">Update Status</button>
+                </div>
               </div>
-            </div>
-          </form>
+            </form>
+          @elseif($order->order_status === 'shipped')
+            <form wire:submit.prevent="updateStatus">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="select">
+                    <select id="order_status" name="order_status" class="form-select" wire:model.live="orderStatus">
+                      <option value="">Select Option</option>
+                      <option value="delivered">Delivered</option>
+                      <option value="cancelled">Cancelled</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <button type="submit" class="btn btn-primary tf-button w208">Update Status</button>
+                </div>
+              </div>
+            </form>
+          @endif
         </div>
       </div>
     </div>

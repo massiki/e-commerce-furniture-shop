@@ -96,7 +96,7 @@
                       <td class="text-center">{{ $order->created_at->translatedFormat('d M Y') }}</td>
                       <td class="text-center">{{ $order->orderItems->count() }}</td>
                       <td class="text-center">
-                        {{ $order->order_status === 'delivered' && $order->delivered_at ? $order->delivered_at : '' }}
+                        {{ $order->order_status === 'delivered' && $order->delivered_date ? $order->delivered_date->translatedFormat('d M Y') : '' }}
                       </td>
                       <td class="text-center">
                         <a href="{{ route('admin.orders.detail', $order->id) }}" wire:navigate>
@@ -115,8 +115,7 @@
                     @endforelse
                   </tbody>
                 </table>
-
-
+                {{ $orders->links(data: ['scrollTo' => false]) }}
               </div>
             </div>
           </div>
