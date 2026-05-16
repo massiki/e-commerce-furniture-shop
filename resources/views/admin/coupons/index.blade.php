@@ -59,7 +59,8 @@
                 <tbody>
                   @forelse ($coupons as $coupon)
                     <tr>
-                      <th scope="row">{{ $loop->iteration }}</th>
+                      <th scope="row">{{ ($coupons->currentPage() - 1) * $coupons->perPage() + $loop->iteration }}
+                      </th>
                       <td>{{ $coupon->code }} | {{ $coupon->type }}</td>
                       <td>
                         {{ $coupon->type == 'percent' ? $coupon->value . '%' : 'Rp ' . number_format($coupon->value, 0, ',', '.') }}
@@ -67,7 +68,6 @@
                       <td>{{ number_format($coupon->cart_value, 0, ',', '.') }}</td>
                       <td>
                         {{ $coupon->expired_date ? \Carbon\Carbon::parse($coupon->expired_date)->locale('id')->translatedFormat('d F Y') : '-' }}
-
                       </td>
                       <td>
                         <div class="list-icon-function" bis_skin_checked="1">

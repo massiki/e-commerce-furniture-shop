@@ -56,7 +56,8 @@
                 <tbody>
                   @forelse ($categories as $category)
                     <tr>
-                      <th scope="row">{{ $loop->iteration }}</th>
+                      <th scope="row">
+                        {{ ($categories->currentPage() - 1) * $categories->perPage() + $loop->iteration }}</th>
                       <td>
                         <div class="customer d-flex align-items-center">
                           <div class="thumb_34 mr_15 mt-0">

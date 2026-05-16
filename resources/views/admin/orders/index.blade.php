@@ -58,7 +58,8 @@
                 <tbody>
                   @forelse($orders as $order)
                     <tr>
-                      <td class="text-center">{{ $loop->iteration }}</td>
+                      <td class="text-center">{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}
+                      </td>
                       <td class="text-center">{{ $order->name }}</td>
                       <td class="text-center">{{ $order->phone }}</td>
                       <td class="text-center">

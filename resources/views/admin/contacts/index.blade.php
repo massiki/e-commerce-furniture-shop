@@ -50,7 +50,8 @@
                 <tbody>
                   @forelse ($contacts as $contact)
                     <tr>
-                      <th scope="row">{{ $loop->iteration }}</th>
+                      <th scope="row">{{ $loop->iteration }}
+                      </th>
                       <td>{{ $contact->name }}</td>
                       <td>{{ $contact->email }}</td>
                       <td>{{ $contact->subject }}</td>

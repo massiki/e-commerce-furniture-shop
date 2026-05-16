@@ -56,7 +56,7 @@
                 <tbody>
                   @forelse ($brands as $brand)
                     <tr>
-                      <th scope="row">{{ $loop->iteration }}</th>
+                      <th scope="row">{{ ($brands->currentPage() - 1) * $brands->perPage() + $loop->iteration }}</th>
                       <td>
                         <div class="customer d-flex align-items-center">
                           <div class="thumb_34 mr_15 mt-0"><img class="img-fluid"

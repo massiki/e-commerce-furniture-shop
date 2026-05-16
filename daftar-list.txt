@@ -8,7 +8,6 @@
 - add fiture comment product
 - show data grafict in admin dashboard
 - add field phone in table user
-- fix no table in per-page
 
 referensi
 https://vinotiliving.com/id/collections/sale-furniture-accessories/products/milan-top-marble-dining-table

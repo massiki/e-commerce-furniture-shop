@@ -92,7 +92,7 @@
                     <tbody>
                       @forelse ($orders as $order)
                         <tr>
-                          <td>{{ $loop->iteration }}</td>
+                          <td>{{ ($orders->currentPage() - 1) * $orders->perPage() + $loop->iteration }}</td>
                           <td>{{ $order->name }}</td>
                           <td>{{ $order->created_at->translatedFormat('d M Y') }}</td>
                           <td>
