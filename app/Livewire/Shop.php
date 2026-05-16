@@ -58,6 +58,9 @@ class Shop extends Component
 
     public function toggleCart(Product $product)
     {
+        $user = Auth::user();
+        if (!$user) return $this->redirect(route('login'), true);
+
         $cart = Cart::firstOrCreate(['user_id' => Auth::user()->id]);
         $cartItem = $cart->items()->where('product_id', $product->id)->first();
         if ($cartItem) {
@@ -71,7 +74,7 @@ class Shop extends Component
     public function toggleWishlist(Product $product)
     {
         $user = Auth::user();
-        if (!$user) return;
+        if (!$user) return $this->redirect(route('login'), true);
 
         $wishlist = $user->wishlists()->where('product_id', $product->id)->first();
         if ($wishlist) {
