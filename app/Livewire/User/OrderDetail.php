@@ -33,7 +33,11 @@ class OrderDetail extends Component
             foreach ($this->order->orderItems as $item) {
                 if ($item->product) $item->product->increment('quantity', $item->quantity);
             }
-            $this->order->update(['order_status' => 'cancelled', 'cancelled_date' => now()]);
+            $this->order->update([
+                'order_status' => 'cancelled',
+                'cancelled_date' => now(),
+                'payment_status' => 'failed'
+            ]);
             session()->flash('success', 'Order cancelled successfully.');
         }
     }
@@ -43,7 +47,11 @@ class OrderDetail extends Component
         abort_unless($this->order->user_id === Auth::id(), 403);
 
         if ($this->order->order_status === 'shipped') {
-            $this->order->update(['order_status' => 'delivered', 'delivered_date' => now()]);
+            $this->order->update([
+                'order_status' => 'delivered',
+                'delivered_date' => now(),
+                'payment_status' => 'paid'
+            ]);
         }
         session()->flash('success', 'Order delivered successfully.');
     }
