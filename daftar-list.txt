@@ -11,3 +11,6 @@
 
 referensi
 https://vinotiliving.com/id/collections/sale-furniture-accessories/products/milan-top-marble-dining-table
+
+templete ui
+https://github.com/surfsidemedia/Laravel-12-E-Commerce-Project
