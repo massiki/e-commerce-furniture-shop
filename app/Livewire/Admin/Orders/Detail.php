@@ -42,17 +42,25 @@ class Detail extends Component
 
         // update urder stastus, shipped -> delivered
         if ($this->order->order_status === 'shipped' && $this->orderStatus === 'delivered') {
-            $this->order->update(['order_status' => $this->orderStatus, 'delivered_date' => now()]);
+            $this->order->update([
+                'order_status' => $this->orderStatus,
+                'delivered_date' => now(),
+                'payment_status' => 'paid'
+            ]);
             session()->flash('success', 'Order delivered successfully.');
             return;
         }
 
-        // update order status, processed -> cancelled
+        // update order status, processed -> cancelled or pending -> cancelled
         if (in_array($this->order->order_status, ['pending', 'processed', 'shipped']) && $this->orderStatus === 'cancelled') {
             foreach ($this->order->orderItems as $item) {
                 if ($item->product) $item->product->increment('quantity', $item->quantity);
             }
-            $this->order->update(['order_status' => 'cancelled', 'cancelled_date' => now()]);
+            $this->order->update([
+                'order_status' => 'cancelled',
+                'cancelled_date' => now(),
+                'payment_status' => 'failed'
+            ]);
             session()->flash('success', 'Order cancelled successfully.');
             return;
         }
