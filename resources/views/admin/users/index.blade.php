@@ -52,32 +52,48 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td class="pname">
-                      <div class="image">
-                        <img src="{{ asset('img/staf/2.png') }}" alt="" class="image">
-                      </div>
-                      <div class="name">
-                        <a href="#" class="body-title-2">Admin</a>
-                        <div class="text-tiny">ADM</div>
-                      </div>
-                    </td>
-                    <td>1234567890</td>
-                    <td>admin@surfsidemedia.in</td>
-                    <td class="text-center"><a href="#" target="_blank">0</a></td>
-                    <td>
-                      <div class="list-icon-function">
-                        <a href="#" wire:navigate>
-                          <div class="item edit">
-                            <i class="icon-edit-3"></i>
+                  @forelse($users as $user)
+                    <tr>
+                      <td>{{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}</td>
+                      <td class="pname">
+                        <div class="image">
+                          <img src="{{ asset('assets/images/placehold-400x400.svg') }}" alt="{{ $user->name }}"
+                            class="image" style="width:40px; height:40px; border-radius:50%;">
+                        </div>
+                        <div class="name">
+                          <a href="#" class="body-title-2">{{ $user->name }}</a>
+                          <div class="text-tiny">
+                            {{ strtoupper($user->role ?? 'USR') }}
                           </div>
-                        </a>
-                      </div>
-                    </td>
-                  </tr>
+                        </div>
+                      </td>
+                      <td>{{ $user->phone ?? '-' }}</td>
+                      <td>{{ $user->email }}</td>
+                      <td class="text-center">
+                        <a href="#" target="_blank">{{ $user->orders->count() ?? 0 }}</a>
+                      </td>
+                      <td>
+                        <div class="list-icon-function">
+                          <a href="#" wire:navigate>
+                            <div class="item edit">
+                              <i class="icon-edit-3"></i>
+                            </div>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  @empty
+                    <tr>
+                      <td colspan="6" class="text-center">Tidak ada data user.</td>
+                    </tr>
+                  @endforelse
                 </tbody>
               </table>
+              <!-- Pagination -->
+              <div class="mt-3">
+                {{ $users->links() }}
+              </div>
+
             </div>
           </div>
         </div>
