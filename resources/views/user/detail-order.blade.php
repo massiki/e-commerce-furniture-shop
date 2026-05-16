@@ -255,6 +255,19 @@
                 </div>
               </div>
             </div>
+            <x-alert-success />
+            @if (in_array($order->order_status, ['pending', 'processed']))
+              <button class="btn btn-danger btn-sm" wire:click.prevent="cancelOrder"
+                wire:confirm="Are you sure to canncel this order?">
+                Cancel Order
+              </button>
+            @endif
+            @if ($order->order_status === 'shipped')
+              <button class="btn btn-success btn-sm" wire:click.prevent="confirmReceived"
+                wire:confirm="Have you received the product?">
+                Confirm Received
+              </button>
+            @endif
           </div>
         </div>
       </div>
