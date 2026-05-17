@@ -13,7 +13,7 @@ class AdminNavbar extends Component
         Auth::guard('web')->logout();
         Session::invalidate();
         Session::regenerateToken();
-        $this->redirect(route('login'), navigate: true);
+        $this->redirect(route('login'));
     }
 
     public function render()
