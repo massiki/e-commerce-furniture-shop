@@ -22,7 +22,7 @@ class Login extends Component
             return;
         };
         request()->session()->regenerate();
-        $this->redirect(route('admin.dashboard'), true);
+        $this->redirect(route('admin.dashboard'));
     }
 
     public function render()
